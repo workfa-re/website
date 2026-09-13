@@ -45,6 +45,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // Match only public website aliases; application and internal hosts keep their own routing.
+    return ["jobbridge.app", "www.jobbridge.app", "www.workfa.re"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host.replaceAll(".", "\\.") }],
+      destination: "https://workfa.re/:path*",
+      permanent: true,
+    }));
+  },
   images: {
     remotePatterns: [
       {

@@ -6,13 +6,13 @@ import { Footer } from "@/components/Footer";
 import { SiteMenuButton } from "@/components/SiteMenu";
 import { siteConfig } from "@/config/site";
 
-const updatedAt = "23. Juni 2026";
+const updatedAt = "14. September 2026";
 const platformImprintUrl = "https://app.jobbridge.app/legal/impressum";
 
 export const metadata: Metadata = {
     title: "Impressum",
     description:
-        "Impressum und Anbieterkennzeichnung für jobbridge.app: verantwortliche Angaben, Kontakt und Abgrenzung zur JobBridge-Plattform.",
+        "Impressum und Anbieterkennzeichnung für workfa.re: verantwortliche Angaben, Kontakt und Abgrenzung zur JobBridge-Plattform.",
     robots: {
         index: true,
         follow: true,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 const essentials = [
-    "Anbieterkennzeichnung für die Landingpage jobbridge.app.",
+    "Anbieterkennzeichnung für die Landingpage workfa.re.",
     "Kontakt zur Website erfolgt direkt per E-Mail.",
     "Für app.jobbridge.app gelten eigene rechtliche Angaben der Plattform.",
 ];
@@ -200,11 +200,11 @@ export default function ImpressumPage() {
                             </span>
                         </h1>
                         <p className="mt-8 max-w-[39rem] text-pretty text-[clamp(1.05rem,1.45vw,1.32rem)] font-medium leading-[1.42] tracking-[-0.012em] text-slate-300">
-                            Die Anbieterkennzeichnung für jobbridge.app. Kurz auffindbar, klar getrennt von der
+                            Die Anbieterkennzeichnung für workfa.re. Kurz auffindbar, klar getrennt von der
                             Plattform und ohne Angaben, die hier keinen Zweck erfüllen.
                         </p>
                         <p className="mt-6 text-sm text-slate-500">
-                            Stand: <span className="text-slate-300">{updatedAt}</span> · gilt für jobbridge.app
+                            Stand: <span className="text-slate-300">{updatedAt}</span> · gilt für workfa.re
                         </p>
                     </div>
                 </div>
@@ -298,7 +298,7 @@ export default function ImpressumPage() {
 
                     <LegalRow eyebrow="04" title="Abgrenzung zur Plattform">
                         <p>
-                            Dieses Impressum gilt für die Landingpage <strong className="text-white">jobbridge.app</strong>.
+                            Dieses Impressum gilt für die Landingpage <strong className="text-white">workfa.re</strong>.
                             Die Plattform unter{" "}
                             <a href="https://app.jobbridge.app" className="text-blue-200 transition hover:text-white">
                                 app.jobbridge.app

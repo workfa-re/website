@@ -6,7 +6,7 @@ export const homePageConfig = {
 
 export const siteConfig = {
     name: "JobBridge",
-    url: "https://jobbridge.app",
+    url: "https://workfa.re",
     appUrl: "https://app.jobbridge.app",
     contactEmail: "kontakt@jobbridge.team",
     defaultTitle: "Sichere Taschengeldjobs für Jugendliche",

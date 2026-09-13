@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { siteConfig } from "@/config/site";
 
 export const runtime = "edge";
 
@@ -91,7 +92,7 @@ export function GET() {
                             width: "100%",
                         }}
                     >
-                        <span>jobbridge.app</span>
+                        <span>{new URL(siteConfig.url).hostname}</span>
                         <span>Deutschlandweit gedacht</span>
                     </div>
                 </div>

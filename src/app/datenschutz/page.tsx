@@ -6,13 +6,13 @@ import { Footer } from "@/components/Footer";
 import { SiteMenuButton } from "@/components/SiteMenu";
 import { siteConfig } from "@/config/site";
 
-const updatedAt = "23. Juni 2026";
+const updatedAt = "14. September 2026";
 const platformPrivacyUrl = "https://app.jobbridge.app/legal/datenschutz";
 
 export const metadata: Metadata = {
     title: "Datenschutz",
     description:
-        "Datenschutzhinweise für jobbridge.app: welche Daten auf der JobBridge-Landingpage entstehen, wofür sie genutzt werden und welche Rechte bestehen.",
+        "Datenschutzhinweise für workfa.re: welche Daten auf der JobBridge-Landingpage entstehen, wofür sie genutzt werden und welche Rechte bestehen.",
     robots: {
         index: true,
         follow: true,
@@ -235,7 +235,7 @@ export default function DatenschutzPage() {
                             genutzt werden und welche Rechte Sie haben.
                         </p>
                         <p className="mt-6 text-sm text-slate-500">
-                            Stand: <span className="text-slate-300">{updatedAt}</span> · gilt für jobbridge.app
+                            Stand: <span className="text-slate-300">{updatedAt}</span> · gilt für workfa.re
                         </p>
                     </div>
                 </div>
@@ -253,7 +253,7 @@ export default function DatenschutzPage() {
 
                     <LegalRow eyebrow="01" title="Geltungsbereich">
                         <p>
-                            Diese Datenschutzhinweise gelten für die Website <strong className="text-white">jobbridge.app</strong>.
+                            Diese Datenschutzhinweise gelten für die Website <strong className="text-white">workfa.re</strong>.
                             Die Plattform unter{" "}
                             <a href="https://app.jobbridge.app" className="text-blue-200 transition hover:text-white">
                                 app.jobbridge.app

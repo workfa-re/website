@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 export type TeamMember = {
     slug: string;
     name: string;
@@ -118,7 +120,7 @@ export const teamMembers = [
             "Rheinbach",
         ],
         sameAs: [
-            "https://jobbridge.app",
+            siteConfig.url,
             "https://ray-group.eu",
             "https://www.instagram.com/rezanycn/",
             "https://www1.wdr.de/nrw/rheinland/rhein-sieg-kreis/rezan-job-app-rheinbach-100.html",
@@ -184,7 +186,7 @@ export const teamMembers = [
             "Rheinbach",
             "Taschengeldjobs durch Wissensvermittlung",
         ],
-        sameAs: ["https://jobbridge.app/team/tim-lohmeier"],
+        sameAs: [`${siteConfig.url}/team/tim-lohmeier`],
     },
     {
         slug: "tobias-rohm",
@@ -243,7 +245,7 @@ export const teamMembers = [
             "digitale Taschengeldbörse",
             "Rheinbach",
         ],
-        sameAs: ["https://jobbridge.app/team/tobias-rohm"],
+        sameAs: [`${siteConfig.url}/team/tobias-rohm`],
     },
 ] as const satisfies TeamMember[];
 
