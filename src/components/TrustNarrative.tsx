@@ -23,7 +23,7 @@ type PointerState = {
     active: boolean;
 };
 
-function JobBridgeMark() {
+function WorkfareMark() {
     return (
         <div aria-hidden="true" className="relative h-11 w-[5.8rem] sm:h-[3.25rem] sm:w-[7rem]">
             <div className="absolute -inset-4 rounded-full bg-blue-300/10 blur-2xl" />
@@ -436,7 +436,7 @@ export function TrustNarrative() {
         <section
             id="vertrauen"
             data-trust-narrative
-            aria-label="JobBridge Ablauf und Plattformprinzip"
+            aria-label="Workfare Ablauf und Plattformprinzip"
             className="relative isolate min-h-[94svh] overflow-hidden bg-[#02040b] text-white"
         >
             <PixelShaderBackdrop />
@@ -454,7 +454,7 @@ export function TrustNarrative() {
                             custom={0}
                             className="will-change-transform"
                         >
-                            <JobBridgeMark />
+                            <WorkfareMark />
                         </motion.div>
 
                         <motion.h2
@@ -476,7 +476,7 @@ export function TrustNarrative() {
                             custom={0.27}
                             className="mt-7 max-w-[35rem] text-pretty text-[clamp(1.08rem,1.45vw,1.54rem)] font-medium leading-[1.28] tracking-[-0.02em] text-[#808792] will-change-transform"
                         >
-                            <span className="text-white">JobBridge zeigt, was gebraucht wird,</span>{" "}
+                            <span className="text-white">Workfare zeigt, was gebraucht wird,</span>{" "}
                             <span>wer helfen kann und wie aus einer Anfrage ein fairer Job wird.</span>
                         </motion.p>
 

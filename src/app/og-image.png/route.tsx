@@ -1,12 +1,10 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/config/site";
 
-export const size = {
+const size = {
     width: 1200,
     height: 630,
 };
-
-export const contentType = "image/png";
 
 export function GET() {
     return new ImageResponse(
@@ -50,7 +48,7 @@ export function GET() {
                             width: "100%",
                         }}
                     >
-                        <span>JobBridge</span>
+                        <span>{siteConfig.name}</span>
                         <span style={{ color: "#bfdbfe", fontSize: 28, fontWeight: 500 }}>
                             Die digitale Taschengeldbörse
                         </span>

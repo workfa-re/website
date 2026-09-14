@@ -1,0 +1,121 @@
+.link {
+    --inset: 0.75rem;
+    --icon-size: 4.75rem;
+    --duration: 700ms;
+    --easing: cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 42rem;
+    height: 6.25rem;
+    overflow: hidden;
+    border-radius: 9999px;
+    padding: var(--inset);
+    background: #202020;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 24px 80px rgb(0 0 0 / 38%);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.link:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 70%);
+    outline-offset: 4px;
+}
+
+.fill {
+    position: absolute;
+    z-index: 0;
+    inset-block: var(--inset);
+    left: var(--inset);
+    width: var(--icon-size);
+    border-radius: 9999px;
+    background: #f2f2f2;
+    pointer-events: none;
+    transition: width var(--duration) var(--easing), box-shadow var(--duration) var(--easing);
+}
+
+.arrowPosition {
+    position: absolute;
+    z-index: 20;
+    top: var(--inset);
+    left: var(--inset);
+    display: grid;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    place-items: center;
+    color: black;
+    pointer-events: none;
+    transition: left var(--duration) var(--easing), transform var(--duration) var(--easing);
+}
+
+.arrow {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 3;
+    transition: transform var(--duration) var(--easing);
+}
+
+.label {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    padding-left: calc(var(--icon-size) + 0.5rem);
+    padding-right: 1rem;
+    font-size: clamp(1.25rem, 5.8vw, 3rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 300ms ease-out;
+}
+
+.link[data-active="true"] .fill {
+    width: calc(100% - var(--inset) * 2);
+    box-shadow: 0 0 58px rgb(255 255 255 / 16%);
+}
+
+.link[data-active="true"] .arrowPosition {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.link[data-active="true"] .arrow {
+    transform: rotate(-90deg);
+}
+
+.link[data-active="true"] .label {
+    opacity: 0;
+}
+
+@media (min-width: 768px) {
+    .link {
+        --inset: 1rem;
+        --icon-size: 6.25rem;
+        height: 8.25rem;
+    }
+
+    .arrow {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .label {
+        font-size: clamp(2.15rem, 8vw, 4.7rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fill,
+    .arrowPosition,
+    .arrow,
+    .label {
+        transition: none;
+    }
+}

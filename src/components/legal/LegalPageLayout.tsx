@@ -19,7 +19,7 @@ export function LegalPageLayout({
                 <SiteHeader />
             </div>
 
-            <article className="mx-auto w-full max-w-3xl px-5 pb-16 pt-6 [overflow-wrap:anywhere] sm:px-8 sm:pb-20 sm:pt-10">
+            <article className="mx-auto w-full max-w-3xl px-5 pt-6 [overflow-wrap:anywhere] sm:px-8 sm:pt-10">
                 <div className="pb-8">
                     <h1 className="text-balance text-[2.125rem] font-semibold leading-tight tracking-[-0.03em] text-white sm:text-[2.5rem]">
                         {title}
@@ -40,7 +40,7 @@ export function LegalPageLayout({
 
 export function LegalSection({ title, children }: { title: string; children: ReactNode }) {
     return (
-        <section className="border-t border-white/10 py-7 sm:py-8">
+        <section className="border-t border-white/10 py-7 last:pb-0 sm:py-8 sm:last:pb-0">
             <h2 className="text-balance text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl">
                 {title}
             </h2>
