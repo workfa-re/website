@@ -60,16 +60,16 @@ export const teamMembers = [
             {
                 kind: "direct-email",
                 label: "Direkt",
-                value: "rezan.yalcin@jobbridge.team",
+                value: "rezan.yalcin@workfare.team",
                 description: "Persönlicher Kontakt zu Rezan.",
-                href: "mailto:rezan.yalcin@jobbridge.team",
+                href: "mailto:rezan.yalcin@workfare.team",
             },
             {
                 kind: "team-email",
                 label: "JobBridge Team",
-                value: "kontakt@jobbridge.team",
+                value: "kontakt@workfare.team",
                 description: "Für Medien, Kooperationen und organisatorische Rückfragen.",
-                href: "mailto:kontakt@jobbridge.team",
+                href: "mailto:kontakt@workfare.team",
             },
             {
                 kind: "instagram",
@@ -107,9 +107,9 @@ export const teamMembers = [
             },
             {
                 label: "Kontakt",
-                value: "kontakt@jobbridge.team",
+                value: "kontakt@workfare.team",
                 description: "Für Medien, Kooperationen und offizielle Rückfragen zu JobBridge.",
-                href: "mailto:kontakt@jobbridge.team",
+                href: "mailto:kontakt@workfare.team",
             },
         ],
         knowsAbout: [
@@ -148,16 +148,16 @@ export const teamMembers = [
             {
                 kind: "direct-email",
                 label: "Direkt",
-                value: "tim.lohmeier@jobbridge.team",
+                value: "tim.lohmeier@workfare.team",
                 description: "Persönlicher Kontakt zu Tim.",
-                href: "mailto:tim.lohmeier@jobbridge.team",
+                href: "mailto:tim.lohmeier@workfare.team",
             },
             {
                 kind: "team-email",
                 label: "JobBridge Lab",
-                value: "kontakt@jobbridge.team",
+                value: "kontakt@workfare.team",
                 description: "Kontakt für Fragen zu JobBridge Edu und dem JobBridge Lab.",
-                href: "mailto:kontakt@jobbridge.team",
+                href: "mailto:kontakt@workfare.team",
             },
         ],
         profileLinks: [
@@ -173,9 +173,9 @@ export const teamMembers = [
             },
             {
                 label: "Kontakt",
-                value: "tim.lohmeier@jobbridge.team",
+                value: "tim.lohmeier@workfare.team",
                 description: "Direkter Kontakt zu Tim.",
-                href: "mailto:tim.lohmeier@jobbridge.team",
+                href: "mailto:tim.lohmeier@workfare.team",
             },
         ],
         knowsAbout: [
@@ -209,17 +209,17 @@ export const teamMembers = [
             {
                 kind: "direct-email",
                 label: "E-Mail",
-                value: "tobias.rohm@jobbridge.team",
+                value: "tobias.rohm@workfare.team",
                 description: "Direkter Kontakt zu Tobias.",
-                href: "mailto:tobias.rohm@jobbridge.team",
+                href: "mailto:tobias.rohm@workfare.team",
             },
         ],
         profileLinks: [
             {
                 label: "E-Mail",
-                value: "tobias.rohm@jobbridge.team",
+                value: "tobias.rohm@workfare.team",
                 description: "Direkter Kontakt zu Tobias.",
-                href: "mailto:tobias.rohm@jobbridge.team",
+                href: "mailto:tobias.rohm@workfare.team",
             },
             {
                 label: "Arbeitsort",

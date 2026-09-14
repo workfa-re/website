@@ -31,6 +31,7 @@ Grundlage: Dateiinventur aller 81 ursprünglich getrackten Projektdateien, Codep
 
 | Priorität | Konkreter Befund aus dem geprüften Bestand | Änderung innerhalb des vorhandenen Designs | Datei/Bereich |
 |---|---|---|---|
+| P1 | Aktuelle eigene JobBridge-Texte stehen noch in Homepage-Abschnitten, Teamprofilen, Einblicke-Seiten und Vorschaudaten. | In der nächsten Inhaltsrunde aktuelle eigene Marke vereinheitlichen; historische Fremdberichte, belegte Firmennamen, Quellen und URL-Pfade einzeln behandeln. | `FeatureSections`, `TrustNarrative`, Produktdemo, Team-/Einblicke-Inhalte und Metadaten, OG-Bild |
 | P0 | Sicherheits-Slider kürzt Beschreibung mobil mit `line-clamp-4`. | Beschreibung vollständig lesbar machen; vorhandene Sliderform behalten und Höhe passend zum Inhalt wählen. | `src/components/FeatureSections.tsx`, Sicherheitsbeschreibung |
 | P0 | Abschlussbutton blendet sein Label mit `group-hover:opacity-0` aus. | „Zur Plattform“ in jedem Zustand sichtbar halten. Form, Größe und Position bleiben. | `src/components/FeatureSections.tsx`, Abschluss-CTA |
 | P0 | Sicherheit, Kontakt und Plattform nutzen noch `PlaceholderPage` statt eigentlicher Inhalte. | Im bestehenden dunklen Seitensystem echte Antworten ergänzen. Gestaltung nicht neu erfinden. | `src/app/sicherheit/page.tsx`, `src/app/kontakt/page.tsx`, `src/app/plattform/page.tsx` |
@@ -74,7 +75,7 @@ Apple ordnet Glas der funktionalen Bedien- und Navigationsebene zu. Genau diese 
 | Externer Bericht `/einblicke/[slug]` | Originalquelle und Datum klar, Original-Link erreichbar. Keine Berichterstattung als Partnerschaft oder Sicherheitszertifikat darstellen. |
 | `/einblicke/team` | Echte Personen und Rollen zeigen; vorbereitete Plätze sachlich behandeln. |
 | `/team/rezan-yalcin`, `/team/tim-lohmeier`, `/team/tobias-rohm`, `/team/[slug]` | Kontaktzustände und Abstände konsistent; persönliche Inhalte bewahren. Fehlende Fotos nicht durch künstliche Personen ersetzen. |
-| `/impressum`, `/datenschutz` | Rechtstexte beim visuellen Eingriff bewahren. Lesebreite, Standdatum, Links und Kopierbarkeit prüfen; dunklen Stil behalten. |
+| `/impressum`, `/datenschutz` | Umgesetzt: gemeinsames kompaktes Layout mit Workfare-Header, größere Titel, erhaltene Rechtsangaben und umgestellte E-Mail-Adressen. Browser- und Inhaltsprüfung im Änderungsprotokoll. |
 | `/demnaechst` | Falls benötigt: realen Status und funktionierenden Rückweg. Kein erfundenes Veröffentlichungsdatum. |
 | `/blog`, `/team/rezan`, `/team/resan-yalcin` | Bestehende Weiterleitungen erhalten; keine neue Gestaltung. |
 | Sitemap, RSS, News-Feed, OG, Manifest | Aktuelle eigene Marke konsistent; vorhandene URLs, Quellen und Redirects bewahren. |
@@ -127,3 +128,13 @@ Die Abnahmefrage lautet: **Ist die vorhandene Website klarer, besser bedienbar u
 | Dominante vollständige Workfare-Wortmarke im Menü. | Blasse, kleinere und unten angeschnittene Signatur am Fensterrand; die Nebenlinks stehen darüber. Die vier Hauptlinks bleiben der Blickfang. |
 
 Diese Feinabstimmung ist lokal umgesetzt und auf Desktop sowie Handy geprüft. Die bestehenden Menüanimationen bleiben erhalten. Die Nebenlinks stehen nach der letzten Korrektur ohne zusätzlichen Footerabstand direkt über der Signatur. Einzelheiten und Prüfgrenzen stehen im Änderungsprotokoll.
+
+## Anschließende Hero- und Rechtsseitenrunde
+
+| Before | After |
+|---|---|
+| Bisherige mobile Hero-Größenkurve und deckender Hauptbutton. | Unter 768 Pixeln etwa vier Prozent größere Überschrift; heller primärer Glasbutton im bestehenden Material. Separat committed. |
+| Eigene alte Header und große Einstiege auf beiden Rechtsseiten. | Gemeinsamer Workfare-Header auf allen 23 regulären Inhaltsseiten; kompakte Rechtsseiten mit Titel, Stand und klar gegliederten Angaben. |
+| Bisherige Website-Mailadressen. | Auf Nutzerwunsch vier Adressen auf `workfare.team` umgestellt; Menü und Impressum verwenden die zentrale Kontaktadresse. |
+
+App- und Verwaltungsumstellung bleiben Folgeaufgaben. Die früheren Tabellen dokumentieren ihren damaligen Prüfstand; die aktuelle Detailprüfung und die erhaltenen Rechtsinhalte stehen in `changes-2026-09-14.md`.
