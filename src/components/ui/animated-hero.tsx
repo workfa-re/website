@@ -30,40 +30,11 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const MOBILE_NOISE_URL =
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23noise)' opacity='0.09'/%3E%3C/svg%3E\")";
 
-function scrollToHowItWorksStage(reducedMotion: boolean) {
+function scrollToPlatformPreview(reducedMotion: boolean) {
     const section = document.getElementById("how-it-works");
     if (!section) return;
 
-    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
-    const scrollSpan = Math.max(section.offsetHeight - window.innerHeight, 0);
-    const targetProgress = window.innerWidth < 768 ? 0.16 : 0.19;
-    const targetY = sectionTop + scrollSpan * targetProgress;
-
-    if (reducedMotion) {
-        window.scrollTo(0, targetY);
-        return;
-    }
-
-    const startY = window.scrollY;
-    const distance = targetY - startY;
-    const duration = 1300;
-    const startTime = performance.now();
-
-    const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
-
-    const frame = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeOutQuint(progress);
-
-        window.scrollTo(0, startY + distance * eased);
-
-        if (progress < 1) {
-            window.requestAnimationFrame(frame);
-        }
-    };
-
-    window.requestAnimationFrame(frame);
+    section.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth", block: "start" });
 }
 
 const VERTEX_SHADER = /* glsl */ `
@@ -931,7 +902,7 @@ function Hero() {
                         <button
                             type="button"
                             onClick={() => {
-                                scrollToHowItWorksStage(reducedMotion);
+                                scrollToPlatformPreview(reducedMotion);
                             }}
                             className="glass-button inline-flex items-center justify-center px-7 py-4 text-[0.9rem] font-medium"
                         >

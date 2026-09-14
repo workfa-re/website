@@ -345,3 +345,20 @@
     .hero-menu-link { transition: none; }
     .menu-trigger:hover .menu-trigger-icon { transform: none; }
 }
+
+/* Demo surfaces follow the website's explicit mode, never the operating system. */
+.live-platform-demo { --demo-surface: #020617; --demo-muted: #94a3b8; }
+.live-platform-demo[data-theme="light"] { --demo-surface: #f6f8fc; --demo-muted: #475569; }
+.live-platform-demo[data-theme="light"] .demo-role-group {
+    background: #eef1f7;
+    box-shadow: inset 0 0 0 1px rgb(15 23 42 / 9%);
+}
+.live-platform-demo[data-theme="light"] .demo-role-button { color: #475569; }
+.live-platform-demo[data-theme="light"] .demo-role-button[aria-pressed="true"] {
+    background: #fff;
+    color: #0f172a;
+    box-shadow: 0 1px 4px rgb(15 23 42 / 8%);
+}
+.live-platform-demo[data-theme="light"] .demo-role-button:focus-visible { outline-color: #214fd0; }
+.live-platform-demo[data-theme="light"] .demo-retry { color: #0f172a; background-color: #e2e8f0; }
+.live-platform-demo[data-theme="light"] .demo-retry:focus-visible { outline-color: #214fd0; }

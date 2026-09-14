@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { serializeJsonLd } from "@/lib/json-ld";
+import { WebsiteThemeProvider } from "@/components/providers/WebsiteThemeProvider";
+import { DEFAULT_WEBSITE_THEME } from "@/config/website-theme";
 import "./globals.css";
 
 const SITE_URL = siteConfig.url;
@@ -160,7 +162,8 @@ export default function RootLayout({
         <html
             lang="de"
             data-scroll-behavior="smooth"
-            className={`${instrumentSerif.variable} ${geistSans.variable} ${geistMono.variable} dark`}
+            data-theme={DEFAULT_WEBSITE_THEME}
+            className={`${instrumentSerif.variable} ${geistSans.variable} ${geistMono.variable} ${DEFAULT_WEBSITE_THEME}`}
         >
             <head>
                 <script
@@ -183,7 +186,9 @@ export default function RootLayout({
                 />
             </head>
             <body className="min-h-screen bg-background font-sans antialiased">
-                {children}
+                <WebsiteThemeProvider initialTheme={DEFAULT_WEBSITE_THEME}>
+                    {children}
+                </WebsiteThemeProvider>
             </body>
         </html>
     );

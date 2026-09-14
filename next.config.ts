@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { platformDemoEnabled, platformDemoUrl } from "./src/config/platform-demo";
 
 const isProduction = process.env.NODE_ENV === "production";
 const microsoftCustomerConnectScript = "https://res.public.onecdn.static.microsoft";
@@ -11,7 +12,7 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   `connect-src 'self'${isProduction ? "" : " ws://localhost:* ws://127.0.0.1:* http://localhost:* http://127.0.0.1:*"}`,
-  `frame-src 'self' ${microsoftCustomerConnectFrame}`,
+  `frame-src 'self' ${microsoftCustomerConnectFrame}${platformDemoEnabled ? ` ${new URL(platformDemoUrl).origin}` : ""}`,
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

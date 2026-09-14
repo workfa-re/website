@@ -1,6 +1,6 @@
 # Workfare: Kleine Verbesserungen am bestehenden Design
 
-Stand: 14. September 2026. Verbindlicher Rahmen: **kein Redesign, keine helle neue Markenwelt, keine weiteren Bildentwürfe.** Farbwelt, Schriftfamilien, Hintergrundeffekte, Scrollbühne, Produktdarstellung und Homepage-Reihenfolge bleiben. Die Desktop-Aurora wurde bei gleicher Gestaltungsrichtung technisch entlastet; Darstellung und Ablauf sind geprüft, eine Netzwerk-Ladezeitverkürzung wurde nicht gemessen. Die Vorschläge betreffen gezielte Inhalts-, Lesbarkeits- und Bedienverbesserungen innerhalb des vorhandenen Designs.
+Stand: 14. September 2026. Verbindlicher Rahmen: **kein Redesign, keine helle neue Markenwelt, keine weiteren Bildentwürfe.** Farbwelt, Schriftfamilien und Hintergrundeffekte der Website sowie die Homepage-Reihenfolge bleiben. Auf ausdrücklichen neuen Nutzerwunsch ersetzt jetzt ein inszenierter Plattform-Startbildschirm die direkt eingebettete Live-Demo; die Anwendung öffnet separat auf `/demo`. Die Desktop-Aurora wurde bei gleicher Gestaltungsrichtung technisch entlastet; Darstellung und Ablauf sind geprüft, eine Netzwerk-Ladezeitverkürzung wurde nicht gemessen. Die Vorschläge betreffen gezielte Inhalts-, Lesbarkeits- und Bedienverbesserungen innerhalb des vorhandenen Designs.
 
 Grundlage: Dateiinventur aller 81 ursprünglich getrackten Projektdateien, Codeprüfung aller Seitentypen, lokale Browserprüfungen und Primärquellenrecherche. Dieser Plan baut auf der bestehenden Website auf.
 
@@ -48,7 +48,7 @@ Die Befunde stammen aus der gelesenen Ausgangsfassung. Vor Umsetzung gegen den l
 | Abschnitt | Was bleibt | Nächster sinnvoller Check |
 |---|---|---|
 | Hero | Dunkle Atmosphäre, Geist/Instrument Serif, Shader, Produktkarten, Aktionen | Neue Workfare-Nennung und gekürzten Text bei 320/390/1440 Pixel prüfen. Kein abgeschnittener Umbruch der vorhandenen `whitespace-nowrap`-Zeilen. |
-| Tablet-Erklärung | Bestehende Scrollbühne, Tablet und Schrittfolge | Alle Schritte und das Ende bleiben mobil und bei Reduced Motion erreichbar. In dieser Runde keine neue Scrolllänge und keine alternative Inszenierung planen. |
+| Plattformvorschau | Aktueller Plattform-Startbildschirm als statische Momentaufnahme; die übrige Website behält ihr Design | Jobkarten erscheinen einzeln beim Scrollen. Mobile Ausschnitte, Reduced Motion und JavaScript-freie Sichtbarkeit prüfen; „Live-Demo“ öffnet erst nach dem Klick die vollständige Anwendung auf `/demo`. |
 | Vertrauenspassage | „Kleine Jobs. Klare Wege. Direkt in deiner Nähe.“, Anordnung und Pixelgestaltung | Text konsistent zur tatsächlichen Verfügbarkeit; Lesbarkeit über dem vorhandenen Hintergrund. |
 | „Für wen?“ | Vier Zielgruppen, Raster, Symbole, Farben | Wiederholungen im Text kürzen. Jugendliche und Eltern innerhalb der bestehenden Karte verständlich unterscheiden. |
 | Sicherheit | Slider, Nummerierung, Farbflächen, Detail-Link | Vollständige mobile Texte; Pfeile gut treffbar und benannt; Detail-Link bietet echte Antworten. |
@@ -94,7 +94,7 @@ Keine erfundenen Zahlen, Sterne, Zitate, Partnerschaften, Siegel oder Garantien 
 - WCAG 2.2 AA als Prüfzieldesign: normaler Text mindestens 4,5:1, großer Text mindestens 3:1; Fokus, Bedienflächen und Beschriftung ebenfalls prüfen. Farben allein bestätigen keine vollständige Zugänglichkeit. [W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - 44 × 44 CSS-Pixel als eigener guter Trefferflächenstandard behalten. WCAG 2.2 AA fordert grundsätzlich 24 × 24 oder passende Abstandsausnahmen; die größere Fläche ist eine bewusste Komfortentscheidung. [W3C: Target Size Minimum](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum)
 - 320/390 Pixel, geringe Bildschirmhöhe, 200 Prozent Zoom, lange deutsche Wörter und Reduced Motion prüfen. Kein allgemeiner Umbau der mobilen Struktur.
-- Shader und Scrollbühne bleiben. Vorhandene Reduced-Motion-Zustände und erreichbare Informationen testen. Falls dabei ein konkreter Defekt auffällt, gezielt korrigieren und benennen.
+- Der Hero-Shader bleibt. Die neue Plattformvorschau erhält eine einmalige Kartenstaffelung; Reduced Motion, Sichtbarkeit ohne JavaScript und erreichbare Informationen testen. Keine Endlosschleife und keine Anmeldung auf der Startseite.
 - Keine Fotokampagne, generierten Bilder oder neuen Videos. Bestehendes Material behalten; nur Ausschnitt, Qualität, Alternativtexte und Nutzungsrahmen prüfen.
 
 ## Referenzen nur als Prinzipien
@@ -112,7 +112,7 @@ Keine erfundenen Zahlen, Sterne, Zitate, Partnerschaften, Siegel oder Garantien 
 1. **Phase A ist lokal umgesetzt und geprüft:** gemeinsamer Header/Dialog mit ursprünglicher Menüanimation, Brückenzeichen, Workfare-Schriftzug, neutrales rundes Glas, ruhig reagierende Hero-CTAs und angepasste Serifüberschrift. Dazu kommen kürzerer Hero-Text, belegte Bereinigung und die Desktop-Aurora-Optimierung. Neue Build-, Browser- und Lifecycle-Ergebnisse stehen im Änderungsprotokoll. Die gemeinsame Durchsicht und Freigabe zum lokalen Commit sind erfolgt. Eine Veröffentlichung ist ein eigener Schritt.
 2. **Kleine UI-Fehler:** CTA-Label und abgeschnittenen Sicherheitstext korrigieren; kritische Kontraste gezielt prüfen. Fertig, wenn alle wichtigen Texte in normalen Zuständen lesbar sind.
 3. **Inhaltliche Lücken:** Sicherheits-, Kontakt- und Plattformseite im vorhandenen System vervollständigen. Fertig, wenn jede angekündigte Antwort und der reale Funktionsstatus vorhanden sind.
-4. **Gezielte Prüfung:** Menü, Slider, Tablet und Kontakt mobil/per Tastatur testen; vorhandene Build-, Lint-, TypeScript- und SEO-Prüfungen ausführen. Keine Tests nur zur Bestätigung einzelner Farbklassen.
+4. **Gezielte Prüfung:** Menü, Slider, Plattformvorschau und Kontakt mobil/per Tastatur testen; vorhandene Build-, Lint-, TypeScript- und SEO-Prüfungen ausführen. Keine Tests nur zur Bestätigung einzelner Farbklassen.
 5. **Nach gemeinsamer Freigabe veröffentlichen:** nachvollziehbarer Commit/Diff, korrekt zugeordneter Autor, Deploymentvergleich und kurze Live-Prüfung. Domainweiterleitungen, Artikelquellen und technische App-/Mailverbindungen bleiben intakt.
 
 Leistung unter denselben Bedingungen vorher/nachher vergleichen, ohne neue Effekte einzuführen. Gute Core-Web-Vitals-Bereiche: LCP höchstens 2,5 Sekunden, INP höchstens 200 ms, CLS höchstens 0,1, jeweils im Feld am 75. Perzentil. Fehlende Felddaten sind keine bestandene Messung. [Google/web.dev: Web Vitals](https://web.dev/articles/vitals)
@@ -138,3 +138,37 @@ Diese Feinabstimmung ist lokal umgesetzt und auf Desktop sowie Handy geprüft. D
 | Bisherige Website-Mailadressen. | Auf Nutzerwunsch vier Adressen auf `workfare.team` umgestellt; Menü und Impressum verwenden die zentrale Kontaktadresse. |
 
 App- und Verwaltungsumstellung bleiben Folgeaufgaben. Die früheren Tabellen dokumentieren ihren damaligen Prüfstand; die aktuelle Detailprüfung und die erhaltenen Rechtsinhalte stehen in `changes-2026-09-14.md`.
+
+## Aktuelle Entscheidung: Plattformvorschau zuerst, Live-Demo separat
+
+Die Startseite zeigt auf ausdrücklichen neuen Nutzerwunsch eine statisch nachgebaute Momentaufnahme des aktuellen Plattform-Startbildschirms. Vier erfundene Jobkarten erscheinen einzeln beim Scrollen; die Navigation bildet den sichtbaren Plattformrahmen nach. Es werden keine E-Mail-Adressen gezeigt. Diese Vorschau lädt weder die Anwendung noch eine Demositzung oder Datenbankverbindung. Der Link „Live-Demo“ führt mit deaktiviertem Vorladen auf die separate Website-Seite `/demo`.
+
+Dort bleibt die vollständige reguläre Plattform mit ihren Datenbank-Demoprofilen und dem besuchergebundenen Wechsel zwischen Suchenden, privaten Anbietern und Unternehmen erhalten. Der gemeinsame Website-Header, eine knappe Erklärung und drei Rollenbuttons rahmen die große Anwendungsansicht ein. Die Route ist von der Indexierung ausgeschlossen. Die Datenbanktrennung und der Anmeldeablauf werden in dieser Runde nicht verändert.
+
+Die statische Vorschau verwendet die Plattformschrift ausschließlich innerhalb des dargestellten Bildschirms sowie das vorhandene Brückenasset. Gestaltung und responsive Details werden gegen den aktuellen Plattformstand abgeglichen. Sie ist keine automatisch synchronisierte Ansicht; spätere Plattformänderungen müssen bewusst in diesen Nachbau übernommen werden. Eine Behauptung pixelgenauer Gleichheit ist nicht Teil der Abnahme.
+
+| Before | After |
+|---|---|
+| Die vollständige Datenbankdemo öffnete direkt beim Scrollen auf der Startseite. | Statischer, animierter Plattform-Startbildschirm ohne Anwendungssitzung; „Live-Demo“ öffnet die vollständige Anwendung auf `/demo`. |
+| Einbettung und Einführung waren ein gemeinsamer Bereich. | Gestalteter Einblick auf der Startseite und eigene, großflächige Demoseite mit gemeinsamem Header. |
+| Die Vorschau war an eine erreichbare Demo-Anwendung gebunden. | Der Startbildschirm wird von der Website selbst dargestellt; nur `/demo` benötigt die laufende Anwendung. |
+
+Prüfung der aktuellen Vorschau: TypeScript, gezieltes ESLint und Produktionsbuild bestanden. Vorschau bei 320, 390 und 1440 Pixeln geprüft; Animation, Übergang auf `/demo` und alle drei Rollen dort bestätigt. Reduced Motion und der JavaScript-freie Fallback wurden im Quellcode geprüft. Der vollständige Änderungsumfang und die aktuellen Nachweise stehen in `changes-platform-preview-2026-09-14.md`; die Architektur steht in `platform-demo.md`.
+
+Der frühere Prüfstand der Datenbankdemo bleibt dokumentiert: 253 Plattformtests, 58 echte API-Prüfungen, drei SQL-Prüfsuiten und beide damaligen Produktionsbuilds bestanden. Rollenwechsel und Desktop-/Handydarstellung wurden für diese vorherige Fassung geprüft. Das ersetzt nicht die Abnahme der neuen Startseitenvorschau und der getrennten Website-Route. Die Prüfung auf dem späteren Produktionshost gehört weiterhin zur Veröffentlichung. Diese Runde ist noch nicht committed oder veröffentlicht.
+
+Für eine spätere gemeinsame Designrunde auf ausdrücklichen Nutzerwunsch vormerken:
+
+- Die vier Glaskarten unter „Für wen?“ sind noch nicht abgenommen. Es sind weiterhin zu viele Informationen gleichzeitig sichtbar; Anordnung und Informationsmenge neu lösen.
+- Die Abstände innerhalb und zwischen den Karten sind noch nicht stimmig. Mit dem Design-Skill erneut prüfen, statt den Zwischenstand als fertig zu behandeln.
+- Der ausdrücklich angehängte Skill `make-interfaces-feel-better` wird verwendet.
+
+Diese Kartenkorrekturen bleiben zurückgestellt.
+
+## Farbmodi: gemeinsame Grundlage, Hellmodus später
+
+Die Website bleibt aktuell dunkel. Ihr zentraler ThemeProvider steuert nun auch die statische Plattformvorschau und den Start der vollständigen Demo. Beide unterstützen `dark` und `light`; Änderungen können der eingebetteten Anwendung ohne Neuladen mitgeteilt werden. Die normale Plattform behält ihre eigene Profil-/Systemeinstellung. Umsetzung und Prüfgrenzen stehen in `changes-demo-theme-2026-09-14.md`.
+
+Vorgemerkt: den vollständigen Hellmodus aller Websitebereiche gestalten, Kontraste und Glasflächen in beiden Modi prüfen und anschließend einen öffentlichen Umschalter mit gespeicherter Auswahl anbinden. Die vorbereitete Demo-Kopplung ist kein abgeschlossener Hellmodus der gesamten Website.
+
+Anschließende Freigabe: Nutzerauftrag für Commit und Push erhalten. Die zuvor dokumentierten offenen Gestaltungsaufgaben bleiben erhalten. Die öffentliche Live-Demo wird erst mit ausdrücklich konfigurierter, getrennt bereitgestellter Demo-Instanz freigeschaltet; lokal bleibt sie aktiv. Abschließende Build-, Test- und Git-Prüfung: `changes-demo-theme-2026-09-14.md`.
