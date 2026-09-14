@@ -924,7 +924,7 @@ function Hero() {
                     >
                         <a
                             href={siteConfig.appUrl}
-                            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-[0.9rem] font-medium text-slate-950 transition-[background-color,box-shadow] duration-200 motion-reduce:transition-none hover:bg-blue-50 hover:shadow-[inset_0_0_0_1px_rgba(191,219,254,0.65)] active:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
+                            className="glass-button glass-button-primary inline-flex items-center justify-center px-7 py-4 text-[0.9rem] font-semibold"
                         >
                             Zur Plattform
                         </a>
