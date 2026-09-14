@@ -1,29 +1,21 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandMark } from "@/components/BrandMark";
 import { SiteMenuButton } from "@/components/SiteMenu";
+import { siteConfig } from "@/config/site";
 
 export function SiteHeader({ className = "" }: { className?: string }) {
     return (
         <header className={`flex items-center justify-between ${className}`}>
             <Link
                 href="/"
-                aria-label="JobBridge Startseite"
-                className="group inline-flex items-center gap-3 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#02040b]"
+                aria-label={`${siteConfig.name} Startseite`}
+                className="brand-link inline-flex min-h-11 items-center gap-3 rounded-[1.125rem] outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-4 focus-visible:ring-offset-[#02040b]"
             >
-                <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.045] shadow-[0_12px_36px_rgba(2,6,23,0.2)]">
-                    <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(96,165,250,0.25),transparent_58%)] opacity-80" />
-                    <Image
-                        src="/favicon.ico"
-                        alt=""
-                        width={44}
-                        height={44}
-                        unoptimized
-                        className="relative object-cover"
-                        style={{ width: 44, height: "auto", transform: "scale(1.08)" }}
-                    />
+                <span className="glass-control" aria-hidden="true">
+                    <BrandMark className="h-[18px] w-[29px]" />
                 </span>
-                <span className="text-[1.05rem] font-semibold tracking-[-0.015em] text-white transition group-hover:text-blue-100">
-                    JobBridge
+                <span className="brand-wordmark text-[1.25rem] font-semibold leading-none tracking-[-0.04em] text-white sm:text-[1.3rem]">
+                    {siteConfig.name}
                 </span>
             </Link>
 

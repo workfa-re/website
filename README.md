@@ -1,47 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Workfare Website
 
-## Getting Started
+Öffentliche Website unter [workfa.re](https://workfa.re), entwickelt mit Next.js App Router, React, TypeScript und Tailwind CSS. Die Veröffentlichung erfolgt über Dokploy aus dem Repository [workfa-re/website](https://github.com/workfa-re/website).
 
-First, run the development server:
+## Lokal starten
+
+Die geprüfte Entwicklungsumgebung verwendet Node.js 24 und npm 11. Die installierte Next.js-Version benötigt mindestens Node.js 20.9.0.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Danach ist die Website unter [localhost:3000](http://localhost:3000) erreichbar. Abhängigkeiten werden über `package.json` und `package-lock.json` gemeinsam verwaltet. Für den Produktionsbuild muss der Download der eingebundenen Google-Schriften erreichbar sein.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Prüfen und Produktionsstand ansehen
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+npm run lint
+npm run seo:verify
+npm run build
+npm run start -- --port 3100
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Während der Produktionsserver läuft, in einem zweiten Terminal:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run domains:verify -- http://127.0.0.1:3100
+```
 
-## Learn More
+Die Domainprüfung verwendet ausschließlich einen lokalen Server. Sie kontrolliert permanente Weiterleitungen, erhaltene Pfade und Suchparameter, die Abgrenzung zu anderen Hosts sowie Canonical-, Sitemap-, Robots- und Feed-Adressen.
 
-To learn more about Next.js, take a look at the following resources:
+## Projektaufbau
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- `src/app/`: Seiten, Metadaten, globale Styles sowie Sitemap-, RSS- und Bildrouten.
+- `src/components/`: gemeinsam verwendete Oberflächen und Animationen.
+- `src/config/site.ts`: aktuelle Marke, Website-Adresse, Navigation und Dienstverknüpfungen.
+- `src/content/`: historische Beiträge, externe Medienquellen und Teamprofile.
+- `public/`: unmittelbar erreichbare, tatsächlich verwendete statische Dateien.
+- `scripts/`: vorhandene Prüfungen für Suchmaschinenangaben und Domainwechsel.
+- `docs/`: [Dateiinventur](docs/file-audit.md) und [Bildherkunft](docs/image-provenance.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Die Website leitet `jobbridge.app`, `www.jobbridge.app` und `www.workfa.re` dauerhaft auf `https://workfa.re` weiter. Vorhandene historische Artikelpfade und Profilweiterleitungen bleiben erhalten. Die Anwendung und interne Dienste verwenden vorerst ihre bestehenden Adressen; deren Umstellung ist ein eigener Arbeitsschritt.
 
-## Deploy on Vercel
+Änderungen werden lokal geprüft und anschließend bewusst über Git veröffentlicht. Ein lokaler Build oder ein bearbeiteter Dateistand veröffentlicht die Website noch nicht. Der Microsoft-Chat benötigt außerdem die passende Domainfreigabe im externen Dienst; eine Quelltextänderung allein richtet diese nicht ein.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Bilder und historische Inhalte
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Neue Bilder erhalten eine nachvollziehbare Herkunft und einen konkreten Verwendungszweck. In [image-provenance.md](docs/image-provenance.md) werden Quelle, Dateipfad, vorhandene Metadaten und bekannte Bearbeitungen dokumentiert. Ein Quellenlink ersetzt keine erforderliche Nutzungserlaubnis.
 
-## License
+Keine Entwürfe, ungenutzten Bilder, Zugangsdaten oder internen Berichte in `public/` ablegen: Dateien dort sind direkt erreichbar, auch wenn keine Seite sie verlinkt. Bestätigte generative KI-Bilder müssen als solche dokumentiert werden; das Aussehen oder fehlende Kameradaten allein beweist keine KI-Herkunft. Suchmaschinenregeln werden bei Bedarf gezielt für einzelne Inhalte festgelegt.
 
-The source code of this website is licensed under the [MIT License](LICENSE). 
+Historische Presseberichte, deren Originaltitel, Quellen, Personenangaben und frühere Markenbezeichnungen bleiben unverändert. Aktuelle Oberflächentexte beziehen die neue Marke möglichst aus `siteConfig`.
 
-**Exceptions:**
-The JobBridge brand, logos, and all text content (including but not limited to the website copy, blog posts, and documentation) are NOT covered by this license and remain strictly **All Rights Reserved**. You may not use the JobBridge name, logos, or content without explicit written permission.
+## Lizenz
+
+Der Quellcode steht unter der [MIT-Lizenz mit den dort aufgeführten Ausnahmen](LICENSE). Marken, Logos und Textinhalte sind von dieser Freigabe ausgenommen. Die Umbenennung und diese Dokumentation ändern keine bestehenden Rechte oder Nutzungsbedingungen. Für fremde Pressebilder gelten die Rechte ihrer jeweiligen Urheber; die Herkunftsliste erteilt keine zusätzliche Nutzungserlaubnis.

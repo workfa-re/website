@@ -1,15 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment, memo, type MouseEvent, type MutableRefObject, useEffect, useRef, useState } from "react";
+import { Fragment, memo, useEffect, useRef, useState } from "react";
 import {
     animate,
     AnimatePresence,
     motion,
     type MotionValue,
-    useMotionValueEvent,
     useReducedMotion,
     useScroll,
     useTransform,
@@ -18,26 +14,21 @@ import {
     CalendarDays,
     Coins,
     Leaf,
-    Menu,
     MapPin,
     PawPrint,
     ShoppingBag,
     Smartphone,
     Wrench,
-    X,
 } from "lucide-react";
-import { mainNavItems, menuMetaLinks } from "@/config/site";
+import { siteConfig } from "@/config/site";
+import { SiteHeader } from "@/components/SiteHeader";
 
 const HEADLINE_PRIMARY_LINE = "Dein erster Job.";
 const HEADLINE_TYPED_LINE = "Aber sicher.";
 const HEADLINE_TYPED_CHARACTERS = Array.from(HEADLINE_TYPED_LINE);
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const MENU_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const MOBILE_NOISE_URL =
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23noise)' opacity='0.09'/%3E%3C/svg%3E\")";
-
-const HERO_MENU_ITEMS = mainNavItems;
-const HERO_MENU_META_LINKS = menuMetaLinks;
 
 function scrollToHowItWorksStage(reducedMotion: boolean) {
     const section = document.getElementById("how-it-works");
@@ -88,7 +79,6 @@ const FRAGMENT_SHADER = /* glsl */ `
 precision highp float;
 
 uniform float uTime;
-uniform float uScroll;
 uniform vec2 uMouse;
 uniform float uIntensity;
 uniform vec2 uResolution;
@@ -144,9 +134,6 @@ void main() {
         abs(p.y - 0.22 * sin(p.x * 1.7 - field * 2.8 - time * 1.1) - 0.24)
     );
 
-    float glow = ribbonA * 0.65 + ribbonB * 0.55;
-    glow *= 0.58 + uIntensity * 0.52 + uScroll * 0.12;
-
     float starField = pow(noise(uv * resolution * 0.18 + time * 0.2), 10.0) * 0.16;
     float grain = (noise(uv * resolution * 0.75 + fieldDetail * 4.0) - 0.5) * 0.035;
     float vignette = smoothstep(1.35, 0.18, length(p * vec2(1.0, 1.18)));
@@ -166,8 +153,6 @@ void main() {
     gl_FragColor = vec4(color, 1.0);
 }
 `;
-
-type ScrollRef = MutableRefObject<number>;
 
 type CardTone = "amber" | "sky" | "emerald" | "violet" | "slate";
 type CardKind = "tech" | "garden" | "pets" | "shopping" | "support";
@@ -400,7 +385,7 @@ function useTypewriter(text: string, startDelay: number, reducedMotion: boolean)
         : { visibleCount, isComplete };
 }
 
-function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
+function AuroraCanvas() {
     const hostRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -434,7 +419,7 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
                 return;
             }
 
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+            renderer.setPixelRatio(1);
             renderer.setClearColor(0x030712, 1);
 
             const scene = new THREE.Scene();
@@ -442,7 +427,6 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
             const geometry = new THREE.PlaneGeometry(2, 2);
             const uniforms = {
                 uTime: { value: 0 },
-                uScroll: { value: 0 },
                 uMouse: { value: new THREE.Vector2(0.5, 0.5) },
                 uIntensity: { value: 0 },
                 uResolution: { value: new THREE.Vector2(1, 1) },
@@ -459,7 +443,14 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
                 const width = host.clientWidth;
                 const height = host.clientHeight;
                 if (width === 0 || height === 0) return;
-                renderer.setSize(width, height, false);
+
+                // The soft background does not need a Retina-sized drawing buffer.
+                const renderScale = Math.min(1, Math.sqrt((1920 * 1080) / (width * height)));
+                renderer.setSize(
+                    Math.max(1, Math.round(width * renderScale)),
+                    Math.max(1, Math.round(height * renderScale)),
+                    false
+                );
                 uniforms.uResolution.value.set(width, height);
             };
 
@@ -470,6 +461,7 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
 
             const mouseTarget = new THREE.Vector2(0.5, 0.5);
             const handlePointerMove = (event: PointerEvent) => {
+                if (!active) return;
                 const rect = host.getBoundingClientRect();
                 if (rect.width === 0 || rect.height === 0) return;
 
@@ -491,28 +483,59 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
                 },
             });
 
+            const frameInterval = 1000 / 30;
             let frame = 0;
-            let active = true;
+            let active = false;
+            let inView = false;
+            let lastRender = 0;
+            let lastTime = 0;
 
-            const render = () => {
+            const render = (now: number) => {
                 if (!active) return;
+                frame = window.requestAnimationFrame(render);
+                if (now - lastRender < frameInterval) return;
 
-                uniforms.uTime.value += 0.012;
-                uniforms.uScroll.value = scrollRef.current;
-                uniforms.uMouse.value.x += (mouseTarget.x - uniforms.uMouse.value.x) * 0.06;
-                uniforms.uMouse.value.y += (mouseTarget.y - uniforms.uMouse.value.y) * 0.06;
+                const elapsed = lastTime === 0 ? 1000 / 60 : Math.min(now - lastTime, 100);
+                lastRender = now - ((now - lastRender) % frameInterval);
+                lastTime = now;
+                const mouseBlend = 1 - Math.pow(0.94, elapsed / (1000 / 60));
+
+                // Keep the original 60 Hz motion speed, independent of display refresh rate.
+                uniforms.uTime.value += elapsed * 0.00072;
+                uniforms.uMouse.value.x += (mouseTarget.x - uniforms.uMouse.value.x) * mouseBlend;
+                uniforms.uMouse.value.y += (mouseTarget.y - uniforms.uMouse.value.y) * mouseBlend;
 
                 renderer.render(scene, camera);
-                frame = window.requestAnimationFrame(render);
             };
 
-            frame = window.requestAnimationFrame(render);
+            const syncActivity = () => {
+                const shouldRun = inView && !document.hidden;
+                if (active === shouldRun) return;
+
+                active = shouldRun;
+                if (active) {
+                    lastRender = 0;
+                    lastTime = 0;
+                    frame = window.requestAnimationFrame(render);
+                } else {
+                    window.cancelAnimationFrame(frame);
+                }
+            };
+
+            const intersectionObserver = new IntersectionObserver(([entry]) => {
+                inView = entry.isIntersecting;
+                syncActivity();
+            });
+            intersectionObserver.observe(host);
+            document.addEventListener("visibilitychange", syncActivity);
 
             cleanup = () => {
                 active = false;
                 intensityAnimation.stop();
                 window.cancelAnimationFrame(frame);
                 window.removeEventListener("pointermove", handlePointerMove);
+                document.removeEventListener("visibilitychange", syncActivity);
+                intersectionObserver.disconnect();
                 resizeObserver.disconnect();
                 geometry.dispose();
                 material.dispose();
@@ -525,7 +548,7 @@ function AuroraCanvas({ scrollRef }: { scrollRef: ScrollRef }) {
             disposed = true;
             cleanup();
         };
-    }, [scrollRef]);
+    }, []);
 
     return <div ref={hostRef} aria-hidden className="pointer-events-none absolute inset-0 z-0" />;
 }
@@ -739,234 +762,8 @@ function HeroVisual({
     );
 }
 
-function handleHeroMenuNavigation(
-    event: MouseEvent<HTMLAnchorElement>,
-    item: { href: string },
-    isCurrent: boolean,
-    reducedMotion: boolean,
-    closeMenu: () => void
-) {
-    const { href } = item;
-
-    if (isCurrent) {
-        event.preventDefault();
-        closeMenu();
-        return;
-    }
-
-    if (!href.startsWith("#")) {
-        closeMenu();
-        return;
-    }
-
-    event.preventDefault();
-    closeMenu();
-
-    if (href === "#how-it-works") {
-        scrollToHowItWorksStage(reducedMotion);
-        return;
-    }
-
-    document.querySelector<HTMLElement>(href)?.scrollIntoView({
-        behavior: reducedMotion ? "auto" : "smooth",
-        block: "start",
-    });
-}
-
-function MenuWord({ label, active }: { label: string; active: boolean }) {
-    return (
-        <span className="relative block h-[1em] overflow-hidden pb-[0.055em]">
-            <motion.span
-                className="block will-change-transform"
-                animate={{ y: active ? "-100%" : "0%" }}
-                transition={{ duration: 0.72, ease: MENU_EASE }}
-            >
-                {label}
-            </motion.span>
-            <motion.span
-                aria-hidden
-                className="absolute inset-x-0 top-full block text-white will-change-transform"
-                animate={{ y: active ? "-100%" : "0%" }}
-                transition={{ duration: 0.72, ease: MENU_EASE }}
-            >
-                {label}
-            </motion.span>
-        </span>
-    );
-}
-
-function HeroMenuItem({
-    item,
-    index,
-    isCurrent,
-    reducedMotion,
-    onClose,
-}: {
-    item: (typeof HERO_MENU_ITEMS)[number];
-    index: number;
-    isCurrent: boolean;
-    reducedMotion: boolean;
-    onClose: () => void;
-}) {
-    const [active, setActive] = useState(false);
-
-    return (
-        <motion.a
-            href={item.href}
-            aria-label={item.label}
-            aria-current={isCurrent ? "page" : undefined}
-            onClick={(event) =>
-                handleHeroMenuNavigation(event, item, isCurrent, reducedMotion, onClose)
-            }
-            onHoverStart={() => setActive(!isCurrent)}
-            onHoverEnd={() => setActive(false)}
-            onFocus={() => setActive(!isCurrent)}
-            onBlur={() => setActive(false)}
-            className={`hero-menu-link ${
-                isCurrent
-                    ? "text-white/34"
-                    : "text-white/96 hover:text-white focus-visible:text-white"
-            }`}
-            style={{
-                fontFamily: "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
-            }}
-            initial={reducedMotion ? false : { opacity: 0, y: 34 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-                duration: 0.78,
-                delay: 0.18 + index * 0.055,
-                ease: EASE,
-            }}
-        >
-            <MenuWord label={item.label} active={active} />
-        </motion.a>
-    );
-}
-
-function HeroMenuOverlay({
-    open,
-    pathname,
-    reducedMotion,
-    onClose,
-}: {
-    open: boolean;
-    pathname: string;
-    reducedMotion: boolean;
-    onClose: () => void;
-}) {
-    useEffect(() => {
-        if (!open) return;
-
-        const previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                onClose();
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            document.body.style.overflow = previousOverflow;
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [onClose, open]);
-
-    return (
-        <AnimatePresence>
-            {open ? (
-                <motion.div
-                    className="fixed inset-0 z-[120] overflow-hidden bg-[#050505] text-white"
-                    initial={reducedMotion ? false : { y: "-100%" }}
-                    animate={{ y: 0 }}
-                    exit={reducedMotion ? { opacity: 0 } : { y: "-100%" }}
-                    transition={{ duration: 0.72, ease: EASE }}
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label="Navigation"
-                >
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_58%_32%,rgba(59,130,246,0.11),transparent_34%),radial-gradient(circle_at_22%_86%,rgba(14,165,233,0.08),transparent_26%)]" />
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_28%,rgba(255,255,255,0.018))]" />
-
-                    <button
-                        type="button"
-                        onClick={onClose}
-                        aria-label="Menü schließen"
-                        className="group absolute right-6 top-6 z-20 flex h-12 w-12 items-center justify-center rounded-full text-white transition hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:right-10 sm:top-10"
-                    >
-                        <motion.span
-                            className="flex"
-                            whileHover={reducedMotion ? undefined : { rotate: 90, scale: 1.05 }}
-                            transition={{ duration: 0.35, ease: EASE }}
-                        >
-                            <X className="h-8 w-8 stroke-[1.45]" aria-hidden="true" />
-                        </motion.span>
-                    </button>
-
-                    <nav
-                        aria-label="Overlay Navigation"
-                        className="hero-menu-nav"
-                    >
-                        <div className="hero-menu-items">
-                            {HERO_MENU_ITEMS.map((item, index) => (
-                                <HeroMenuItem
-                                    key={item.label}
-                                    item={item}
-                                    index={index}
-                                    isCurrent={item.href === pathname}
-                                    reducedMotion={reducedMotion}
-                                    onClose={onClose}
-                                />
-                            ))}
-                        </div>
-                    </nav>
-
-                    <div data-hero-menu-meta className="hero-menu-meta">
-                        <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-[0.8rem] font-medium text-white/44 sm:gap-x-10 sm:text-sm">
-                            {HERO_MENU_META_LINKS.map((item) =>
-                                item.href.startsWith("/") ? (
-                                    <Link
-                                        key={item.label}
-                                        href={item.href}
-                                        onClick={onClose}
-                                        className="transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                                    >
-                                        {item.label}
-                                    </Link>
-                                ) : (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        onClick={onClose}
-                                        className="transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                                    >
-                                        {item.label}
-                                    </a>
-                                )
-                            )}
-                        </div>
-                    </div>
-
-                    <div
-                        data-hero-menu-wordmark
-                        aria-hidden
-                        className="hero-menu-wordmark"
-                    >
-                        JobBridge
-                    </div>
-                </motion.div>
-            ) : null}
-        </AnimatePresence>
-    );
-}
-
 function Hero() {
     const heroRef = useRef<HTMLElement | null>(null);
-    const scrollRef = useRef(0);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const pathname = usePathname() ?? "/";
     const reducedMotion = useReducedMotion() ?? false;
     const isDesktop = useIsDesktop();
     const showCanvas = isDesktop && !reducedMotion;
@@ -982,10 +779,6 @@ function Hero() {
         offset: ["start start", "end start"],
     });
 
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        scrollRef.current = latest;
-    });
-
     const contentY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : -72]);
     const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, reducedMotion ? 1 : 0.38]);
     const visualY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : -36]);
@@ -993,77 +786,21 @@ function Hero() {
     return (
         <section
             ref={heroRef}
-            aria-label="JobBridge Hero"
+            aria-label={`${siteConfig.name} – Start`}
             className="relative min-h-[calc(100svh-1rem)] w-full overflow-hidden rounded-[24px] border border-white/10 bg-[#030712] text-white shadow-[0_40px_140px_rgba(2,6,23,0.55)] sm:min-h-[calc(100svh-1.5rem)] sm:rounded-[28px] lg:min-h-[calc(100svh-2rem)] lg:rounded-[32px]"
             style={{
                 backgroundImage: showCanvas ? undefined : MOBILE_NOISE_URL,
                 backgroundColor: "#030712",
             }}
         >
-            {showCanvas ? <AuroraCanvas scrollRef={scrollRef} /> : null}
+            {showCanvas ? <AuroraCanvas /> : null}
 
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(96,165,250,0.14),transparent_30%),radial-gradient(circle_at_72%_38%,rgba(59,130,246,0.14),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_26%),linear-gradient(180deg,rgba(3,7,18,0.04),rgba(3,7,18,0.28))]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:120px_120px] opacity-[0.08]" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#02040b] to-transparent" />
 
-            <HeroMenuOverlay
-                open={menuOpen}
-                pathname={pathname}
-                reducedMotion={reducedMotion}
-                onClose={() => setMenuOpen(false)}
-            />
-
             <div className="relative z-10 mx-auto grid min-h-[calc(100svh-1rem)] w-full max-w-[1760px] grid-cols-12 grid-rows-[auto_minmax(0,1fr)] gap-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] sm:min-h-[calc(100svh-1.5rem)] sm:px-7 sm:pb-8 sm:pt-6 md:px-10 md:pb-10 md:pt-8 lg:min-h-[calc(100svh-2rem)] lg:grid-rows-none lg:gap-0 xl:px-12 2xl:px-16">
-                <motion.div
-                    className="col-span-12 flex h-16 items-center justify-between"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.72, delay: 0.04, ease: EASE }}
-                >
-                    <Link
-                        href="/"
-                        aria-label="JobBridge Startseite"
-                        className="group flex min-w-0 items-center gap-3 rounded-[1.45rem] py-1 pr-3 outline-none transition focus-visible:ring-2 focus-visible:ring-cyan-200/70"
-                    >
-                        <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(255,255,255,0.035))] shadow-[0_12px_34px_rgba(2,6,23,0.38)] transition group-hover:border-cyan-100/28 group-hover:bg-white/[0.075]">
-                            <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_34%_22%,rgba(125,211,252,0.2),transparent_44%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_52%)]" />
-                            <Image
-                                src="/favicon.ico"
-                                alt=""
-                                width={48}
-                                height={48}
-                                unoptimized
-                                priority
-                                className="relative h-11 w-11 max-w-none scale-[1.08] object-contain object-center drop-shadow-[0_4px_14px_rgba(56,189,248,0.2)]"
-                            />
-                        </span>
-                        <span className="min-w-0">
-                            <span className="block truncate text-[1.04rem] font-semibold tracking-normal text-white">
-                                JobBridge
-                            </span>
-                        </span>
-                    </Link>
-
-                    <div className="flex items-center">
-                        <motion.button
-                            type="button"
-                            onClick={() => setMenuOpen(true)}
-                            aria-label="Menü öffnen"
-                            aria-expanded={menuOpen}
-                            className="group flex h-11 w-11 items-center justify-center rounded-[1.15rem] border border-white/10 bg-white/[0.045] text-white shadow-[0_10px_35px_rgba(2,6,23,0.24)] backdrop-blur-xl transition hover:border-white/18 hover:bg-white/[0.075] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
-                            whileHover={reducedMotion ? undefined : { y: -1 }}
-                            whileTap={reducedMotion ? undefined : { scale: 0.98 }}
-                        >
-                            <motion.span
-                                className="flex"
-                                whileHover={reducedMotion ? undefined : { rotate: 90 }}
-                                transition={{ duration: 0.35, ease: EASE }}
-                            >
-                                <Menu className="h-[1.125rem] w-[1.125rem] stroke-[1.8]" aria-hidden="true" />
-                            </motion.span>
-                        </motion.button>
-                    </div>
-                </motion.div>
+                <SiteHeader className="col-span-12 h-16" />
 
                 <motion.div
                     style={{ y: contentY, opacity: contentOpacity }}
@@ -1077,7 +814,7 @@ function Hero() {
                     >
                         <motion.h1
                             aria-label={`${HEADLINE_PRIMARY_LINE} ${HEADLINE_TYPED_LINE}`}
-                            className="overflow-visible text-balance text-[clamp(3.12rem,10.2vw,8.4rem)] font-normal leading-none tracking-[-0.04em] text-white drop-shadow-[0_14px_40px_rgba(96,165,250,0.08)] sm:text-[clamp(3.35rem,9vw,8.4rem)] sm:leading-[0.97]"
+                            className="hero-heading overflow-visible text-balance font-normal text-white drop-shadow-[0_14px_40px_rgba(96,165,250,0.08)]"
                             style={{
                                 fontFamily: "var(--font-serif), ui-serif, Georgia, serif",
                             }}
@@ -1089,11 +826,11 @@ function Hero() {
                                 ease: EASE,
                             }}
                         >
-                            <span aria-hidden="true" className="block whitespace-nowrap leading-[1.14] sm:hidden">
+                            <span aria-hidden="true" className="block whitespace-nowrap pb-[0.04em] sm:hidden">
                                 {HEADLINE_PRIMARY_LINE}
                             </span>
 
-                            <span aria-hidden="true" className="hidden whitespace-nowrap pb-[0.05em] sm:block">
+                            <span aria-hidden="true" className="hidden whitespace-nowrap pb-[0.04em] sm:block">
                                 {HEADLINE_PRIMARY_LINE.split(" ").map((word, wordIndex) => (
                                     <Fragment key={`${word}-${wordIndex}`}>
                                         {wordIndex > 0 ? " " : null}
@@ -1113,7 +850,7 @@ function Hero() {
                                 ))}
                             </span>
 
-                            <span aria-hidden="true" className="relative -mt-[0.2em] block min-h-[1.1em] whitespace-nowrap pb-[0.06em] leading-[1.06] sm:-mt-[0.12em] sm:min-h-[1.02em] sm:pb-[0.02em] sm:leading-[inherit]">
+                            <span aria-hidden="true" className="hero-heading-typed relative block min-h-[1.08em] whitespace-nowrap pb-[0.06em] leading-[1.08]">
                                 <span
                                     aria-hidden
                                     className="pointer-events-none select-none opacity-0"
@@ -1169,12 +906,12 @@ function Hero() {
                         </motion.h1>
 
                         <motion.p
-                            className="mt-8 max-w-[39rem] text-lg leading-relaxed text-slate-300 md:text-xl"
+                            className="mt-8 max-w-[39rem] text-pretty text-lg leading-relaxed text-slate-300 md:text-xl"
                             initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.82, delay: 1.44, ease: EASE }}
                         >
-                            JobBridge bringt Jugendliche, Eltern und Auftraggeber in Deutschland auf eine Plattform, die Schutz nicht als Nachtrag behandelt. Verifizierte Auftraggeber, moderierte Kommunikation und klare Freigaben machen den Einstieg besser.
+                            Ein bisschen helfen. Eigenes Geld verdienen. Mit Workfare findest du kleine Jobs in deiner Nähe und Menschen, die deine Unterstützung brauchen.
                         </motion.p>
                     </motion.div>
 
@@ -1186,8 +923,8 @@ function Hero() {
                         transition={{ duration: 0.82, delay: 1.58, ease: EASE }}
                     >
                         <a
-                            href="https://app.jobbridge.app"
-                            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-[0.9rem] font-medium text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-[0_18px_48px_rgba(147,197,253,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
+                            href={siteConfig.appUrl}
+                            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-[0.9rem] font-medium text-slate-950 transition-[background-color,box-shadow] duration-200 motion-reduce:transition-none hover:bg-blue-50 hover:shadow-[inset_0_0_0_1px_rgba(191,219,254,0.65)] active:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
                         >
                             Zur Plattform
                         </a>
@@ -1196,7 +933,7 @@ function Hero() {
                             onClick={() => {
                                 scrollToHowItWorksStage(reducedMotion);
                             }}
-                            className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-7 py-4 text-[0.9rem] font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300/28 hover:bg-blue-400/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
+                            className="glass-button inline-flex items-center justify-center px-7 py-4 text-[0.9rem] font-medium"
                         >
                             So funktioniert&apos;s
                         </button>

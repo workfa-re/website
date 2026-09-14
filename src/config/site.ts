@@ -1,17 +1,11 @@
-export const homePageConfig = {
-    // Keep disabled by default. Set to true to show Ray Group branding on the homepage again.
-    showRayGroupBadgeInHero: false,
-    showRayGroupTextInFooter: false,
-} as const;
-
 export const siteConfig = {
-    name: "JobBridge",
+    name: "Workfare",
     url: "https://workfa.re",
     appUrl: "https://app.jobbridge.app",
     contactEmail: "kontakt@jobbridge.team",
     defaultTitle: "Sichere Taschengeldjobs für Jugendliche",
     defaultDescription:
-        "JobBridge verbindet Jugendliche, Eltern und Auftraggeber in Deutschland: sichere Taschengeldjobs, klare Rollen, Verifizierung und transparente Freigaben.",
+        "Workfare verbindet Jugendliche, Eltern und Auftraggeber in Deutschland: sichere Taschengeldjobs, klare Rollen, Verifizierung und transparente Freigaben.",
 } as const;
 
 export const mainNavItems = [
@@ -35,9 +29,9 @@ export const placeholderPages = {
         eyebrow: "Plattform",
         title: "Die digitale Taschengeldbörse",
         description:
-            "JobBridge bringt Jugendliche, Eltern und Auftraggeber in einem klaren digitalen Ablauf zusammen: lokale Aufgaben, nachvollziehbare Freigaben und transparente Kommunikation.",
+            "Workfare bringt Jugendliche, Eltern und Auftraggeber in einem klaren digitalen Ablauf zusammen: lokale Aufgaben, nachvollziehbare Freigaben und transparente Kommunikation.",
         metaDescription:
-            "Die JobBridge-Plattform für sichere Taschengeldjobs: lokale Aufgaben, Verifizierung, Elternfreigaben und klare Rollen für Jugendliche, Eltern und Auftraggeber.",
+            "Die Workfare-Plattform für sichere Taschengeldjobs: lokale Aufgaben, Verifizierung, Elternfreigaben und klare Rollen für Jugendliche, Eltern und Auftraggeber.",
     },
     sicherheit: {
         path: "/sicherheit",
@@ -45,9 +39,9 @@ export const placeholderPages = {
         eyebrow: "Sicherheit",
         title: "Sicher arbeiten",
         description:
-            "Wie JobBridge Jugendliche, Eltern und Auftraggeber schützt: klare Rollen, geprüfte Kontakte und ein Ablauf, der nicht auf Zufall gebaut ist.",
+            "Wie Workfare Jugendliche, Eltern und Auftraggeber schützt: klare Rollen, geprüfte Kontakte und ein Ablauf, der nicht auf Zufall gebaut ist.",
         metaDescription:
-            "Sicherheit bei JobBridge: klare Rollen, geprüfte Kontakte, Jugendschutz und transparente Freigaben für sichere Taschengeldjobs.",
+            "Sicherheit bei Workfare: klare Rollen, geprüfte Kontakte, Jugendschutz und transparente Freigaben für sichere Taschengeldjobs.",
     },
     kontakt: {
         path: "/kontakt",
@@ -55,9 +49,9 @@ export const placeholderPages = {
         eyebrow: "Kontakt",
         title: "Direkter Kontakt",
         description:
-            "Für Fragen zur Website, zur Plattform oder zu JobBridge. Kurz schreiben, wir melden uns sauber und nachvollziehbar zurück.",
+            "Für Fragen zur Website, zur Plattform oder zu Workfare. Kurz schreiben, wir melden uns sauber und nachvollziehbar zurück.",
         metaDescription:
-            "Kontakt zu JobBridge für Fragen zur Website, Plattform, sicheren Taschengeldjobs und lokalen Auftraggebern.",
+            "Kontakt zu Workfare für Fragen zur Website, Plattform, sicheren Taschengeldjobs und lokalen Auftraggebern.",
     },
     demnaechst: {
         path: "/demnaechst",
@@ -67,6 +61,6 @@ export const placeholderPages = {
         description:
             "Dieser Bereich bleibt bewusst reduziert, bis Inhalt und Funktion feststehen. Keine leere Seite, kein künstliches Versprechen.",
         metaDescription:
-            "Ein vorbereiteter JobBridge-Bereich für kommende Inhalte und Funktionen.",
+            "Ein vorbereiteter Workfare-Bereich für kommende Inhalte und Funktionen.",
     },
 } as const;

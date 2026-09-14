@@ -337,10 +337,6 @@ export function getInsightLastModified(insight: Insight): string {
     return insight.kind === "own" ? insight.updatedAt : insight.publishedAt;
 }
 
-export function getOwnInsight(slug: string): OwnInsight | undefined {
-    return ownInsights.find((insight) => insight.slug === slug);
-}
-
 export function getInsightBySlug(slug: string): Insight | undefined {
     return allInsights.find((insight) => getInsightSlug(insight) === slug);
 }

@@ -1,0 +1,129 @@
+# Workfare: Kleine Verbesserungen am bestehenden Design
+
+Stand: 14. September 2026. Verbindlicher Rahmen: **kein Redesign, keine helle neue Markenwelt, keine weiteren Bildentwürfe.** Farbwelt, Schriftfamilien, Hintergrundeffekte, Scrollbühne, Produktdarstellung und Homepage-Reihenfolge bleiben. Die Desktop-Aurora wurde bei gleicher Gestaltungsrichtung technisch entlastet; Darstellung und Ablauf sind geprüft, eine Netzwerk-Ladezeitverkürzung wurde nicht gemessen. Die Vorschläge betreffen gezielte Inhalts-, Lesbarkeits- und Bedienverbesserungen innerhalb des vorhandenen Designs.
+
+Grundlage: Dateiinventur aller 81 ursprünglich getrackten Projektdateien, Codeprüfung aller Seitentypen, lokale Browserprüfungen und Primärquellenrecherche. Dieser Plan baut auf der bestehenden Website auf.
+
+## Bereits umgesetzter lokaler Stand
+
+- Paketkorrektur `a6f739e` ist lokal committed.
+- Abgeschlossener UI-Stand für den lokalen Commit: gemeinsamer Header/Menu mit nativem Dialog und Fokusführung. Die ursprüngliche Menüanimation mit Slide, gestaffelten Links, Word-Roll und Hoverrotation ist wiederhergestellt. Die Nebenlinks stehen im normalen Fluss über einer dezenten, unten angeschnittenen Wortmarke am Fensterrand.
+- Die vorhandene Brücke ersetzt das zwischenzeitliche Monoline-W und sitzt optisch einen Pixel höher. Workfare bleibt als Geist-Schriftzug sichtbar. Runde `.glass-control` und `.glass-button` teilen klare, neutrale Reflexe ohne künstliche Blauverläufe oder Sättigungsfilter.
+- Hero-CTAs springen beim Hover nicht hoch. Die Serifüberschrift bleibt, mit lockererem Tracking von `-0.015em`, eng aufeinander abgestimmten Zeilen und kräftiger skalierter responsiver Größe.
+- Kürzerer Hero-Text und Bereinigung ungenutzter Dateien/Assets sind ebenfalls bereits bearbeitet.
+- **Vorheriger Prüfstand:** Build/TypeScript, Lint, SEO, 31 Domainprüfungen, OG-Bild, Header/Headline in acht Größen sowie Menübedienung wurden für eine frühere lokale Fassung geprüft. Zusätzlich ist der jüngste Stand mit Build/Lint, responsiven Browserprüfungen und 13 Aurora-Lifecycle-Prüfgruppen bestanden. Einzelheiten: `changes-2026-09-14.md`.
+
+## Jüngste Korrekturen am Bestand
+
+| Before | After |
+|---|---|
+| Zwischenzeitlich vereinfachte Navigation ohne ursprüngliche Bewegung. | Slide beim Öffnen/Schließen, gestaffelte Links, Word-Roll bei Hover/Fokus sowie Hoverrotation von Menü-/Schließen-Icon wiederhergestellt; Reduced Motion wird berücksichtigt. |
+| Meta-Links und große Wortmarke getrennt angeordnet. | Gemeinsamer Menüfooter im normalen Fluss: Nebenlinks zuerst, dezente angeschnittene Wortmarke darunter. |
+| Zwischenzeitliches Monoline-W. | Vorhandenes Brückenasset in `BrandMark.tsx`, 29 × 18 Pixel, optisch mit `-top-px` einen Pixel nach oben versetzt. |
+| Glas mit 16-Pixel-Rundung beziehungsweise zwischenzeitlichen farbigen Effekten. | Vollrunde `.glass-control`/`.glass-button` mit gemeinsamen neutralen Reflexen, klarer Mitte und feiner Kante; kein Sättigungsfilter und kein künstlicher Blauverlauf im Glasmaterial. |
+| Headerglas und sekundärer Hero-Button unterschiedlich gestaltet. | Gemeinsames Material; Headersteuerung 44 × 44 Pixel, Glasbutton mindestens 54 Pixel hoch. |
+| Hero-CTAs bewegen sich beim Hover nach oben. | Rückmeldung nur über Fläche/Kante/Schatten, ohne Hochspringen. |
+| Dichteres Tracking und enger zusammengerückte Herozeilen. | Instrument Serif bleibt; `-0.015em` Tracking, `1.06` Grundzeilenhöhe und `.18em` enger zusammengeführten Zeilen. |
+| Frühere responsive Hero-Größenstaffelung. | `.hero-heading` nutzt `clamp(3rem, 15vw, 8rem)`, ab 1024 Pixeln `clamp(4.5rem, 9vw, 8.4rem)`; ohne horizontalen Überlauf in acht Größen geprüft. |
+| Bisherige Desktop-Aurora-Implementierung. | CSS-Pixel mit Full-HD-Pixelbudget, Zielrate 30 Bilder/s, Pause bei unsichtbarem Hero/Tab; toten Scroll-Shaderpfad entfernt. Ablauf und Darstellung geprüft, keine gemessene Netzwerkbeschleunigung. |
+
+## Prioritäten für die nächste kleine Runde
+
+| Priorität | Konkreter Befund aus dem geprüften Bestand | Änderung innerhalb des vorhandenen Designs | Datei/Bereich |
+|---|---|---|---|
+| P0 | Sicherheits-Slider kürzt Beschreibung mobil mit `line-clamp-4`. | Beschreibung vollständig lesbar machen; vorhandene Sliderform behalten und Höhe passend zum Inhalt wählen. | `src/components/FeatureSections.tsx`, Sicherheitsbeschreibung |
+| P0 | Abschlussbutton blendet sein Label mit `group-hover:opacity-0` aus. | „Zur Plattform“ in jedem Zustand sichtbar halten. Form, Größe und Position bleiben. | `src/components/FeatureSections.tsx`, Abschluss-CTA |
+| P0 | Sicherheit, Kontakt und Plattform nutzen noch `PlaceholderPage` statt eigentlicher Inhalte. | Im bestehenden dunklen Seitensystem echte Antworten ergänzen. Gestaltung nicht neu erfinden. | `src/app/sicherheit/page.tsx`, `src/app/kontakt/page.tsx`, `src/app/plattform/page.tsx` |
+| P0 | Verifizierte Auftraggeber/moderierte Kommunikation werden als verfügbar beschrieben, andere Schutztexte als Absicht. | Tatsächlichen Funktionsstand bestätigen; vorhandene und geplante Funktionen konsistent formulieren. | Hero-Text, `FeatureSections.tsx`, `src/config/site.ts`, Sicherheitsseite |
+| P1 | Kleine Hilfstexte kombinieren Grau und Transparenz über wechselnden Hintergründen. | Nur messbar kritische Textopazitäten lokal anheben. Bestehende Palette beibehalten. | Footer, Artikelkarten, Zielgruppen-/Sicherheitsbeschreibungen |
+| P1 | Demo nennt konkrete Orte, Zeiten und Vergütungen. | Falls Testdaten: klein und eindeutig als Beispiel kennzeichnen. Kein Kartenumbau. | `src/components/ui/animated-hero.tsx`, `hero-scroll-demo.tsx` |
+| P1 | Kontaktbereich hängt sichtbar stark am Chatwidget. | Funktionierenden E-Mail-/Kontaktweg unabhängig vom Widget erreichbar machen; Fehlerzustand verständlich. | `src/components/FooterChat.tsx`, Kontaktseite |
+| P2 | Teamübersicht enthält vorbereitete zusätzliche Teamplätze. | Nur tatsächliche Personen als Team darstellen; leere Plätze nicht als Größeninszenierung verwenden. Kein neues Bildmaterial. | `src/components/team/TeamOverviewSection.tsx` |
+
+Die Befunde stammen aus der gelesenen Ausgangsfassung. Vor Umsetzung gegen den laufenden Diff prüfen, damit bereits korrigierte Stellen nicht doppelt bearbeitet werden.
+
+## Homepage: Bestehende Abschnitte gezielt prüfen
+
+| Abschnitt | Was bleibt | Nächster sinnvoller Check |
+|---|---|---|
+| Hero | Dunkle Atmosphäre, Geist/Instrument Serif, Shader, Produktkarten, Aktionen | Neue Workfare-Nennung und gekürzten Text bei 320/390/1440 Pixel prüfen. Kein abgeschnittener Umbruch der vorhandenen `whitespace-nowrap`-Zeilen. |
+| Tablet-Erklärung | Bestehende Scrollbühne, Tablet und Schrittfolge | Alle Schritte und das Ende bleiben mobil und bei Reduced Motion erreichbar. In dieser Runde keine neue Scrolllänge und keine alternative Inszenierung planen. |
+| Vertrauenspassage | „Kleine Jobs. Klare Wege. Direkt in deiner Nähe.“, Anordnung und Pixelgestaltung | Text konsistent zur tatsächlichen Verfügbarkeit; Lesbarkeit über dem vorhandenen Hintergrund. |
+| „Für wen?“ | Vier Zielgruppen, Raster, Symbole, Farben | Wiederholungen im Text kürzen. Jugendliche und Eltern innerhalb der bestehenden Karte verständlich unterscheiden. |
+| Sicherheit | Slider, Nummerierung, Farbflächen, Detail-Link | Vollständige mobile Texte; Pfeile gut treffbar und benannt; Detail-Link bietet echte Antworten. |
+| Abschluss | Form und Position | Label bleibt sichtbar, Beschriftung und tatsächliches Ziel passen zusammen. |
+| Kontakt/Footer | Vorhandene dunkle Struktur | Kontakt funktioniert auch ohne Widget. Kleintexte/Fokus lesbar. Technische App-/Maildomains nur nach tatsächlicher Einrichtung ändern. |
+
+## Headerglas: jetzige kleine Lösung fertig prüfen
+
+Die bestehenden 44-Pixel-Steuerflächen bleiben der Umfang im Header. Das ursprüngliche Brückenzeichen sitzt scharf und deckend im runden Glas, der Workfare-Schriftzug daneben. `.glass-control` und `.glass-button` verwenden dasselbe Material mit neutralen Reflexen und klarer Mitte. Der aktuelle Code setzt `border-radius: 999px` und `blur(1.5px) brightness(1.04)` ein; künstliche Blauverläufe und Sättigungsfilter gehören nicht dazu. Der sekundäre Hero-Button nutzt dieses Material mit mindestens 54 Pixel Höhe. Keine zusätzliche große Glasleiste und keine neue Navigation.
+
+Glas muss ohne Blur-Unterstützung noch als brauchbare Fläche erkennbar sein. Das native Menüdialog-Verhalten zusammen mit den wiederhergestellten Animationen prüfen: Öffnen, Schließ-Slide, gestaffelte Links, Word-Roll, Hoverrotation, Escape, Fokus innerhalb des Dialogs, Rückkehr zum Auslöser und Scrollfreigabe. Bei einer Navigation wartet der normale Linkklick das Schließen ab. Wortmarke und Linkleiste bleiben auch auf kleiner Bildschirmhöhe im normalen Fluss erreichbar. Die ursprünglichen Menüanimationen bleiben ausdrücklich erhalten.
+
+Apple ordnet Glas der funktionalen Bedien- und Navigationsebene zu. Genau diese Begrenzung ist hier nützlich; die sparsame Web-Umsetzung ist unsere Ableitung. [Apple: Materialien](https://developer.apple.com/design/human-interface-guidelines/materials), [Apple: Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/)
+
+## Unterseiten: Inhalt statt neuer Gestaltung
+
+| Seitentyp | Konkrete Ergänzung beziehungsweise Prüfung |
+|---|---|
+| `/plattform` | Unter bestehendem Kopf Voraussetzungen, tatsächliche Schritte, verfügbarer Umfang und Anwendungseinstieg erklären. Vorhandene Text-/Kartenmuster nutzen. |
+| `/sicherheit` | Beantworten: Was wird geprüft? Welche Rolle haben Eltern? Was wird wann sichtbar? Wohin bei Problemen? Kurze Abschnitte und Anker reichen. |
+| `/kontakt` | Funktionierende Kontaktadresse, Zweck und gegebenenfalls Presse-/Kooperationsweg. Formular nur bei tatsächlich funktionierendem Versand. |
+| `/einblicke`, `/einblicke/alle` | Karten, Fotos und Überschriften behalten. Quellen, Datum, Fokus und Lesbarkeit prüfen. Eigene Texte und Medienberichte unterscheidbar halten. |
+| Eigener Artikel `/einblicke/[slug]` | Autor, Datum, Bilder und Gliederung erhalten. Nur Lesebreite, Zeilenhöhe und Links konsistent machen. |
+| Externer Bericht `/einblicke/[slug]` | Originalquelle und Datum klar, Original-Link erreichbar. Keine Berichterstattung als Partnerschaft oder Sicherheitszertifikat darstellen. |
+| `/einblicke/team` | Echte Personen und Rollen zeigen; vorbereitete Plätze sachlich behandeln. |
+| `/team/rezan-yalcin`, `/team/tim-lohmeier`, `/team/tobias-rohm`, `/team/[slug]` | Kontaktzustände und Abstände konsistent; persönliche Inhalte bewahren. Fehlende Fotos nicht durch künstliche Personen ersetzen. |
+| `/impressum`, `/datenschutz` | Rechtstexte beim visuellen Eingriff bewahren. Lesebreite, Standdatum, Links und Kopierbarkeit prüfen; dunklen Stil behalten. |
+| `/demnaechst` | Falls benötigt: realen Status und funktionierenden Rückweg. Kein erfundenes Veröffentlichungsdatum. |
+| `/blog`, `/team/rezan`, `/team/resan-yalcin` | Bestehende Weiterleitungen erhalten; keine neue Gestaltung. |
+| Sitemap, RSS, News-Feed, OG, Manifest | Aktuelle eigene Marke konsistent; vorhandene URLs, Quellen und Redirects bewahren. |
+
+## Texte und Belege
+
+Vorhandene kurze Überschriften können bleiben. Konkretisieren sollte man die Erklärung darunter: „Verifiziert“ benötigt eine Beschreibung der tatsächlichen Prüfung; „moderiert“ benötigt einen verständlichen Ablauf; „Eltern sollen …“ und „Eltern können …“ sind unterschiedliche Produktstände.
+
+„Schreib uns deine Frage“ ist verständlicher als „Wir melden uns sauber und nachvollziehbar zurück“. Antwortzeiten, Kostenfreiheit, bundesweite Verfügbarkeit und Alters-/Tätigkeitsregeln nur mit aktuellem Sachstand nennen. „Zur Plattform“ bleibt korrekt, solange es zum Anwendungseinstieg führt; „Jobs ansehen“ setzt tatsächlich direkt sichtbare Angebote voraus.
+
+Keine erfundenen Zahlen, Sterne, Zitate, Partnerschaften, Siegel oder Garantien ergänzen. Reale Teamangaben und korrekt zugeordnete Berichte sind wertvolle Belege. Historische Artikel behalten Originaltitel und damaligen Kontext; aktuelle eigene Einordnung verwendet Workfare. Ein Wettbewerbsergebnis ist kein Nachweis unabhängiger Produktsicherheit.
+
+## Lesbarkeit, Mobilgeräte und Medien
+
+- Palette nicht ersetzen. Vorhandenes `#707782` auf deckendem `#02040b` ergibt rechnerisch etwa 4,54:1; `#808792` auf derselben Fläche etwa 5,66:1. Transparenz und Hintergrundeffekte verändern das Ergebnis. Das sind Beispielrechnungen, keine Freigabe aller gerenderten Zustände.
+- WCAG 2.2 AA als Prüfzieldesign: normaler Text mindestens 4,5:1, großer Text mindestens 3:1; Fokus, Bedienflächen und Beschriftung ebenfalls prüfen. Farben allein bestätigen keine vollständige Zugänglichkeit. [W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- 44 × 44 CSS-Pixel als eigener guter Trefferflächenstandard behalten. WCAG 2.2 AA fordert grundsätzlich 24 × 24 oder passende Abstandsausnahmen; die größere Fläche ist eine bewusste Komfortentscheidung. [W3C: Target Size Minimum](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum)
+- 320/390 Pixel, geringe Bildschirmhöhe, 200 Prozent Zoom, lange deutsche Wörter und Reduced Motion prüfen. Kein allgemeiner Umbau der mobilen Struktur.
+- Shader und Scrollbühne bleiben. Vorhandene Reduced-Motion-Zustände und erreichbare Informationen testen. Falls dabei ein konkreter Defekt auffällt, gezielt korrigieren und benennen.
+- Keine Fotokampagne, generierten Bilder oder neuen Videos. Bestehendes Material behalten; nur Ausschnitt, Qualität, Alternativtexte und Nutzungsrahmen prüfen.
+
+## Referenzen nur als Prinzipien
+
+| Quelle | Selektive Anwendung auf den vorhandenen Auftritt |
+|---|---|
+| [nebenan.de](https://nebenan.de/) | Konkrete Alltagssituationen und Antworten zu Anmeldung/Datenschutz/Finanzierung. Keine Farben, Fotos oder Layouts übernehmen. |
+| [Goodwall](https://www.goodwall.io/) | Reale Menschen und eigene belegbare Stimmen. Keine Partnerleisten, Sterne oder fremde Reichweitenzahlen übertragen. |
+| [YoungCapital](https://www.youngcapital.de/) | Aktionen klar benennen: Angebote sehen, registrieren oder Information lesen. Keine neue Suchoberfläche bauen. |
+| [Join](https://join.com/de) | Produktansicht mit konkreter Funktion und Wirkung erklären. Keine Enterprise-Sprache oder Zertifikate kopieren. |
+| [GOV.UK Design Principles](https://www.gov.uk/guidance/government-design-principles) | Nutzerfragen zuerst, verständliche Wege und kleine überprüfbare Schritte. Keine amtliche Gestaltung übernehmen. |
+
+## Umsetzung und Abnahme
+
+1. **Phase A ist lokal umgesetzt und geprüft:** gemeinsamer Header/Dialog mit ursprünglicher Menüanimation, Brückenzeichen, Workfare-Schriftzug, neutrales rundes Glas, ruhig reagierende Hero-CTAs und angepasste Serifüberschrift. Dazu kommen kürzerer Hero-Text, belegte Bereinigung und die Desktop-Aurora-Optimierung. Neue Build-, Browser- und Lifecycle-Ergebnisse stehen im Änderungsprotokoll. Die gemeinsame Durchsicht und Freigabe zum lokalen Commit sind erfolgt. Eine Veröffentlichung ist ein eigener Schritt.
+2. **Kleine UI-Fehler:** CTA-Label und abgeschnittenen Sicherheitstext korrigieren; kritische Kontraste gezielt prüfen. Fertig, wenn alle wichtigen Texte in normalen Zuständen lesbar sind.
+3. **Inhaltliche Lücken:** Sicherheits-, Kontakt- und Plattformseite im vorhandenen System vervollständigen. Fertig, wenn jede angekündigte Antwort und der reale Funktionsstatus vorhanden sind.
+4. **Gezielte Prüfung:** Menü, Slider, Tablet und Kontakt mobil/per Tastatur testen; vorhandene Build-, Lint-, TypeScript- und SEO-Prüfungen ausführen. Keine Tests nur zur Bestätigung einzelner Farbklassen.
+5. **Nach gemeinsamer Freigabe veröffentlichen:** nachvollziehbarer Commit/Diff, korrekt zugeordneter Autor, Deploymentvergleich und kurze Live-Prüfung. Domainweiterleitungen, Artikelquellen und technische App-/Mailverbindungen bleiben intakt.
+
+Leistung unter denselben Bedingungen vorher/nachher vergleichen, ohne neue Effekte einzuführen. Gute Core-Web-Vitals-Bereiche: LCP höchstens 2,5 Sekunden, INP höchstens 200 ms, CLS höchstens 0,1, jeweils im Feld am 75. Perzentil. Fehlende Felddaten sind keine bestandene Messung. [Google/web.dev: Web Vitals](https://web.dev/articles/vitals)
+
+Die Abnahmefrage lautet: **Ist die vorhandene Website klarer, besser bedienbar und inhaltlich verlässlicher, ohne wie eine andere Website auszusehen?**
+
+
+## Letzte lokale Feinabstimmung
+
+| Before | After |
+|---|---|
+| Zu großer vertikaler Abstand zwischen den beiden Herozeilen. | Abstand um `.18em` reduziert; Schriftfamilie, Größe und Buchstabenabstand bleiben. |
+| Dominante vollständige Workfare-Wortmarke im Menü. | Blasse, kleinere und unten angeschnittene Signatur am Fensterrand; die Nebenlinks stehen darüber. Die vier Hauptlinks bleiben der Blickfang. |
+
+Diese Feinabstimmung ist lokal umgesetzt und auf Desktop sowie Handy geprüft. Die bestehenden Menüanimationen bleiben erhalten. Die Nebenlinks stehen nach der letzten Korrektur ohne zusätzlichen Footerabstand direkt über der Signatur. Einzelheiten und Prüfgrenzen stehen im Änderungsprotokoll.

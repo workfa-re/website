@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Loader2, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
+const CHAT_LABEL = `${siteConfig.name} Chat`;
+const CHAT_OPEN_LABEL = `${CHAT_LABEL} öffnen`;
 const CHAT_SCRIPT_ID = "chatbot";
 const CHAT_WIDGET_STYLE_ID = "jobbridge-chat-widget-overrides";
 const CHAT_SCRIPT_SRC =
@@ -89,28 +92,28 @@ function relabelTeamsWidget() {
     const teamsButton = getTeamsButton();
 
     if (teamsButton) {
-        if (teamsButton.alt !== "JobBridge Chat öffnen") {
-            teamsButton.alt = "JobBridge Chat öffnen";
+        if (teamsButton.alt !== CHAT_OPEN_LABEL) {
+            teamsButton.alt = CHAT_OPEN_LABEL;
         }
 
-        if (teamsButton.ariaLabel !== "JobBridge Chat öffnen") {
-            teamsButton.ariaLabel = "JobBridge Chat öffnen";
+        if (teamsButton.ariaLabel !== CHAT_OPEN_LABEL) {
+            teamsButton.ariaLabel = CHAT_OPEN_LABEL;
         }
 
-        if (teamsButton.title !== "JobBridge Chat öffnen") {
-            teamsButton.title = "JobBridge Chat öffnen";
+        if (teamsButton.title !== CHAT_OPEN_LABEL) {
+            teamsButton.title = CHAT_OPEN_LABEL;
         }
     }
 
     const iframe = getTeamsIframe();
 
     if (iframe) {
-        if (iframe.title !== "JobBridge Chat") {
-            iframe.title = "JobBridge Chat";
+        if (iframe.title !== CHAT_LABEL) {
+            iframe.title = CHAT_LABEL;
         }
 
-        if (iframe.getAttribute("aria-label") !== "JobBridge Chat") {
-            iframe.setAttribute("aria-label", "JobBridge Chat");
+        if (iframe.getAttribute("aria-label") !== CHAT_LABEL) {
+            iframe.setAttribute("aria-label", CHAT_LABEL);
         }
     }
 }
@@ -280,14 +283,14 @@ export function FooterChat() {
         <>
             <style id={CHAT_WIDGET_STYLE_ID}>{CHAT_WIDGET_OVERRIDE_CSS}</style>
             <section
-                aria-label="JobBridge Chat"
+                aria-label={CHAT_LABEL}
                 data-chatclient-host
                 className="relative z-20 bg-black px-4 py-10 md:py-12"
             >
                 <div className="mx-auto flex max-w-7xl flex-col gap-5 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
                     <div className="max-w-xl">
                         <h2 className="text-[1.05rem] font-medium tracking-[-0.02em] text-white">
-                            Fragen zu JobBridge?
+                            Fragen zu {siteConfig.name}?
                         </h2>
                         <p className="mt-1.5 text-sm leading-6 text-neutral-400">
                             Öffnet den Chat direkt auf dieser Seite.

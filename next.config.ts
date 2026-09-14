@@ -8,7 +8,7 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' ${microsoftCustomerConnectScript}${isProduction ? "" : " 'unsafe-eval'"}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.unsplash.com",
+  "img-src 'self' data: blob:",
   "font-src 'self' data:",
   `connect-src 'self'${isProduction ? "" : " ws://localhost:* ws://127.0.0.1:* http://localhost:* http://127.0.0.1:*"}`,
   `frame-src 'self' ${microsoftCustomerConnectFrame}`,
@@ -45,6 +45,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Keep development from adding generated instruction files to the source tree.
+  agentRules: false,
   async redirects() {
     // Match only public website aliases; application and internal hosts keep their own routing.
     return ["jobbridge.app", "www.jobbridge.app", "www.workfa.re"].map((host) => ({
@@ -53,14 +55,6 @@ const nextConfig: NextConfig = {
       destination: "https://workfa.re/:path*",
       permanent: true,
     }));
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-    ],
   },
   async headers() {
     return [
