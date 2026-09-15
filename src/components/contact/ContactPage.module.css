@@ -1,14 +1,12 @@
 .page {
     min-height: 100vh;
     color: #f8fafc;
-    background:
-        radial-gradient(ellipse 45rem 28rem at 84% 22rem, rgb(89 120 151 / 10%), transparent 72%),
-        radial-gradient(ellipse 32rem 30rem at 3% 11rem, rgb(39 66 92 / 12%), transparent 80%),
-        #02040b;
+    background: radial-gradient(ellipse 70% 32rem at 78% 0, rgb(52 72 104 / 12%), transparent), #02040b;
 }
 
 .container { width: 100%; max-width: 1280px; margin-inline: auto; padding: 24px 20px 0; }
-.hero { display: grid; gap: 28px; padding-block: clamp(64px, 7vw, 104px) 48px; }
+.hero { position: relative; isolation: isolate; overflow: hidden; display: grid; gap: 28px; padding-block: clamp(64px, 7vw, 104px) 48px; }
+.heroBackdrop { position: absolute; z-index: -1; pointer-events: none; width: min(100%, 680px); height: min(100%, 420px); right: -40px; top: -24px; opacity: .8; mask-image: radial-gradient(ellipse at 72% 30%, #000 12%, transparent 73%); }
 .heroTitle { animation: enter 600ms cubic-bezier(.22, 1, .36, 1) both; }
 .hero h1 { max-width: 14ch; font-size: clamp(2.75rem, 7vw, 5.5rem); font-weight: 550; line-height: 1.06; letter-spacing: -.04em; text-wrap: balance; }
 .hero h1 span { display: block; color: #a8b8cc; }

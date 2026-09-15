@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { PixelShaderBackdrop } from "@/components/PixelShaderBackdrop";
 import { SiteHeader } from "@/components/SiteHeader";
 import { teamMembers, type TeamMember } from "@/content/team";
 import { CopyEmailButton } from "./CopyEmailButton";
@@ -35,6 +36,9 @@ export function ContactPage({ departments }: { departments: readonly ContactDepa
                 <SiteHeader />
 
                 <header className={styles.hero}>
+                    <div className={styles.heroBackdrop} aria-hidden="true">
+                        <PixelShaderBackdrop variant="quiet" />
+                    </div>
                     <div className={styles.heroTitle}>
                         <h1>Kontakt zu <span>Workfare.</span></h1>
                     </div>

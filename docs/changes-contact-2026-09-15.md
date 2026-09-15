@@ -60,3 +60,15 @@ Ein neues Mitglied wird mit der nächsten Veröffentlichung der Website automati
 Die unabhängige Gegenprüfung bestätigt die unveränderten bisherigen Headerwerte, nicht blockierende Reflexebenen und konsistente Kontaktziele. Die Veröffentlichung umfasst die Kontaktseite, den gemeinsamen Glasabgleich sowie die vorhandenen Search-Console-Notizen. Tatsächliche Abteilungszustellung und Empfang bleiben eine gesonderte Prüfung am E-Mail-System.
 
 Der abschließende Browservergleich bestätigt identische berechnete Hintergründe, Schatten, Filter und beide Reflexebenen für Header-Glas und Kontaktkarten. Desktop mit 1280 Pixeln und kleines Handy mit 320 Pixeln wurden erneut geprüft; kein horizontaler Überlauf. Vollständiges Lint, SEO-Prüfung und Produktionsbuild einschließlich TypeScript bestehen auch nach dem gemeinsamen Glasabgleich.
+
+## Hintergrundabgleich mit Einblicke
+
+| Before | After |
+| --- | --- |
+| `ContactPage.module.css`: Zwei eigene radiale Lichtflächen im Seitenhintergrund. | Derselbe dunkle Grundton und dieselbe radiale Beleuchtung wie in `InsightsIndex.module.css`. |
+| `ContactPage.tsx`: Kein Rechteck-Shader im Einstieg. | Der bestehende `PixelShaderBackdrop` wird mit `variant="quiet"` eingebunden. |
+| `ContactPage.module.css`: Der Hero enthielt nur sein Inhaltsraster. | Eine absolut positionierte, nicht interaktive Hintergrundebene übernimmt Position, Deckkraft und radiale Maske aus Einblicke. Ein isolierter, begrenzter Hero hält den Shader hinter den Inhalten. |
+
+Die Glasmaterialien, Texte und Abstände der freigegebenen Kontaktseite bleiben erhalten. Der gemeinsam verwendete Shader begrenzt das Zeichnen auf 30 Bilder pro Sekunde, pausiert außerhalb des sichtbaren Bereichs und bei verborgenem Dokument und bleibt bei reduzierter Bewegung statisch.
+
+Geprüft: Desktop mit 1280 × 720 und Mobile mit 390 × 844, jeweils ohne horizontalen Überlauf und mit genau einem Shader-Canvas im Hero. Screenshots zeigen die dezente rechteckige Struktur und ihren Verlauf. Der berechnete Seitenhintergrund stimmt mit Einblicke überein. Browserkonsole ohne Fehler, vollständiges Lint und Produktionsbuild einschließlich TypeScript erfolgreich. Das normale Browserformat wurde wiederhergestellt. Der Nutzer hat diesen Hintergrundabgleich nach Ansicht der Desktop- und Mobile-Screenshots für Commit und Push freigegeben.
