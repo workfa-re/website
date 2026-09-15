@@ -20,16 +20,17 @@ const jobs = [
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const enterDelay = (seconds: number) => ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
+const REVEAL_PACE = 1.25;
+const enterDelay = (seconds: number) => ({ "--enter-delay": `${seconds * REVEAL_PACE}s` }) as CSSProperties;
 type CardTiming = { index: number; enteredAt: number | null };
 const cardEntrance: Variants = {
     hidden: { opacity: 0, y: 56, scale: 0.955, rotateX: 6, filter: "blur(4px)" },
     visible: ({ index, enteredAt }: CardTiming) => ({
         opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
         transition: {
-            duration: 1.08,
-            // Early cards follow the chrome; later cards respond immediately to scrolling.
-            delay: Math.max(0, enteredAt === null ? 0 : (enteredAt + 1200 - performance.now()) / 1000) + (index % 2) * 0.18,
+            duration: 1.08 * REVEAL_PACE,
+            // Keep the first cards behind the chrome; later cards enter as they scroll into view.
+            delay: Math.max(0, enteredAt === null ? 0 : (enteredAt + 1200 * REVEAL_PACE - performance.now()) / 1000) + (index % 2) * 0.18 * REVEAL_PACE,
             ease: EASE,
         },
     }),
@@ -45,7 +46,7 @@ function PreviewJob({ job, index, enteredAt, reducedMotion }: {
             custom={{ index, enteredAt }}
             initial={reducedMotion ? false : "hidden"}
             whileInView={enteredAt === null && !reducedMotion ? "hidden" : "visible"}
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.25 }}
             variants={reducedMotion ? undefined : cardEntrance}
         >
             <h4>{job.title}</h4>
@@ -71,7 +72,7 @@ export function HeroScrollDemo() {
 
     return (
         <section id="how-it-works" aria-label="Ein Blick in die Workfare Plattform" className={styles.section}>
-            <div className={styles.presentation} data-motion={reducedMotion ? "off" : "on"} data-entered={enteredAt !== null ? "true" : undefined}>
+            <div className={styles.presentation} style={{ "--reveal-pace": REVEAL_PACE } as CSSProperties} data-motion={reducedMotion ? "off" : "on"} data-entered={enteredAt !== null ? "true" : undefined}>
                 <motion.div
                     data-theme={theme}
                     data-preview-screen
@@ -82,8 +83,8 @@ export function HeroScrollDemo() {
                         const now = performance.now();
                         setEnteredAt((previous) => previous ?? now);
                     }}
-                    viewport={{ once: true, amount: 0.08 }}
-                    transition={{ duration: reducedMotion ? 0 : 1.15, ease: EASE }}
+                    viewport={{ once: true, amount: 0.18 }}
+                    transition={{ duration: reducedMotion ? 0 : 1.15 * REVEAL_PACE, ease: EASE }}
                 >
                     <span aria-hidden="true" className={styles.edgeLight} />
                     <div className={styles.chrome} aria-hidden="true">

@@ -5,10 +5,7 @@ import {
     animate,
     AnimatePresence,
     motion,
-    type MotionValue,
     useReducedMotion,
-    useScroll,
-    useTransform,
 } from "framer-motion";
 import {
     CalendarDays,
@@ -592,13 +589,7 @@ const JobCard = memo(function JobCard({
     );
 });
 
-function HeroVisual({
-    reducedMotion,
-    visualY,
-}: {
-    reducedMotion: boolean;
-    visualY: MotionValue<number>;
-}) {
+function HeroVisual({ reducedMotion }: { reducedMotion: boolean }) {
     const sceneRef = useRef<HTMLDivElement | null>(null);
     const [isSceneVisible, setIsSceneVisible] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -646,7 +637,6 @@ function HeroVisual({
         <motion.div
             ref={sceneRef}
             data-hero-visual
-            style={{ y: visualY }}
             aria-hidden="true"
             className="relative -ml-8 col-span-5 mt-0 hidden min-h-0 items-center justify-center lg:flex xl:-ml-12"
             initial={reducedMotion ? false : { opacity: 0, x: 36, scale: 0.97 }}
@@ -734,7 +724,6 @@ function HeroVisual({
 }
 
 function Hero() {
-    const heroRef = useRef<HTMLElement | null>(null);
     const reducedMotion = useReducedMotion() ?? false;
     const isDesktop = useIsDesktop();
     const showCanvas = isDesktop && !reducedMotion;
@@ -745,18 +734,8 @@ function Hero() {
     );
     const visibleTypedCharacters = HEADLINE_TYPED_CHARACTERS.slice(0, typedCount);
 
-    const { scrollYProgress } = useScroll({
-        target: heroRef,
-        offset: ["start start", "end start"],
-    });
-
-    const contentY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : -72]);
-    const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, reducedMotion ? 1 : 0.38]);
-    const visualY = useTransform(scrollYProgress, [0, 1], [0, reducedMotion ? 0 : -36]);
-
     return (
         <section
-            ref={heroRef}
             aria-label={`${siteConfig.name} – Start`}
             className="relative flex w-full overflow-hidden rounded-[24px] border border-white/10 bg-[#030712] text-white shadow-[0_40px_140px_rgba(2,6,23,0.55)] sm:rounded-[28px] lg:rounded-[32px]"
             style={{
@@ -770,12 +749,11 @@ function Hero() {
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:120px_120px] opacity-[0.08]" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#02040b] to-transparent" />
 
-            {/* Fill the current viewport; intrinsic rows can grow on short screens or with larger text. */}
+            {/* Keep the viewport height stable while scrolling; allow content to grow on short screens. */}
             <div className="relative z-10 mx-auto grid min-h-[calc(var(--hero-viewport,100vh)-var(--hero-inset,0.5rem)*2-2px)] w-full max-w-[1760px] grid-cols-12 grid-rows-[auto_minmax(auto,1fr)] gap-0 px-[max(1.25rem,env(safe-area-inset-left),env(safe-area-inset-right))] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-[max(1.75rem,env(safe-area-inset-left),env(safe-area-inset-right))] sm:pb-[max(2rem,env(safe-area-inset-bottom))] sm:pt-[max(1.5rem,env(safe-area-inset-top))] md:px-[max(2.5rem,env(safe-area-inset-left),env(safe-area-inset-right))] md:pb-[max(2.5rem,env(safe-area-inset-bottom))] md:pt-[max(2rem,env(safe-area-inset-top))] lg:gap-0 xl:px-[max(3rem,env(safe-area-inset-left),env(safe-area-inset-right))] 2xl:px-[max(4rem,env(safe-area-inset-left),env(safe-area-inset-right))]">
                 <SiteHeader className="col-span-12 h-16" />
 
-                <motion.div
-                    style={{ y: contentY, opacity: contentOpacity }}
+                <div
                     className="col-span-12 row-start-2 flex flex-col justify-between pt-8 [@media(max-width:639px)_and_(max-height:700px)]:pt-6 lg:row-auto lg:col-span-7 lg:justify-center lg:pb-6 lg:pr-10 lg:pt-0 xl:pr-14"
                 >
                     <motion.div
@@ -910,9 +888,9 @@ function Hero() {
                             So funktioniert&apos;s
                         </button>
                     </motion.div>
-                </motion.div>
+                </div>
 
-                {isDesktop ? <HeroVisual reducedMotion={reducedMotion} visualY={visualY} /> : null}
+                {isDesktop ? <HeroVisual reducedMotion={reducedMotion} /> : null}
             </div>
         </section>
     );

@@ -1,6 +1,6 @@
 .section {
     background: #02040b;
-    padding: 32px 24px 72px;
+    padding: clamp(56px, 8svh, 104px) 24px 72px;
     scroll-margin-top: 24px;
 }
 .presentation { max-width: 1392px; margin-inline: auto; perspective: 1600px; }
@@ -110,16 +110,16 @@
 }
 .presentation[data-motion="on"] :is(.reveal, .chromeReveal, .wordmark) { opacity: 0; }
 .presentation[data-motion="on"][data-entered="true"] .reveal {
-    animation: content-reveal 800ms cubic-bezier(.22,1,.36,1) var(--enter-delay, 0s) both;
+    animation: content-reveal calc(800ms * var(--reveal-pace, 1)) cubic-bezier(.22,1,.36,1) var(--enter-delay, 0s) both;
 }
 .presentation[data-motion="on"][data-entered="true"] .chromeReveal {
-    animation: glass-reveal 950ms cubic-bezier(.22,1,.36,1) var(--enter-delay, 0s) both;
+    animation: glass-reveal calc(950ms * var(--reveal-pace, 1)) cubic-bezier(.22,1,.36,1) var(--enter-delay, 0s) both;
 }
 .presentation[data-motion="on"][data-entered="true"] .wordmark {
-    animation: wordmark-write 1000ms cubic-bezier(.22,1,.36,1) 240ms both;
+    animation: wordmark-write calc(1000ms * var(--reveal-pace, 1)) cubic-bezier(.22,1,.36,1) calc(240ms * var(--reveal-pace, 1)) both;
 }
 .presentation[data-motion="on"][data-entered="true"] .edgeLight {
-    animation: edge-light 1450ms ease-out 180ms both;
+    animation: edge-light calc(1450ms * var(--reveal-pace, 1)) ease-out calc(180ms * var(--reveal-pace, 1)) both;
 }
 
 @keyframes glass-reveal {
@@ -154,7 +154,7 @@
     .brand { padding: 6px; }
 }
 @media (max-width: 600px) {
-    .section { padding: 24px 8px 48px; }
+    .section { padding-inline: 8px; padding-bottom: 48px; }
     .screen { height: 1040px; border-radius: 20px; }
     .chrome { padding: 16px; height: 88px; gap: 8px; }
     .pill { height: 48px; padding: 4px; }
