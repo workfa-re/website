@@ -1,10 +1,12 @@
 # Einblicke: Auffindbarkeit und Google News
 
-Stand: 15. September 2026. Diese Übersicht trennt die öffentlich geprüfte Website von den lokalen Änderungen dieser Runde. Die Google-Einreichung wurde dabei nicht ausgeführt.
+Stand: 15. September 2026. Diese Übersicht trennt die technische Website-Prüfung von den anschließend direkt in der angemeldeten Google Search Console bestätigten Ergebnissen. Die Domain-Inhaberschaft ist bestätigt; beide Sitemaps wurden inzwischen eingereicht und von Google gelesen.
+
+Der Code-Stand „Refine insights navigation, team pages and SEO“ wurde zuvor als Commit `c3a6a1c63c77191ae7335651bcce4cda7c8c0d06` veröffentlicht; Autor und Committer sind `r-yalcin`, der Live-Abgleich ist bestanden. Die nachfolgenden Search-Console-Ergebnisse sind ein späterer Dokumentationsnachtrag und waren nicht Teil dieses Code-Commits.
 
 ## Was bereits öffentlich vorhanden ist
 
-Die HTTPS-Endpunkte wurden mit gültiger Zertifikatsprüfung abgerufen:
+Bei der vorherigen technischen Prüfung dieser Runde wurden die HTTPS-Endpunkte mit gültiger Zertifikatsprüfung abgerufen. Die nachfolgende Tabelle dokumentiert diesen früheren Abrufstand; die aktuellen Google-Ergebnisse stehen im nächsten Abschnitt.
 
 | Endpunkt | Geprüfter öffentlicher Stand |
 | --- | --- |
@@ -14,11 +16,31 @@ Die HTTPS-Endpunkte wurden mit gültiger Zertifikatsprüfung abgerufen:
 | [feed.xml](https://workfa.re/feed.xml) | HTTP 200, zehn Einträge. |
 | [Einblicke](https://workfa.re/einblicke) und vorhandener eigener Artikel | HTTP 200. |
 
-Eine Sitemap existiert somit schon. Ob Google einzelne URLs aufgenommen hat und ob die Sitemaps im richtigen Konto eingereicht wurden, ist damit nicht bewiesen. Dafür braucht es die Search Console; ihr Kontostand wurde in dieser Runde nicht eingesehen.
+Eine Sitemap existierte somit bereits vor der Konto-Anmeldung. Der technische Abruf allein belegt keine Aufnahme einzelner URLs in Google.
 
-Der Einstieg in die Search Console wurde im Browser geprüft. Nach „Jetzt starten“ erscheint die Google-Anmeldung. Es besteht dort derzeit kein zugänglicher Kontostand; es wurden keine Sitemaps eingereicht oder Kontoeinstellungen verändert. Die Anmeldung kann vor der späteren Prüfung der veröffentlichten Seiten erfolgen.
+Der erste Einstieg in die Search Console endete zunächst an der Google-Anmeldung. Dieser Zwischenstand ist überholt: Nach der Anmeldung durch den Nutzer konnten Inhaberschaft, Sitemaps und URL-Status direkt geprüft werden. Kontoadresse und Verifikationswerte werden hier nicht festgehalten.
 
-## Lokale technische Änderungen
+## Aktuell in Search Console bestätigt
+
+| Prüfung | Ergebnis am 15. September 2026 |
+| --- | --- |
+| Domain `workfa.re` | Inhaberschaft bestätigt. |
+| robots.txt | Von Google als gültig gemeldet. |
+| Allgemeine Sitemap | Eingereicht, Status „Erfolgreich“, 23 Seiten erkannt; zuletzt am 15. September 2026 gelesen. |
+| News-Sitemap | Eingereicht und gelesen, null URLs. Die Detailmeldung nennt ein fehlendes Tag `url` unter `urlset`. |
+| Startseite `/` | Bereits indexiert. Googlebot Smartphone hat sie am 15. September 2026 gecrawlt; Crawling und Indexierung sind erlaubt, der Seitenabruf war erfolgreich. Die Canonical-URL zeigt auf die Startseite selbst. |
+| `/einblicke` | Zunächst als unbekannt gemeldet. Die Indexierungsanfrage wurde anschließend erfolgreich angenommen und die bevorzugte Crawl-Warteschlange bestätigt. Das ist noch keine bestätigte Indexierung. |
+| `/einblicke/ueber-uns` | Zunächst als unbekannt gemeldet. Die Indexierungsanfrage wurde erfolgreich angenommen und die bevorzugte Crawl-Warteschlange bestätigt. Die tatsächliche Indexierung steht noch aus. |
+| `/einblicke/warum-jobbridge-entstanden-ist` | Zunächst als unbekannt gemeldet. Die Indexierungsanfrage wurde erfolgreich angenommen und die bevorzugte Crawl-Warteschlange bestätigt. Die tatsächliche Indexierung steht noch aus. |
+| `/team/rezan-yalcin` | Bereits indexiert, ein gültiges Profilseite-Element erkannt. Letzter Googlebot-Smartphone-Crawl laut Anzeige: 15. September 2026, 16:27:13. Crawling und Indexierung erlaubt, Abruf erfolgreich. Nutzerseitige Canonical-URL verweist auf sich selbst; Google bestätigt die geprüfte URL als Canonical. |
+
+Damit sind alle fünf gezielten URL-Prüfungen abgeschlossen: Startseite und Rezan-Profil sind bereits indexiert; für Einblicke, Über uns und den eigenen Artikel wurden die Anfragen angenommen. Für das bereits indexierte Profil war keine neue Anfrage erforderlich. Die im Profilbericht genannte alte Profiladresse unter `jobbridge.app` ist eine historische Entdeckungsquelle; ihr Auftauchen allein belegt keinen Weiterleitungs- oder Canonical-Fehler.
+
+Die News-Sitemap ist leer, weil derzeit kein eigener freigegebener Nachrichtenbeitrag aus den letzten 48 Stunden vorliegt. Google beschreibt eine leere News-Sitemap in Veröffentlichungspausen ausdrücklich als zulässig; eine entsprechende Leer-Warnung schadet der regulären Suche nicht. Die hier beobachtete Detailmeldung wird deshalb dokumentiert und bei der nächsten tatsächlich veröffentlichten Nachricht erneut geprüft. Alte Beiträge werden weder umdatiert noch zur Füllung als neue Nachrichten ausgegeben. [Google zu leeren News-Sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap)
+
+Ein zusätzlicher erneuter HTTP-Abruf war wegen eines Kapazitätsfehlers der automatischen Werkzeug-Freigabeprüfung nicht ausführbar. Das ist kein Websitefehler. Die aktuelle Basis für die oben genannten Google-Ergebnisse ist die direkt geprüfte Search Console.
+
+## Veröffentlichte technische Änderungen
 
 - Die allgemeine Sitemap enthält die neue Seite `/einblicke/ueber-uns` statt der weitergeleiteten Teamübersicht. Die bestehenden Profiladressen bleiben enthalten.
 - Das pauschale Änderungsdatum aller Seiten wurde entfernt. Eigene Beiträge verwenden weiterhin ihr gepflegtes `updatedAt`; bei Profilen, allgemeinen Seiten und Quellenverweisen wird kein unbekanntes Datum erfunden. Das Veröffentlichungsdatum eines fremden Artikels ist kein Änderungsdatum unserer Quellenseite. Google empfiehlt zuverlässig belegbare Änderungsdaten. [Sitemap-Dokumentation](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
@@ -39,11 +61,12 @@ Der Einstieg in die Search Console wurde im Browser geprüft. Nach „Jetzt star
 
 Eine leere News-Sitemap ist bei längeren Veröffentlichungspausen korrekt. Alte Artikel künstlich neu zu datieren ist keine Lösung. [Google zu News-Sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap)
 
-## Search Console: nach Veröffentlichung erledigen
+## Search Console: erledigt und nächste Schritte
 
-- [ ] In der [Google Search Console](https://search.google.com/search-console) prüfen, ob die Domain-Property `workfa.re` im zuständigen Konto existiert. Falls nicht: anlegen und den von Google ausgegebenen TXT-Eintrag bei Cloudflare eintragen. Einen bestehenden Verifikationseintrag beibehalten. [Domain bestätigen](https://support.google.com/webmasters/answer/9008080?hl=de)
-- [ ] Im Bericht „Sitemaps“ `https://workfa.re/sitemap.xml` und `https://workfa.re/news-sitemap.xml` einreichen beziehungsweise vorhandene Einreichungen kontrollieren. Die Verweise in robots.txt ermöglichen bereits die Entdeckung; die Einreichung schafft zusätzlich nachvollziehbare Status- und Fehlerberichte. [Sitemaps-Bericht](https://support.google.com/webmasters/answer/7451001?hl=de)
-- [ ] Mit der URL-Prüfung Startseite, Einblicke, Über uns, einen eigenen Beitrag und ein Profil testen. Live-Test, gewählte Canonical-URL und Indexierungsgrund ansehen; bei Bedarf Indexierung beantragen. Das ist eine Anfrage, keine Aufnahmegarantie. [Erneuten Crawl anfragen](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl)
+- [x] Domain-Property `workfa.re` in der [Google Search Console](https://search.google.com/search-console) und Inhaberschaft bestätigt. Bestehende Verifikation beibehalten. [Domain bestätigen](https://support.google.com/webmasters/answer/9008080?hl=de)
+- [x] `https://workfa.re/sitemap.xml` und `https://workfa.re/news-sitemap.xml` eingereicht und Abruf durch Google kontrolliert. Die allgemeine Sitemap ist erfolgreich; der besondere Leerzustand der News-Sitemap ist oben dokumentiert. [Sitemaps-Bericht](https://support.google.com/webmasters/answer/7451001?hl=de)
+- [x] Alle fünf gezielten URLs geprüft: Indexierung von Startseite und Rezan-Profil bestätigt, einschließlich eines gültigen Profilseite-Elements; Indexierung für Einblicke, Über uns und den eigenen Artikel erfolgreich beantragt.
+- [ ] Die tatsächliche Aufnahme der drei angefragten Unterseiten später kontrollieren. Eine angenommene Anfrage ist keine Aufnahmegarantie. [Erneuten Crawl anfragen](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl)
 - [ ] Einen eigenen Artikel im [Rich Results Test](https://search.google.com/test/rich-results) prüfen. Sichtbarer Titel, Autorenangabe, Datum und Bild müssen zu den strukturierten Daten passen. [Article-Markup](https://developers.google.com/search/docs/appearance/structured-data/article)
 - [ ] Für den früheren Domainumzug prüfen, ob die alten einzelnen URLs dauerhaft auf ihr jeweiliges neues Gegenstück weiterleiten und ob der Adresswechsel für die verifizierten alten Properties gemeldet wurde. Das setzt weiterhin Kontrolle über die alte Domain voraus. [Googles Umzugsanleitung](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes)
 - [ ] Anschließend Seitenindexierung, Leistung und gegebenenfalls News-Leistungsberichte beobachten. Eine `site:`-Suche allein ist kein vollständiger Indexierungsnachweis.
@@ -62,4 +85,4 @@ Weder die News-Aufnahme noch Platz eins in der Suche sind zusagbar. Sichtbarkeit
 
 Die laufende lokale Website wurde zusätzlich per HTTP geprüft: allgemeine Sitemap mit 23 URLs und neuer Über-uns-Adresse, gültige leere News-Sitemap, zehn RSS-Einträge einschließlich Verfassern und Feed-Selbstreferenz. Der eigene Artikel liefert `BlogPosting` mit dem tatsächlichen Autorprofil und dem hinterlegten Porträt; der geprüfte externe WDR-Verweis liefert `WebPage` statt eigenen Artikel-Markups. Beide enthalten gültiges Breadcrumb-JSON-LD. Alle geprüften Antworten waren HTTP 200.
 
-Offen bleibt die Kontoprüfung und Einreichung in Search Console sowie die Prüfung des endgültig veröffentlichten Standes durch Google. Eine erfolgreiche lokale Prüfung ersetzt diese Schritte nicht.
+Kontoprüfung, Sitemap-Einreichung und alle fünf gezielten URL-Prüfungen sind abgeschlossen. Offen bleiben die spätere Kontrolle der tatsächlichen Indexierung der drei angefragten Unterseiten, der separate Rich-Results-Test des eigenen Artikels und die gesonderte Prüfung des früheren Domainumzugs. Erfolgreiche lokale Tests und angenommene Crawl-Anfragen ersetzen keine Bestätigung der Aufnahme durch Google.

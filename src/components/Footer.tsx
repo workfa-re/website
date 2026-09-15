@@ -27,6 +27,9 @@ export function Footer({ showChat = true }: { showChat?: boolean }) {
                             <Link href="/einblicke" className="transition-colors hover:text-white">
                                 Einblicke
                             </Link>
+                            <Link href="/kontakt" className="transition-colors hover:text-white">
+                                Kontakt
+                            </Link>
                             <Link href="/impressum" className="transition-colors hover:text-white">
                                 Impressum
                             </Link>

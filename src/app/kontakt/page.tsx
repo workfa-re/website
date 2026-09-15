@@ -1,35 +1,66 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/PlaceholderPage";
-import { placeholderPages } from "@/config/site";
+import { ContactPage } from "@/components/contact/ContactPage";
+import { contactDepartments } from "@/config/contact";
+import { siteConfig } from "@/config/site";
+import { serializeJsonLd } from "@/lib/json-ld";
 
-const page = placeholderPages.kontakt;
+const path = "/kontakt";
+const pageUrl = `${siteConfig.url}${path}`;
+const title = `Kontakt | ${siteConfig.name}`;
+const description = "Kontakt zu Workfare: die passenden E-Mail-Adressen für allgemeine Fragen, Support, Presse und Datenschutz sowie direkte Kontakte zum Team.";
 
 export const metadata: Metadata = {
-    title: page.navLabel,
-    description: page.metaDescription,
+    title: "Kontakt",
+    description,
     alternates: {
-        canonical: page.path,
+        canonical: path,
     },
     openGraph: {
-        title: `${page.navLabel} | JobBridge`,
-        description: page.metaDescription,
-        url: page.path,
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "JobBridge" }],
+        title,
+        description,
+        url: path,
+        type: "website",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
     },
     twitter: {
         card: "summary_large_image",
-        title: `${page.navLabel} | JobBridge`,
-        description: page.metaDescription,
+        title,
+        description,
         images: ["/og-image.png"],
+    },
+};
+
+const contactPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: title,
+    description,
+    inLanguage: "de-DE",
+    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    mainEntity: {
+        "@type": "Organization",
+        "@id": `${siteConfig.url}/#organization`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        contactPoint: contactDepartments.map((department) => ({
+            "@type": "ContactPoint",
+            contactType: department.title,
+            description: department.description,
+            email: department.email,
+        })),
     },
 };
 
 export default function KontaktPage() {
     return (
-        <PlaceholderPage
-            eyebrow={page.eyebrow}
-            title={page.title}
-            description={page.description}
-        />
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: serializeJsonLd(contactPageJsonLd) }}
+            />
+            <ContactPage departments={contactDepartments} />
+        </>
     );
 }

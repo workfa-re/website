@@ -3,6 +3,8 @@ export const siteConfig = {
     url: "https://workfa.re",
     appUrl: "https://app.jobbridge.app",
     contactEmail: "kontakt@workfare.team",
+    supportEmail: "support@workfare.team",
+    privacyEmail: "datenschutz@workfare.team",
     pressEmail: "presse@workfare.team",
     defaultTitle: "Sichere Taschengeldjobs für Jugendliche",
     defaultDescription:
@@ -43,16 +45,6 @@ export const placeholderPages = {
             "Wie Workfare Jugendliche, Eltern und Auftraggeber schützt: klare Rollen, geprüfte Kontakte und ein Ablauf, der nicht auf Zufall gebaut ist.",
         metaDescription:
             "Sicherheit bei Workfare: klare Rollen, geprüfte Kontakte, Jugendschutz und transparente Freigaben für sichere Taschengeldjobs.",
-    },
-    kontakt: {
-        path: "/kontakt",
-        navLabel: "Kontakt",
-        eyebrow: "Kontakt",
-        title: "Direkter Kontakt",
-        description:
-            "Für Fragen zur Website, zur Plattform oder zu Workfare. Kurz schreiben, wir melden uns sauber und nachvollziehbar zurück.",
-        metaDescription:
-            "Kontakt zu Workfare für Fragen zur Website, Plattform, sicheren Taschengeldjobs und lokalen Auftraggebern.",
     },
     demnaechst: {
         path: "/demnaechst",
