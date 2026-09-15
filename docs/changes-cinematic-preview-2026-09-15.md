@@ -46,3 +46,16 @@ Stand: 15. September 2026. Umgesetzt, geprüft und vom Nutzer für Commit und Pu
 - Der vorhandene Docker-Dienst und die isolierte lokale Demo wurden wieder gestartet. Der tatsächliche Klick auf „Live-Demo“ öffnete die separate Seite und die dunkle Suchendenansicht mit dem Beispielprofil. Die Startseite steht danach wieder am Seitenanfang; temporäre Browsergrößen wurden zurückgesetzt.
 
 Die Glaskarten weiter unten und der vollständige Website-Hellmodus bleiben die separat vorgemerkten Aufgaben. Die Animationsarbeit verändert weder Datenbankzugriffe noch Demo-Berechtigungen.
+
+## Nachtrag: kompakter Plattformheader
+
+Nach dem vorherigen Commit angepasst und geprüft; vom Nutzer für Commit und Push freigegeben. Die öffentliche Live-Demo bleibt auf ausdrücklichen Nutzerwunsch eine spätere Aufgabe.
+
+| Before | After |
+|---|---|
+| Die Vorschau reservierte auf Handys zwei Kopfzeilen für Wortmarke und Navigation. | In `PlatformPreview.module.css` die mobile Grid-Überschreibung entfernt: Logo, Navigation und Profilbereich stehen wieder gemeinsam in einer 88 Pixel hohen Kopfzeile. Die 48 Pixel hohen Glaselemente bleiben erhalten. |
+| Der Schriftzug wurde für die Animation auch auf Handys erzwungen; auf Tablets war er versteckt. | Der Schriftzug klappt unter 768 Pixeln zum Logo ein. Ab 768 Pixeln bleibt Workfare sichtbar, die Ortszeile erst ab 1024 Pixeln, entsprechend den Breakpoints der Plattform. |
+| Zusätzliche mobile Abstände und größere Navigationselemente waren auf die zweite Zeile abgestimmt. | Die ursprünglichen einzeiligen Abstände, Symbolgrößen und der Abstand zum Inhalt gelten wieder. Die übrige Animationsfolge bleibt erhalten. |
+| Der öffentliche Vorbereitungsstatus war nur allgemein beschrieben. | `platform-demo.md` enthält den geprüften öffentlichen Stand und die konkreten Schritte bis zur Freischaltung. |
+
+Browserprüfung bei 320, 390 und 768 Pixeln: alle drei Headergruppen auf derselben Höhe, keine Kollisionen oder horizontaler Seitenüberlauf. Schriftzug auf Handys verborgen und auf dem Tablet vorhanden. Die öffentliche Demo wurde lesend geprüft, nicht freigeschaltet.

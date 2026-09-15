@@ -175,4 +175,6 @@ Anschließende Freigabe: Nutzerauftrag für Commit und Push erhalten. Die zuvor 
 
 ## Neue lokale Runde am 15. September: inszenierte Vorschau
 
+TODO — öffentliche Live-Demo: Auf ausdrücklichen Nutzerwunsch am 15. September zurückgestellt. Separate Demo-Datenbank, gehosteten Installationsweg, Dokploy-Anwendung, Domain und öffentliche Abnahme später umsetzen. Die Reihenfolge ist in `platform-demo.md` dokumentiert. Der aktuelle Commit gibt ausschließlich die mobile Headerkorrektur und ihre Dokumentation frei.
+
 Auf Nutzerwunsch bleibt der Demo-Link jetzt unabhängig von der öffentlichen Einbettungsfreigabe sichtbar. Hero und Vorschau werden durch eine volle dynamische Bildschirmhöhe getrennt. Die Vorschau erhält eine einmalige Folge aus Glasfläche, geschriebener Wortmarke, Navigation, Texten und Jobkarten mit deutlicher Tiefenbewegung und ruhigem Endzustand. Bestehende Gestaltung und reduzierte Bewegung bleiben berücksichtigt. Die geprüfte Runde ist vom Nutzer für Commit und Push freigegeben; vollständige Änderungstabelle und Prüfgrenzen: `changes-cinematic-preview-2026-09-15.md`.

@@ -143,11 +143,15 @@
 @media (max-width: 1023px) {
     .jobs { grid-template-columns: 1fr; }
     .content { padding-inline: 32px; }
-    .brandName, .profileName, .chevron, .selectedNav > span { display: none; }
-    .brand, .profile { padding: 6px; }
+    .brandName small, .profileName, .chevron, .selectedNav > span { display: none; }
+    .profile { padding: 6px; }
     .navigation > span { min-width: 46px; }
     .navigation .selectedNav { padding-inline: 14px; }
     .chrome { padding-inline: 24px; }
+}
+@media (max-width: 767px) {
+    .brandName { display: none; }
+    .brand { padding: 6px; }
 }
 @media (max-width: 600px) {
     .section { padding: 24px 8px 48px; }
@@ -262,16 +266,5 @@
 .screen[data-theme="dark"] .fade { background: linear-gradient(transparent, #020617); }
 @media (max-width: 600px) {
     .screen[data-theme="dark"] .filter { background: #080d1d; box-shadow: -12px 0 15px #080d1d; }
-    /* Give the written wordmark room without squeezing the platform controls. */
-    .chrome { display: grid; grid-template-columns: 1fr auto; grid-template-rows: 48px 48px; height: 140px; gap: 12px; padding: 16px; }
-    .brand { width: fit-content; padding-right: 12px; }
-    .brandName { display: block; font-size: 17px; }
-    .brandName small { font-size: 10px; }
-    .account { grid-column: 2; grid-row: 1; }
-    .navigation { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-inline: 0; gap: 6px; }
-    .navigation > span { min-width: 54px; }
-    .navigation .selectedNav { padding-inline: 18px; }
-    .navigation .selectedNav > span { display: inline; }
-    .content { padding-top: 12px; }
     .caption { gap: 12px; }
 }

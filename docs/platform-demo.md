@@ -70,6 +70,21 @@ Plattform und Demo verwenden denselben Quellstand, jedoch eigene Builds, weil di
 
 Vor dem Website-Rollout müssen Demo-Hosting, eigene Schlüssel, ausschließlich synthetische Daten, Sitzungsbereinigung, Versandblockade, Produktionsschutz und die Einbettung auf der späteren Domain nachgewiesen sein. Die aktuelle lokale Supabase-Konfiguration mit Entwicklungszugängen ist kein öffentliches Hostingpaket.
 
+### Öffentlich geprüfter Stand am 15. September 2026
+
+`https://workfa.re/demo` liefert den Vorbereitungstext und kein iframe. `demo.workfa.re` konnte bei der Prüfung nicht per DNS aufgelöst werden. Der Text beschreibt daher eine noch nicht freigeschaltete Bereitstellung, keinen laufenden Ladevorgang.
+
+Der nächste Rollout benötigt diese Schritte in dieser Reihenfolge:
+
+1. Eigenes verwaltetes Supabase-Projekt für die Demo anlegen, mit eigenen Schlüsseln und ausschließlich synthetischen Daten. Die reguläre Plattformdatenbank bleibt getrennt.
+2. Im Plattformprojekt einen wiederholbaren Installations- und Updateweg für dieses konkrete Ziel ergänzen. Die vorhandenen lokalen Werkzeuge und SQL-Ergänzungen prüfen ausdrücklich `isolated-local-demo`; sie sind noch kein geprüfter Hosted-Installer. Den vollständigen Aufbau auf einer leeren Demodatenbank prüfen.
+3. In Dokploy die Plattform aus demselben Quellstand als separate Demo-Anwendung bauen. Die Demo-Projektadresse muss bereits beim Build gesetzt sein. `demo.workfa.re` mit DNS und TLS anbinden; Sitzungsantworten dürfen nicht gemeinsam zwischengespeichert werden.
+4. Mailversand ausschließen, Sitzungsbereinigung einrichten und die tatsächliche Herkunft weitergereichter Besucher-IP-Adressen absichern. Ohne geprüfte Cloudflare-Weitergabe teilen alle Besucher derzeit ein Limit von fünf neuen Besuchen pro Stunde. Das Vertrauen in einen Header allein ist keine Absicherung des Ursprungsservers.
+5. Auf der gehosteten Instanz alle drei Rollen, zwei voneinander getrennte Besuche, direkte API-Zugriffe, abgelaufene Sitzungen, die automatische Bereinigung und die Versandsperre prüfen.
+6. Erst anschließend die Website mit `NEXT_PUBLIC_PLATFORM_DEMO_URL=https://demo.workfa.re/demo` neu bauen und die öffentliche Einbettung auf Handy und Desktop abnehmen.
+
+Die Analyse hat keine öffentliche Instanz angelegt und keine Zugangsdaten oder Freigaben geändert. Die DNS-Prüfung belegt die aktuelle öffentliche Nichterreichbarkeit; der interne Dokploy-Bestand wurde hierfür nicht untersucht.
+
 Die Glaskarten und die Migration der übrigen Appdomains bleiben ausdrücklich spätere Aufgaben.
 
 Grundlagen: [Supabase-Umgebungen](https://supabase.com/docs/guides/deployment/managing-environments), [Supabase-Serveranmeldung](https://supabase.com/docs/guides/auth/server-side/creating-a-client), [Next-Proxy-Konvention](https://nextjs.org/docs/app/api-reference/file-conventions/proxy).
