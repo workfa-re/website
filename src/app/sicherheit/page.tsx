@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 
 const path = "/sicherheit";
 const title = `Sicherheit | ${siteConfig.name}`;
-const description = "Sicherheit bei Workfare: Orientierung für Jugendliche, Eltern und Auftraggeber, eine Checkliste vor dem Job und direkte Kontakte für Support und Datenschutz.";
+const description = "Sicherheit bei Workfare: Orientierung für Jugendliche, Eltern und Auftraggeber, eine Checkliste vor dem Job und der Weg zur passenden Kontaktperson.";
 
 export const metadata: Metadata = {
     title: "Sicherheit",

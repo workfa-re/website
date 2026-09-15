@@ -37,7 +37,7 @@ export function AboutPage() {
                     <h2>Mit uns ins Gespräch kommen.</h2>
                     <p>Für Fragen, Ideen oder eine Zusammenarbeit.</p>
                 </div>
-                <Link href="/kontakt" className={styles.contactLink}>
+                <Link href="/kontakt" className={`glass-button ${styles.contactLink}`}>
                     Kontakt aufnehmen
                     <ArrowUpRight size={17} aria-hidden="true" />
                 </Link>

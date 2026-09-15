@@ -67,7 +67,10 @@
 
         --radius: 0.5rem;
 
-        /* Shared clear-glass material for controls and larger contact surfaces. */
+        --content-panel-fill: rgb(255 255 255 / 0.025);
+        --content-panel-border: rgb(255 255 255 / 0.10);
+
+        /* Shared clear-glass material for interactive controls. */
         --glass-surface-fill:
             radial-gradient(100% 65% at 100% 100%, rgb(255 255 255 / 0.04), transparent 65%),
             linear-gradient(135deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0.004) 42%, rgb(255 255 255 / 0.02));
@@ -241,6 +244,17 @@
         .hero-heading { font-size: clamp(4.5rem, 9vw, 8.4rem); }
     }
 
+    /* Content stays quiet; reflective glass is reserved for controls. */
+    .content-panel {
+        position: relative;
+        min-width: 0;
+        border: 1px solid var(--content-panel-border);
+        border-radius: var(--content-panel-radius, 24px);
+        background: var(--content-panel-fill);
+        box-shadow: none;
+        transition: background-color 180ms ease, border-color 180ms ease;
+    }
+
     /* Clear centers, shaped reflections and a sharp rim give depth without frost. */
     .glass-control,
     .glass-button {
@@ -299,7 +313,8 @@
     }
 
     .glass-control:focus-visible,
-    .glass-button:focus-visible {
+    .glass-button:focus-visible,
+    .content-panel:focus-visible {
         outline: 2px solid rgb(255 255 255 / 0.8);
         outline-offset: 4px;
     }
@@ -313,6 +328,8 @@
         button.glass-control:hover,
         .glass-button:hover,
         .brand-link:hover .glass-control { background-color: rgb(255 255 255 / 0.02); }
+        a.content-panel:hover,
+        button.content-panel:hover { background-color: rgb(255 255 255 / 0.045); border-color: rgb(255 255 255 / 0.18); }
         .glass-button-primary:hover { background-color: rgb(255 255 255 / 0.16); }
         .menu-trigger:hover .menu-trigger-icon { transform: rotate(90deg); }
     }
@@ -349,6 +366,7 @@
 @media (prefers-reduced-motion: reduce) {
     .glass-control,
     .glass-button,
+    .content-panel,
     .menu-trigger-icon,
     .hero-menu-link { transition: none; }
     .menu-trigger:hover .menu-trigger-icon { transform: none; }

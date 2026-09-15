@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AboutPage } from "@/components/about/AboutPage";
 import { siteConfig } from "@/config/site";
-import { teamMembers } from "@/content/team";
+import { teamMembers, type TeamMember } from "@/content/team";
 import { serializeJsonLd } from "@/lib/json-ld";
 
 const path = "/einblicke/ueber-uns";
@@ -32,11 +32,11 @@ const aboutJsonLd = {
     inLanguage: "de-DE",
     isPartOf: { "@id": `${siteConfig.url}/#website` },
     about: { "@id": `${siteConfig.url}/#organization` },
-    mainEntity: teamMembers.map((member) => ({
+    mainEntity: teamMembers.map((member: TeamMember) => ({
         "@type": "Person",
         "@id": `${siteConfig.url}${member.profilePath}#person`,
         name: member.name,
-        jobTitle: member.role,
+        ...(!member.profilePending ? { jobTitle: member.role } : {}),
         url: `${siteConfig.url}${member.profilePath}`,
     })),
 };

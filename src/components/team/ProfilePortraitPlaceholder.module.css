@@ -1,0 +1,19 @@
+.placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: inherit;
+    background: #101216;
+    color: #727780;
+}
+
+.symbol {
+    width: 35%;
+    max-width: 72px;
+    height: auto;
+}
+
+.compact .symbol {
+    max-width: 36px;
+}

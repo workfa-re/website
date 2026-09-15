@@ -5,10 +5,12 @@ import { ArrowLeft, ArrowUpRight, Award, Building2, Instagram, Mail, Phone, type
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { PixelShaderBackdrop } from "@/components/TrustNarrative";
+import { ProfileContributions } from "@/components/team/ProfileContributions";
 import { siteConfig } from "@/config/site";
 import { getTeamMember, type TeamMember } from "@/content/team";
-import { externalInsights, formatInsightDate, getInsightAbsoluteUrl, getInsightUrl, ownInsights, type Insight } from "@/content/insights";
+import { externalInsights, formatInsightDate, getInsightAbsoluteUrl, getInsightUrl, getInsightsByAuthor, type Insight } from "@/content/insights";
 import { serializeJsonLd } from "@/lib/json-ld";
+import styles from "@/components/team/ProfileSurfaces.module.css";
 
 const member = getTeamMember("rezan");
 
@@ -88,9 +90,7 @@ export default function RezanYalcinProfilePage() {
         externalInsights.find((insight) => insight.id === "wdr-rezan-jobbridge-jugend-forscht"),
         externalInsights.find((insight) => insight.id === "blick-aktuell-jugend-forscht-bundesfinale-4-platz"),
     ].filter(isDefined);
-    const selectedAuthoredInsights = [
-        ownInsights.find((insight) => insight.slug === "warum-jobbridge-entstanden-ist"),
-    ].filter(isDefined);
+    const selectedAuthoredInsights = getInsightsByAuthor(member.slug);
     const profileSubjectItems = [...pressMentions, ...selectedAuthoredInsights];
     const mentionJsonLd = profileSubjectItems.map((insight) => ({
         "@type": insight.kind === "own" ? "BlogPosting" : "CreativeWork",
@@ -169,27 +169,26 @@ export default function RezanYalcinProfilePage() {
                     <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:min-h-[70svh] lg:px-10">
                         <SiteHeader />
 
-                        <div className="grid flex-1 items-center gap-10 pb-8 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(19rem,0.52fr)] lg:pb-10 lg:pt-12">
+                        <div className="grid flex-1 items-center gap-10 pb-8 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(21rem,0.63fr)] lg:pb-10 lg:pt-12">
                             <div>
                                 <Link
                                     href="/einblicke/ueber-uns#team"
-                                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                    className={`glass-button ${styles.backButton}`}
                                 >
                                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                                     Über uns
                                 </Link>
 
                                 <div className="mt-9 max-w-3xl">
-                                    <aside className="relative mb-6 w-[clamp(6.35rem,20vw,8.25rem)] overflow-visible lg:hidden">
-                                        <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_50%_45%,rgba(226,232,240,0.13),rgba(59,130,246,0.035)_42%,transparent_72%)]" />
-                                        <div className="relative overflow-hidden rounded-[0.95rem] border border-white/10 bg-[#070b13] p-1 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
-                                            <div className="relative aspect-[4/5] overflow-hidden rounded-[0.7rem] bg-[#050912]">
+                                    <aside className={`relative mb-6 overflow-visible lg:hidden ${styles.mobilePortrait}`}>
+                                        <div className={`content-panel ${styles.portraitFrame}`}>
+                                            <div className={styles.portraitSurface}>
                                                 <Image
                                                     src={profileImage.src}
                                                     alt={profileImage.alt}
                                                     fill
-                                                    sizes="8.25rem"
-                                                    className="object-cover"
+                                                    sizes="(min-width: 658px) 138px, (min-width: 507px) calc(22.5vw - 10px), 104px"
+                                                    className={styles.portraitImage}
                                                     style={{ objectPosition: profileImage.position }}
                                                     priority
                                                 />
@@ -197,11 +196,11 @@ export default function RezanYalcinProfilePage() {
                                         </div>
                                     </aside>
 
-                                    <h1 className="text-[clamp(3.35rem,6.4vw,5.9rem)] font-semibold leading-[0.91] tracking-[-0.058em] text-white">
+                                    <h1 className={styles.profileName}>
                                         {member.displayName}
                                     </h1>
                                 </div>
-                                <p className="mt-1 text-xl font-semibold tracking-[-0.035em] text-blue-100/84 sm:text-2xl">
+                                <p className={`${styles.profileRole} text-xl font-semibold tracking-[-0.035em] text-blue-100/84 sm:text-2xl`}>
                                     {member.role}
                                 </p>
                                 <p className="mt-6 max-w-2xl text-[1.02rem] font-medium leading-8 tracking-[-0.02em] text-slate-300 sm:text-[1.14rem]">
@@ -217,12 +216,12 @@ export default function RezanYalcinProfilePage() {
                                                 key={link.href}
                                                 href={link.href}
                                                 aria-label={`${link.label}: ${link.value}`}
-                                                className="group inline-flex min-h-11 max-w-full items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.045] px-4 py-2.5 text-sm font-semibold text-slate-200 backdrop-blur transition duration-300 hover:border-blue-200/24 hover:bg-blue-400/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                                className={`glass-button ${styles.contactButton}`}
                                             >
-                                                <Icon className="h-4 w-4 shrink-0 text-blue-100/78" aria-hidden="true" />
+                                                <Icon className="h-4 w-4 shrink-0 text-slate-200" aria-hidden="true" />
                                                 <span className="min-w-0 break-all">{link.value}</span>
                                                 <ArrowUpRight
-                                                    className="h-3.5 w-3.5 shrink-0 text-slate-500 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
+                                                    className={styles.buttonArrow}
                                                     aria-hidden="true"
                                                 />
                                             </a>
@@ -232,15 +231,14 @@ export default function RezanYalcinProfilePage() {
                             </div>
 
                             <aside className="relative hidden overflow-visible lg:block">
-                                <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.2rem] bg-[radial-gradient(circle_at_50%_42%,rgba(226,232,240,0.115),rgba(59,130,246,0.032)_44%,transparent_74%)]" />
-                                <div className="relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-[#070b13] p-1.5 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
-                                    <div className="relative aspect-[4/5] overflow-hidden rounded-[0.85rem] bg-[#050912]">
+                                <div className={`content-panel ${styles.portraitFrame}`}>
+                                    <div className={styles.portraitSurface}>
                                         <Image
                                             src={profileImage.src}
                                             alt={profileImage.alt}
                                             fill
-                                            sizes="(min-width: 1024px) 28vw, 100vw"
-                                            className="object-cover"
+                                            sizes="(min-width: 1280px) 470px, (min-width: 1024px) calc(41.8vw - 64px), calc(100vw - 54px)"
+                                            className={styles.portraitImage}
                                             style={{ objectPosition: profileImage.position }}
                                             priority
                                         />
@@ -278,7 +276,7 @@ export default function RezanYalcinProfilePage() {
                             </div>
                             <Link
                                 href="/einblicke/alle"
-                                className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-white/18 hover:bg-white/[0.065] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                className={`glass-button ${styles.contactButton}`}
                             >
                                 Alle Einblicke
                                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -294,16 +292,16 @@ export default function RezanYalcinProfilePage() {
                                     <Link
                                         key={getProfileInsightKey(insight)}
                                         href={href}
-                                        className="group flex min-h-full flex-col overflow-hidden rounded-[1.15rem] bg-white/[0.035] outline-none ring-1 ring-white/[0.075] transition duration-300 hover:bg-white/[0.055] hover:ring-white/[0.13] focus-visible:ring-2 focus-visible:ring-white/70"
+                                        className={`group content-panel ${styles.cardLink} ${styles.pressCard}`}
                                     >
-                                        <span className="relative block aspect-[16/10] overflow-hidden bg-[#050912]">
+                                        <span className={`relative block aspect-[16/10] ${styles.cardVisual}`}>
                                             {insight.image ? (
                                                 <Image
                                                     src={insight.image.src}
                                                     alt={insight.image.alt}
                                                     fill
                                                     sizes="(min-width: 1024px) 31vw, (min-width: 768px) 33vw, 100vw"
-                                                    className="object-cover transition duration-700 group-hover:scale-[1.025]"
+                                                    className={styles.cardImage}
                                                     style={{ objectPosition: insight.image.position ?? "center center" }}
                                                 />
                                             ) : (
@@ -316,16 +314,16 @@ export default function RezanYalcinProfilePage() {
                                                 <span aria-hidden="true">·</span>
                                                 <time dateTime={insight.publishedAt}>{formatInsightDate(insight.publishedAt)}</time>
                                             </span>
-                                            <span className="mt-5 block text-[1.35rem] font-semibold leading-[1.04] tracking-[-0.05em] text-white transition group-hover:text-blue-100 sm:text-[1.5rem]">
+                                            <span className="mt-5 block text-[1.35rem] font-semibold leading-[1.04] tracking-[-0.05em] text-white transition-colors duration-200 group-hover:text-blue-100 sm:text-[1.5rem]">
                                                 {insight.title}
                                             </span>
                                             <span className="mt-4 block text-[0.98rem] font-medium leading-7 tracking-[-0.02em] text-slate-400">
                                                 {insight.excerpt}
                                             </span>
-                                            <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-blue-100/82 transition group-hover:text-white">
+                                            <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-blue-100/82 transition-colors duration-200 group-hover:text-white">
                                                 Eintrag öffnen
                                                 <ArrowUpRight
-                                                    className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                                                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none"
                                                     aria-hidden="true"
                                                 />
                                             </span>
@@ -337,69 +335,7 @@ export default function RezanYalcinProfilePage() {
                     </div>
                 </section>
 
-                {selectedAuthoredInsights.length > 0 ? (
-                    <section className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-18 sm:px-8 lg:px-10 lg:pb-24">
-                        <div className="space-y-8 border-t border-white/[0.07] pt-10">
-                            <div className="max-w-3xl">
-                                <h2 className="text-[clamp(2rem,3.2vw,3.35rem)] font-semibold leading-[0.96] tracking-[-0.058em] text-white">
-                                    Beiträge von Rezan
-                                </h2>
-                                <p className="mt-5 text-[1rem] font-medium leading-7 tracking-[-0.02em] text-slate-500 sm:text-[1.05rem]">
-                                    Ausgewählte eigene Texte und Einordnungen aus der Arbeit an Workfare.
-                                </p>
-                            </div>
-
-                            <div className="grid gap-3">
-                                {selectedAuthoredInsights.map((insight) => {
-                                    const href = getProfileInsightHref(insight);
-
-                                    return (
-                                        <Link
-                                            key={getProfileInsightKey(insight)}
-                                            href={href}
-                                            className="group grid overflow-hidden rounded-[1rem] bg-white/[0.03] outline-none ring-1 ring-white/[0.07] transition duration-300 hover:bg-white/[0.052] hover:ring-white/[0.13] focus-visible:ring-2 focus-visible:ring-white/70 md:grid-cols-[minmax(10rem,13rem)_minmax(0,1fr)]"
-                                        >
-                                            <span
-                                                className="relative block aspect-[16/7] overflow-hidden bg-[#050912] md:aspect-auto md:min-h-[9.5rem]"
-                                            >
-                                                {insight.image ? (
-                                                    <Image
-                                                        src={insight.image.src}
-                                                        alt={insight.image.alt}
-                                                        fill
-                                                        sizes="(min-width: 768px) 13rem, 100vw"
-                                                        className="object-cover transition duration-700 group-hover:scale-[1.025]"
-                                                        style={{ objectPosition: insight.image.position ?? "center center" }}
-                                                    />
-                                                ) : (
-                                                    <span className="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,23,42,0.96),rgba(15,23,42,0.52))]" />
-                                                )}
-                                            </span>
-                                            <span className="flex min-h-[9.5rem] flex-1 flex-col justify-center p-4 sm:p-5 md:py-4">
-                                                <span className="text-[0.82rem] font-semibold tracking-[-0.02em] text-slate-500">
-                                                    {formatInsightDate(insight.publishedAt)}
-                                                </span>
-                                                <span className="mt-2 block max-w-3xl text-[1.15rem] font-semibold leading-[1.08] tracking-[-0.045em] text-white transition group-hover:text-blue-100 sm:text-[1.3rem]">
-                                                    {insight.title}
-                                                </span>
-                                                <span className="mt-2 line-clamp-2 max-w-4xl text-[0.92rem] font-medium leading-6 tracking-[-0.018em] text-slate-500 sm:text-[0.98rem]">
-                                                    {insight.excerpt}
-                                                </span>
-                                                <span className="inline-flex items-center gap-2 pt-4 text-sm font-semibold text-blue-100/78 transition group-hover:text-white">
-                                                    Artikel lesen
-                                                    <ArrowUpRight
-                                                        className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                                                        aria-hidden="true"
-                                                    />
-                                                </span>
-                                            </span>
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </section>
-                ) : null}
+                <ProfileContributions member={member} />
 
                 <Footer showChat={false} />
             </main>

@@ -37,6 +37,11 @@ Die folgenden Pfade hatten keine Referenzen in den getrackten Quelltexten, Daten
 
 ## Weitere visuelle Inhalte
 
+### Ergänzung vom 15.09.2026: Tim Lohmeier
+
+- `public/team/tim-lohmeier-portrait.jpg`: vom Nutzer als Foto für Tim Lohmeier bereitgestellte Originaldatei `8f991cb5-c23e-4a91-82e8-47f704e0c11c.JPG`, 3840 × 5120 Pixel. Unverändert übernommen; keine generative Bearbeitung. Darstellungsausschnitt erfolgt über CSS, passende Auslieferungsgrößen über Next Image.
+- Verwendung: Teamübersicht, Kontaktseite, Tims Profil und dessen Linkvorschau, zentral über `src/content/team.ts`.
+
 - `/og-image.png` wird durch `src/app/og-image.png/route.tsx` deterministisch aus Text und CSS gerendert, Größe 1200×630. Es ist keine generative KI-Datei.
 - Hero-/Trust-Hintergründe werden mit Canvas/WebGL beziehungsweise CSS dargestellt. Sie sind dekorative Animationen und keine öffentlichen Personenfotos.
 - Fehlende Teamfotos verwenden ausdrücklich beschriftete CSS-Platzhalter. Keine erfundenen Personenbilder einsetzen.

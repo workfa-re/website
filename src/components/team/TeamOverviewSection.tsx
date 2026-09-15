@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { teamMembers, type TeamMember } from "@/content/team";
+import { ProfilePortraitPlaceholder } from "./ProfilePortraitPlaceholder";
 import styles from "@/components/about/AboutPage.module.css";
 
 const members: readonly TeamMember[] = teamMembers;
@@ -11,12 +12,12 @@ export function TeamOverviewSection() {
         <section id="team" className={styles.teamSection} aria-labelledby="team-heading">
             <div className={styles.sectionHeading}>
                 <h2 id="team-heading">Das Team</h2>
-                <p>Die Menschen hinter Produkt, Entwicklung und Kommunikation.</p>
+                <p>Die Menschen hinter Workfare.</p>
             </div>
             <ul className={styles.teamGrid}>
                 {members.map((member) => (
                     <li key={member.slug}>
-                        <Link href={member.profilePath} className={styles.memberCard}>
+                        <Link href={member.profilePath} className={`content-panel ${styles.memberCard}`}>
                             <span className={styles.portrait}>
                                 {member.profileImage ? (
                                     <Image
@@ -28,9 +29,7 @@ export function TeamOverviewSection() {
                                         style={{ objectPosition: member.profileImage.position ?? "center" }}
                                     />
                                 ) : (
-                                    <span className={styles.initials} aria-hidden="true">
-                                        {member.name.split(" ").map((part) => part[0]).join("")}
-                                    </span>
+                                    <ProfilePortraitPlaceholder compact />
                                 )}
                             </span>
                             <span className={styles.memberInfo}>

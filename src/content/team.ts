@@ -10,6 +10,7 @@ export type TeamMember = {
     profileIntro: string;
     location: string;
     profilePath: string;
+    profilePending?: boolean;
     profileImage?: {
         src: string;
         alt: string;
@@ -128,21 +129,74 @@ export const teamMembers = [
         ],
     },
     {
+        slug: "metin-yalcin",
+        name: "Metin Yalcin",
+        displayName: "Metin Yalcin",
+        shortName: "Metin",
+        role: "Geschäftsführer",
+        description: "Metin Yalcin ist Geschäftsführer von Workfare.",
+        profileIntro: "Metin Yalcin übernimmt die Geschäftsführung von Workfare.",
+        location: "",
+        profilePath: "/team/metin-yalcin",
+        focus: ["Geschäftsführung"],
+        contactLinks: [
+            {
+                kind: "team-email",
+                label: "Workfare Team",
+                value: "kontakt@workfare.team",
+                description: "Kontakt zur Geschäftsführung über das Workfare Team.",
+                href: "mailto:kontakt@workfare.team",
+            },
+        ],
+        profileLinks: [],
+        knowsAbout: ["Workfare"],
+    },
+    {
+        slug: "cueneyt-celik",
+        name: "Cüneyt Celik",
+        displayName: "Cüneyt Celik",
+        shortName: "Cüneyt",
+        role: "Business Angel & erweiterte Geschäftsführung",
+        description:
+            "Cüneyt Celik begleitet Workfare als Business Angel und gehört zur erweiterten Geschäftsführung.",
+        profileIntro:
+            "Cüneyt Celik ist als Business Angel und in der erweiterten Geschäftsführung bei Workfare tätig.",
+        location: "",
+        profilePath: "/team/cueneyt-celik",
+        focus: ["Business Angel", "Erweiterte Geschäftsführung"],
+        contactLinks: [
+            {
+                kind: "team-email",
+                label: "Workfare Team",
+                value: "kontakt@workfare.team",
+                description: "Kontakt zu Cüneyt über das Workfare Team.",
+                href: "mailto:kontakt@workfare.team",
+            },
+        ],
+        profileLinks: [],
+        knowsAbout: ["Workfare"],
+    },
+    {
         slug: "tim-lohmeier",
         name: "Tim Lohmeier",
         displayName: "Tim Lohmeier",
         shortName: "Tim",
-        role: "Produktentwicklung Workfare Edu",
+        role: "Mitarbeiter Produktentwicklung",
         description:
-            "Tim entwickelt im Workfare Lab die Grundlagen für Workfare Edu: eine Lernplattform, auf der Jugendliche bezahlbare Nachhilfe finden und eigenes Wissen fair weitergeben können.",
+            "Tim unterstützt die Produktentwicklung bei Workfare. Er testet einfache Bedienabläufe, dokumentiert Fehler und gibt Rückmeldungen zur Nutzerfreundlichkeit.",
         profileIntro:
-            "Viele Schüler brauchen Hilfe in Mathe, Englisch oder anderen Fächern, doch gute Nachhilfe ist oft teuer oder schwer zu organisieren. Gleichzeitig gibt es Jugendliche, die ein Fach stark beherrschen, anderen helfen möchten und sich dabei fair etwas dazuverdienen wollen. Workfare Edu soll daraus einen klaren, lokalen Lernweg machen: verständliche Profile, passende Lernhilfe und ein Ablauf, der für Schüler, Eltern und Nachhilfegebende nachvollziehbar bleibt.",
+            "Tim prüft die Plattform aus Nutzersicht: Sind die einzelnen Schritte verständlich und funktionieren sie wie erwartet? Er hält Unklarheiten fest und bespricht seine Beobachtungen mit dem Produktteam.",
         location: "Rheinbach, Deutschland",
         profilePath: "/team/tim-lohmeier",
+        profileImage: {
+            src: "/team/tim-lohmeier-portrait.jpg",
+            alt: "Porträt von Tim Lohmeier.",
+            position: "center 30%",
+        },
         focus: [
-            "Bedarf von Schülern und Eltern in Rheinbach verstehen",
-            "Nachhilfeprofile, Fachbereiche und Verfügbarkeiten klar strukturieren",
-            "Faire Regeln für Kontakt, Vertrauen und sichere Lernhilfe entwickeln",
+            "Einfache Bedienabläufe auf der Workfare-Plattform prüfen",
+            "Unklare Schritte und kleine Fehler notieren",
+            "Rückmeldungen mit dem Produktteam besprechen",
         ],
         contactLinks: [
             {
@@ -154,22 +208,24 @@ export const teamMembers = [
             },
             {
                 kind: "team-email",
-                label: "Workfare Lab",
+                label: "Workfare Team",
                 value: "kontakt@workfare.team",
-                description: "Kontakt für Fragen zu Workfare Edu und dem Workfare Lab.",
+                description: "Kontakt für allgemeine Fragen zu Workfare.",
                 href: "mailto:kontakt@workfare.team",
+            },
+            {
+                kind: "external-profile",
+                label: "LinkedIn",
+                value: "LinkedIn",
+                description: "Das LinkedIn-Profil von Tim Lohmeier.",
+                href: "https://www.linkedin.com/in/tim-lohmeier-214493437",
             },
         ],
         profileLinks: [
             {
-                label: "Projekt",
-                value: "Workfare Edu",
-                description: "Ein neues Lernplattform-Projekt in der Anfangsphase.",
-            },
-            {
-                label: "Standort",
-                value: "Workfare Rheinbach",
-                description: "Lokaler Ausgangspunkt für die Arbeit an Workfare Edu.",
+                label: "Aufgabenbereich",
+                value: "Produktentwicklung bei Workfare",
+                description: "Bedienabläufe prüfen und Rückmeldungen zur Nutzerfreundlichkeit sammeln.",
             },
             {
                 label: "Kontakt",
@@ -178,33 +234,24 @@ export const teamMembers = [
                 href: "mailto:tim.lohmeier@workfare.team",
             },
         ],
-        knowsAbout: [
-            "Workfare Edu",
-            "Workfare Lab",
-            "Nachhilfe für Schüler",
-            "digitale Lernplattformen",
-            "Rheinbach",
-            "Taschengeldjobs durch Wissensvermittlung",
+        knowsAbout: ["Workfare", "Bedienabläufe", "Nutzerfeedback"],
+        sameAs: [
+            `${siteConfig.url}/team/tim-lohmeier`,
+            "https://www.linkedin.com/in/tim-lohmeier-214493437",
         ],
-        sameAs: [`${siteConfig.url}/team/tim-lohmeier`],
     },
     {
         slug: "tobias-rohm",
         name: "Tobias Rohm",
         displayName: "Tobias Rohm",
         shortName: "Tobias",
-        role: "Content & Social Media Manager",
-        description:
-            "Tobias arbeitet in der Abteilung Marketing und Kommunikation als Content & Social Media Manager und macht Workfare auf den richtigen Kanälen verständlich.",
-        profileIntro:
-            "Workfare braucht nicht nur eine gute Plattform, sondern auch klare Kommunikation. Tobias arbeitet in der Abteilung Marketing und Kommunikation daran, Inhalte, Social-Media-Auftritte und öffentliche Botschaften so aufzubereiten, dass die Idee hinter Workfare verständlich bleibt und die richtigen Menschen erreicht.",
-        location: "Rheinbach, Deutschland",
+        role: "Rolle folgt",
+        description: "Dieses Profil wird ergänzt.",
+        profileIntro: "Platzhalter: Informationen zu Tobias' Rolle und Aufgaben folgen.",
+        location: "",
         profilePath: "/team/tobias-rohm",
-        focus: [
-            "Content-Planung für Workfare und öffentliche Updates",
-            "Social-Media-Kommunikation für Jugendliche, Eltern und Auftraggeber",
-            "Marketing und Kommunikation rund um die digitale Taschengeldbörse",
-        ],
+        profilePending: true,
+        focus: [],
         contactLinks: [
             {
                 kind: "direct-email",
@@ -214,37 +261,8 @@ export const teamMembers = [
                 href: "mailto:tobias.rohm@workfare.team",
             },
         ],
-        profileLinks: [
-            {
-                label: "E-Mail",
-                value: "tobias.rohm@workfare.team",
-                description: "Direkter Kontakt zu Tobias.",
-                href: "mailto:tobias.rohm@workfare.team",
-            },
-            {
-                label: "Arbeitsort",
-                value: "Rheinbach, Deutschland",
-                description: "Arbeitsort und lokaler Bezug der Rolle.",
-            },
-            {
-                label: "Abteilung",
-                value: "Marketing und Kommunikation",
-                description: "Schwerpunkt in Content, Social Media und externer Kommunikation.",
-            },
-            {
-                label: "Adresse",
-                value: "Rheinbach",
-                description: "Geschäftlicher Standort.",
-            },
-        ],
-        knowsAbout: [
-            "Content",
-            "Social Media",
-            "Marketing und Kommunikation",
-            "Workfare",
-            "digitale Taschengeldbörse",
-            "Rheinbach",
-        ],
+        profileLinks: [],
+        knowsAbout: [],
         sameAs: [`${siteConfig.url}/team/tobias-rohm`],
     },
 ] as const satisfies TeamMember[];

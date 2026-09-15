@@ -5,7 +5,19 @@
 }
 .container { width: 100%; max-width: 1280px; margin-inline: auto; padding: 24px 20px 0; }
 .hero { position: relative; isolation: isolate; overflow: hidden; padding-block: clamp(64px, 7vw, 104px) 48px; }
-.heroBackdrop { position: absolute; z-index: -1; pointer-events: none; width: min(100%, 680px); height: min(100%, 420px); right: -40px; top: -24px; opacity: .8; mask-image: radial-gradient(ellipse at 72% 30%, #000 12%, transparent 73%); }
+.heroBackdrop {
+    position: absolute; z-index: -1; pointer-events: none;
+    width: min(100%, 680px); height: min(100%, 420px);
+    right: 0; top: 0; opacity: .8;
+    /* Fade to transparent inside the hero, before overflow can clip the pixels. */
+    --hero-shader-mask: radial-gradient(ellipse at 72% 30%, #000 12%, transparent 73%),
+        linear-gradient(to right, #000 65%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 24%, #000 70%, transparent 100%);
+    -webkit-mask-image: var(--hero-shader-mask);
+    mask-image: var(--hero-shader-mask);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
 .panel { padding-bottom: 72px; }
 .heroGrid { display: grid; gap: 28px; }
 .hero h1 {

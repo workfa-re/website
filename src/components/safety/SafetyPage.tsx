@@ -4,7 +4,6 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { PixelShaderBackdrop } from "@/components/PixelShaderBackdrop";
 import { SiteHeader } from "@/components/SiteHeader";
-import { siteConfig } from "@/config/site";
 import styles from "./SafetyPage.module.css";
 
 const principles = [
@@ -67,7 +66,7 @@ export function SafetyPage() {
                         {principles.map((principle, index) => (
                             <li
                                 key={principle.title}
-                                className={`${styles.glassPanel} ${styles.principle}`}
+                                className={`${styles.contentPanel} ${styles.principle}`}
                                 style={{ "--entrance-delay": `${100 + index * 90}ms` } as CSSProperties}
                             >
                                 <h2>{principle.title}</h2>
@@ -102,33 +101,11 @@ export function SafetyPage() {
                     <div className={styles.helpIntro}>
                         <div>
                             <h2 id="help-heading">Etwas stimmt nicht?</h2>
-                            <p>Eine Frage zum Job, ein auffälliger Kontakt oder ein Anliegen zu deinen Daten: Hier erreichst du uns.</p>
+                            <p>Auf unserer Kontaktseite findest du die richtige Ansprechperson für dein Anliegen.</p>
                         </div>
-                        <Link href="/kontakt" className={styles.textLink}>
-                            Alle Kontakte <ArrowUpRight size={16} aria-hidden="true" />
+                        <Link href="/kontakt" className={`glass-button ${styles.contactButton}`}>
+                            Zur Kontaktseite <ArrowUpRight size={16} aria-hidden="true" />
                         </Link>
-                    </div>
-
-                    <div className={styles.helpGrid}>
-                        <article className={`${styles.glassPanel} ${styles.helpCard}`}>
-                            <h3>Probleme &amp; Hinweise</h3>
-                            <p>Beschreibe kurz, was passiert ist und auf welchen Job oder Kontakt sich dein Anliegen bezieht. Schicke keine Passwörter oder Zugangscodes mit.</p>
-                            <a href={`mailto:${siteConfig.supportEmail}`} className={styles.emailLink}>
-                                <span>{siteConfig.supportEmail}</span>
-                                <ArrowUpRight size={17} aria-hidden="true" />
-                            </a>
-                        </article>
-                        <article className={`${styles.glassPanel} ${styles.helpCard}`}>
-                            <h3>Deine persönlichen Daten</h3>
-                            <p>Für Fragen zu deinen Daten, zur Auskunft oder Löschung. Informationen zur Datenverarbeitung auf dieser Website findest du in unserer Datenschutzerklärung.</p>
-                            <a href={`mailto:${siteConfig.privacyEmail}`} className={styles.emailLink}>
-                                <span>{siteConfig.privacyEmail}</span>
-                                <ArrowUpRight size={17} aria-hidden="true" />
-                            </a>
-                        </article>
-                    </div>
-                    <div className={styles.helpFooter}>
-                        <Link href="/datenschutz" className={styles.privacyLink}>Datenschutz dieser Website</Link>
                     </div>
                 </section>
             </div>

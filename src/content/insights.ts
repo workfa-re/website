@@ -90,9 +90,9 @@ export const ownInsights = [
         heroLine: "Aus einer einfachen Frage wurde eine Plattform: Wie können Jugendliche sicherer lokale Jobs finden?",
         editorialNote: "Workfare hieß früher JobBridge. Dieser Beitrag beschreibt die ursprüngliche Idee unter dem damaligen Namen.",
         image: {
-            src: "/team/rezan-yalcin-portrait.jpeg",
-            alt: "Rezan Yalcin, Autor des Beitrags und Gründer von Workfare.",
-            position: "center 35%",
+            src: "/insights/jobbridge-author-article-cover.png",
+            alt: "Die frühere JobBridge-Markenkarte mit Brückenlogo auf blauem Hintergrund.",
+            position: "center center",
         },
         featured: true,
         newsEligible: false,
@@ -316,6 +316,12 @@ export const allInsights = [...ownInsights, ...externalInsights].toSorted((a, b)
 );
 
 export const latestInsights = allInsights.slice(0, 6);
+
+export function getInsightsByAuthor(authorSlug: string): OwnInsight[] {
+    return ownInsights
+        .filter((insight) => insight.authorSlug === authorSlug)
+        .toSorted((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+}
 
 export function getInsightSlug(insight: Insight): string {
     return insight.kind === "own" ? insight.slug : insight.id;

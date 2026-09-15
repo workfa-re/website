@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { PixelShaderBackdrop } from "@/components/PixelShaderBackdrop";
 import { SiteHeader } from "@/components/SiteHeader";
 import { teamMembers, type TeamMember } from "@/content/team";
+import { ProfilePortraitPlaceholder } from "@/components/team/ProfilePortraitPlaceholder";
 import { CopyEmailButton } from "./CopyEmailButton";
 import styles from "./ContactPage.module.css";
 
@@ -98,7 +99,7 @@ export function ContactPage({ departments }: { departments: readonly ContactDepa
                                                     style={{ objectPosition: member.profileImage.position ?? "center" }}
                                                 />
                                             ) : (
-                                                <span>{member.name.split(" ").map((part) => part[0]).join("")}</span>
+                                                <ProfilePortraitPlaceholder compact />
                                             )}
                                         </span>
                                         <span className={styles.memberIdentity}>
