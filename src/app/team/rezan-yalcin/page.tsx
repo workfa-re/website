@@ -44,7 +44,7 @@ function getProfileInsightSource(insight: Insight) {
 export const metadata: Metadata = {
     title: member ? `${member.displayName} – ${member.role}` : "Rezan Yalcin",
     description: member
-        ? "Profil von Rezan Yalcin, Gründer von JobBridge: App-Entwicklung, sichere Taschengeldjobs, Jugend forscht und ausgewählte Medienberichte."
+        ? "Profil von Rezan Yalcin, Gründer von Workfare: App-Entwicklung, sichere Taschengeldjobs, Jugend forscht und ausgewählte Medienberichte."
         : undefined,
     alternates: {
         canonical: "/team/rezan-yalcin",
@@ -52,25 +52,25 @@ export const metadata: Metadata = {
     openGraph: {
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Rezan Yalcin | ${siteConfig.name}`,
         description: member
-            ? "Rezan Yalcin entwickelt JobBridge als sichere digitale Taschengeldbörse für lokale Hilfe, Jugendliche, Eltern und Auftraggeber."
+            ? "Rezan Yalcin entwickelt Workfare als sichere digitale Taschengeldbörse für lokale Hilfe, Jugendliche, Eltern und Auftraggeber."
             : undefined,
         url: "/team/rezan-yalcin",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: member?.displayName ?? siteConfig.name }],
+        images: [{ url: member?.profileImage?.src ?? "/og-image.png", width: 1459, height: 1054, alt: member?.profileImage?.alt ?? siteConfig.name }],
     },
     twitter: {
         card: "summary_large_image",
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Rezan Yalcin | ${siteConfig.name}`,
         description: member
-            ? "Profil von Rezan Yalcin, Gründer von JobBridge, mit ausgewählten Beiträgen und öffentlichen Erwähnungen."
+            ? "Profil von Rezan Yalcin, Gründer von Workfare, mit ausgewählten Beiträgen und öffentlichen Erwähnungen."
             : undefined,
-        images: ["/og-image.png"],
+        images: [member?.profileImage?.src ?? "/og-image.png"],
     },
 };
 
 const profileImage = member?.profileImage ?? {
-    src: "/team/rezan-yalcin-profile.jpeg",
-    alt: "Porträt von Rezan Yalcin im Radiostudio.",
-    position: "57% 35%",
+    src: "/team/rezan-yalcin-portrait.jpeg",
+    alt: "Porträt von Rezan Yalcin.",
+    position: "center 35%",
 };
 
 export default function RezanYalcinProfilePage() {
@@ -172,11 +172,11 @@ export default function RezanYalcinProfilePage() {
                         <div className="grid flex-1 items-center gap-10 pb-8 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(19rem,0.52fr)] lg:pb-10 lg:pt-12">
                             <div>
                                 <Link
-                                    href="/einblicke#team"
-                                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                    href="/einblicke/ueber-uns#team"
+                                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                                 >
                                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                                    Einblicke
+                                    Über uns
                                 </Link>
 
                                 <div className="mt-9 max-w-3xl">
@@ -273,7 +273,7 @@ export default function RezanYalcinProfilePage() {
                                     Presse & Erwähnungen
                                 </h2>
                                 <p className="mt-5 max-w-2xl text-[1rem] font-medium leading-7 tracking-[-0.02em] text-slate-500 sm:text-[1.08rem]">
-                                    Ausgewählte öffentliche Fundstellen zu Rezan Yalcin und JobBridge: Mediengespräch, WDR-Beitrag und die Einordnung zum Bundesfinale.
+                                    Ausgewählte öffentliche Fundstellen zu Rezan Yalcin und dem damaligen Projekt JobBridge: Mediengespräch, WDR-Beitrag und die Einordnung zum Bundesfinale.
                                 </p>
                             </div>
                             <Link
@@ -345,7 +345,7 @@ export default function RezanYalcinProfilePage() {
                                     Beiträge von Rezan
                                 </h2>
                                 <p className="mt-5 text-[1rem] font-medium leading-7 tracking-[-0.02em] text-slate-500 sm:text-[1.05rem]">
-                                    Ausgewählte eigene Texte und Einordnungen aus der Arbeit an JobBridge.
+                                    Ausgewählte eigene Texte und Einordnungen aus der Arbeit an Workfare.
                                 </p>
                             </div>
 

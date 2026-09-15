@@ -39,17 +39,17 @@ export const teamMembers = [
         name: "Rezan Yalcin",
         displayName: "Rezan Yalcin",
         shortName: "Rezan",
-        role: "Gründer von JobBridge",
+        role: "Gründer von Workfare",
         description:
-            "Rezan entwickelt JobBridge aus der eigenen Erfahrung heraus: Jugendliche sollen lokale Taschengeldjobs fairer, transparenter und sicherer finden können.",
+            "Rezan entwickelt Workfare aus der eigenen Erfahrung heraus: Jugendliche sollen lokale Taschengeldjobs fairer, transparenter und sicherer finden können.",
         profileIntro:
-            "Viele Jugendliche möchten sich lokal etwas dazuverdienen, finden aber kaum einen einfachen, sicheren und nachvollziehbaren Weg. Gleichzeitig suchen ältere Menschen, Familien und Nachbarn Unterstützung im Alltag, ohne direkt zu wissen, wen sie vertrauensvoll fragen können. Aus dieser Lücke entsteht JobBridge: eine Plattform, die lokale Hilfe einfacher macht und beide Seiten sicherer zusammenbringt.",
+            "Viele Jugendliche möchten sich lokal etwas dazuverdienen, finden aber kaum einen einfachen, sicheren und nachvollziehbaren Weg. Gleichzeitig suchen ältere Menschen, Familien und Nachbarn Unterstützung im Alltag, ohne direkt zu wissen, wen sie vertrauensvoll fragen können. Aus dieser Lücke entsteht Workfare: eine Plattform, die lokale Hilfe einfacher macht und beide Seiten sicherer zusammenbringt.",
         location: "Rheinbach, Deutschland",
         profilePath: "/team/rezan-yalcin",
         profileImage: {
-            src: "/team/rezan-yalcin-profile.jpeg",
-            alt: "Porträt von Rezan Yalcin im Radiostudio.",
-            position: "57% 35%",
+            src: "/team/rezan-yalcin-portrait.jpeg",
+            alt: "Porträt von Rezan Yalcin.",
+            position: "center 35%",
         },
         focus: [
             "Produktentwicklung und Nutzerführung",
@@ -66,7 +66,7 @@ export const teamMembers = [
             },
             {
                 kind: "team-email",
-                label: "JobBridge Team",
+                label: "Workfare Team",
                 value: "kontakt@workfare.team",
                 description: "Für Medien, Kooperationen und organisatorische Rückfragen.",
                 href: "mailto:kontakt@workfare.team",
@@ -82,7 +82,7 @@ export const teamMembers = [
                 kind: "external-profile",
                 label: "Jugend forscht",
                 value: "Offizielles Profil",
-                description: "Projekteintrag zu JobBridge beim Bundeswettbewerb 2026.",
+                description: "Projekteintrag zum damaligen Projekt JobBridge beim Bundeswettbewerb 2026.",
                 href: "https://www.jugend-forscht.de/index.php?id=262&tx_smsjufoprojects_smsjufprojectdb%5Bproject%5D=7820&tx_smsjufoprojects_smsjufprojectdb%5Baction%5D=show&tx_smsjufoprojects_smsjufprojectdb%5Bcontroller%5D=Project&cHash=e139c32f72277b9b127908cdb4f044db",
             },
         ],
@@ -90,30 +90,30 @@ export const teamMembers = [
             {
                 label: "Einblicke",
                 value: "Beiträge und Medienberichte",
-                description: "Gesammelte Berichte, eigene Texte und Updates rund um JobBridge.",
+                description: "Gesammelte Berichte, eigene Texte und Updates rund um Workfare.",
                 href: "/einblicke/alle",
             },
             {
                 label: "Jugend forscht",
                 value: "4. Preis Arbeitswelt",
-                description: "Offizieller Projekteintrag zu JobBridge beim Bundeswettbewerb 2026.",
+                description: "Offizieller Projekteintrag zum damaligen Projekt JobBridge beim Bundeswettbewerb 2026.",
                 href: "https://www.jugend-forscht.de/index.php?id=262&tx_smsjufoprojects_smsjufprojectdb%5Bproject%5D=7820&tx_smsjufoprojects_smsjufprojectdb%5Baction%5D=show&tx_smsjufoprojects_smsjufprojectdb%5Bcontroller%5D=Project&cHash=e139c32f72277b9b127908cdb4f044db",
             },
             {
                 label: "WDR",
                 value: "Studiogespräch und Beitrag",
-                description: "Öffentliche Berichterstattung über Rezan Yalcin und JobBridge.",
+                description: "Öffentliche Berichterstattung über Rezan Yalcin und das damalige Projekt JobBridge.",
                 href: "https://www1.wdr.de/mediathek/video/sendungen/lokalzeit-bonn/studiogespraech-rezan-yalin-app-entwickler-100.html",
             },
             {
                 label: "Kontakt",
                 value: "kontakt@workfare.team",
-                description: "Für Medien, Kooperationen und offizielle Rückfragen zu JobBridge.",
+                description: "Für Medien, Kooperationen und offizielle Rückfragen zu Workfare.",
                 href: "mailto:kontakt@workfare.team",
             },
         ],
         knowsAbout: [
-            "JobBridge",
+            "Workfare",
             "sichere Taschengeldjobs",
             "Jugendschutz",
             "digitale Plattformen",
@@ -132,11 +132,11 @@ export const teamMembers = [
         name: "Tim Lohmeier",
         displayName: "Tim Lohmeier",
         shortName: "Tim",
-        role: "Produktentwicklung JobBridge Edu",
+        role: "Produktentwicklung Workfare Edu",
         description:
-            "Tim entwickelt im JobBridge Lab die Grundlagen für JobBridge Edu: eine Lernplattform, auf der Jugendliche bezahlbare Nachhilfe finden und eigenes Wissen fair weitergeben können.",
+            "Tim entwickelt im Workfare Lab die Grundlagen für Workfare Edu: eine Lernplattform, auf der Jugendliche bezahlbare Nachhilfe finden und eigenes Wissen fair weitergeben können.",
         profileIntro:
-            "Viele Schüler brauchen Hilfe in Mathe, Englisch oder anderen Fächern, doch gute Nachhilfe ist oft teuer oder schwer zu organisieren. Gleichzeitig gibt es Jugendliche, die ein Fach stark beherrschen, anderen helfen möchten und sich dabei fair etwas dazuverdienen wollen. JobBridge Edu soll daraus einen klaren, lokalen Lernweg machen: verständliche Profile, passende Lernhilfe und ein Ablauf, der für Schüler, Eltern und Nachhilfegebende nachvollziehbar bleibt.",
+            "Viele Schüler brauchen Hilfe in Mathe, Englisch oder anderen Fächern, doch gute Nachhilfe ist oft teuer oder schwer zu organisieren. Gleichzeitig gibt es Jugendliche, die ein Fach stark beherrschen, anderen helfen möchten und sich dabei fair etwas dazuverdienen wollen. Workfare Edu soll daraus einen klaren, lokalen Lernweg machen: verständliche Profile, passende Lernhilfe und ein Ablauf, der für Schüler, Eltern und Nachhilfegebende nachvollziehbar bleibt.",
         location: "Rheinbach, Deutschland",
         profilePath: "/team/tim-lohmeier",
         focus: [
@@ -154,22 +154,22 @@ export const teamMembers = [
             },
             {
                 kind: "team-email",
-                label: "JobBridge Lab",
+                label: "Workfare Lab",
                 value: "kontakt@workfare.team",
-                description: "Kontakt für Fragen zu JobBridge Edu und dem JobBridge Lab.",
+                description: "Kontakt für Fragen zu Workfare Edu und dem Workfare Lab.",
                 href: "mailto:kontakt@workfare.team",
             },
         ],
         profileLinks: [
             {
                 label: "Projekt",
-                value: "JobBridge Edu",
+                value: "Workfare Edu",
                 description: "Ein neues Lernplattform-Projekt in der Anfangsphase.",
             },
             {
                 label: "Standort",
-                value: "JobBridge Rheinbach",
-                description: "Lokaler Ausgangspunkt für die Arbeit an JobBridge Edu.",
+                value: "Workfare Rheinbach",
+                description: "Lokaler Ausgangspunkt für die Arbeit an Workfare Edu.",
             },
             {
                 label: "Kontakt",
@@ -179,8 +179,8 @@ export const teamMembers = [
             },
         ],
         knowsAbout: [
-            "JobBridge Edu",
-            "JobBridge Lab",
+            "Workfare Edu",
+            "Workfare Lab",
             "Nachhilfe für Schüler",
             "digitale Lernplattformen",
             "Rheinbach",
@@ -195,13 +195,13 @@ export const teamMembers = [
         shortName: "Tobias",
         role: "Content & Social Media Manager",
         description:
-            "Tobias arbeitet in der Abteilung Marketing und Kommunikation als Content & Social Media Manager und macht JobBridge auf den richtigen Kanälen verständlich.",
+            "Tobias arbeitet in der Abteilung Marketing und Kommunikation als Content & Social Media Manager und macht Workfare auf den richtigen Kanälen verständlich.",
         profileIntro:
-            "JobBridge braucht nicht nur eine gute Plattform, sondern auch klare Kommunikation. Tobias arbeitet in der Abteilung Marketing und Kommunikation daran, Inhalte, Social-Media-Auftritte und öffentliche Botschaften so aufzubereiten, dass die Idee hinter JobBridge verständlich bleibt und die richtigen Menschen erreicht.",
-        location: "JobBridge GmbH | Rheinbach",
+            "Workfare braucht nicht nur eine gute Plattform, sondern auch klare Kommunikation. Tobias arbeitet in der Abteilung Marketing und Kommunikation daran, Inhalte, Social-Media-Auftritte und öffentliche Botschaften so aufzubereiten, dass die Idee hinter Workfare verständlich bleibt und die richtigen Menschen erreicht.",
+        location: "Rheinbach, Deutschland",
         profilePath: "/team/tobias-rohm",
         focus: [
-            "Content-Planung für JobBridge und öffentliche Updates",
+            "Content-Planung für Workfare und öffentliche Updates",
             "Social-Media-Kommunikation für Jugendliche, Eltern und Auftraggeber",
             "Marketing und Kommunikation rund um die digitale Taschengeldbörse",
         ],
@@ -223,7 +223,7 @@ export const teamMembers = [
             },
             {
                 label: "Arbeitsort",
-                value: "JobBridge GmbH | Rheinbach",
+                value: "Rheinbach, Deutschland",
                 description: "Arbeitsort und lokaler Bezug der Rolle.",
             },
             {
@@ -241,7 +241,7 @@ export const teamMembers = [
             "Content",
             "Social Media",
             "Marketing und Kommunikation",
-            "JobBridge",
+            "Workfare",
             "digitale Taschengeldbörse",
             "Rheinbach",
         ],

@@ -84,4 +84,6 @@ if (errors.length > 0) {
     process.exit(1);
 }
 
+await import("./verify-news-sitemap.mjs");
+
 console.log(`SEO verification passed for ${staticPages.length} static app pages.`);

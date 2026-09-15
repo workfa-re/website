@@ -1,70 +1,60 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
-import { allInsights, getInsightLastModified, getInsightPath } from "@/content/insights";
+import { allInsights, getInsightPath } from "@/content/insights";
 import { teamMembers } from "@/content/team";
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = siteConfig.url;
-    const lastModified = new Date("2026-06-29");
-
+    // Omit lastmod where no editorial modification date is recorded. A build date
+    // or the original date of an external source is not this page's update date.
     const staticRoutes = [
         {
             url: baseUrl,
-            lastModified,
             changeFrequency: "weekly",
             priority: 1.0,
         },
         {
             url: `${baseUrl}/plattform`,
-            lastModified,
             changeFrequency: "monthly",
             priority: 0.75,
         },
         {
             url: `${baseUrl}/impressum`,
-            lastModified,
             changeFrequency: "yearly",
             priority: 0.2,
         },
         {
             url: `${baseUrl}/datenschutz`,
-            lastModified,
             changeFrequency: "yearly",
             priority: 0.2,
         },
         {
             url: `${baseUrl}/sicherheit`,
-            lastModified,
             changeFrequency: "monthly",
             priority: 0.6,
         },
         {
             url: `${baseUrl}/demnaechst`,
-            lastModified,
             changeFrequency: "monthly",
             priority: 0.1,
         },
         {
             url: `${baseUrl}/einblicke`,
-            lastModified,
             changeFrequency: "weekly",
             priority: 0.7,
         },
         {
             url: `${baseUrl}/einblicke/alle`,
-            lastModified,
             changeFrequency: "weekly",
             priority: 0.58,
         },
         {
-            url: `${baseUrl}/einblicke/team`,
-            lastModified,
+            url: `${baseUrl}/einblicke/ueber-uns`,
             changeFrequency: "monthly",
             priority: 0.54,
         },
         {
             url: `${baseUrl}/kontakt`,
-            lastModified,
             changeFrequency: "monthly",
             priority: 0.4,
         },
@@ -72,14 +62,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const insightRoutes = allInsights.map((insight) => ({
         url: `${baseUrl}${getInsightPath(insight)}`,
-        lastModified: new Date(getInsightLastModified(insight)),
+        ...(insight.kind === "own" ? { lastModified: new Date(insight.updatedAt) } : {}),
         changeFrequency: "monthly" as const,
         priority: "featured" in insight && insight.featured ? 0.72 : 0.55,
     }));
 
     const teamRoutes = teamMembers.map((member) => ({
         url: `${baseUrl}${member.profilePath}`,
-        lastModified,
         changeFrequency: "monthly" as const,
         priority: 0.45,
     }));

@@ -123,11 +123,11 @@ export default async function TeamProfilePage({ params }: TeamProfileRouteProps)
                         <article className="grid gap-10 py-20 sm:py-24 lg:grid-cols-[minmax(0,0.9fr)_minmax(19rem,0.48fr)] lg:items-center lg:py-28">
                             <div>
                                 <Link
-                                    href="/einblicke#team"
-                                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                    href="/einblicke/ueber-uns#team"
+                                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                                 >
                                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                                    Einblicke
+                                    Über uns
                                 </Link>
                                 <h1 className="mt-9 text-[clamp(3.35rem,6.4vw,5.9rem)] font-semibold leading-[0.91] tracking-[-0.058em] text-white">
                                     {member.displayName}

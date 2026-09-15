@@ -61,6 +61,8 @@ function getTimRelatedInsights(profileMember: TeamMember) {
         profileMember.displayName,
         "lohmeier",
         profileMember.slug.replaceAll("-", " "),
+        "workfare edu",
+        "workfare lab",
         "jobbridge edu",
         "jobbridge lab",
     ].map((term) => term.toLocaleLowerCase("de-DE"));
@@ -78,7 +80,7 @@ function getTimRelatedInsights(profileMember: TeamMember) {
 export const metadata: Metadata = {
     title: member ? `${member.displayName} - ${member.role}` : "Tim Lohmeier",
     description: member
-        ? "Profil von Tim Lohmeier im JobBridge Lab: Produktentwicklung von JobBridge Edu, einer digitalen Lernplattform für bezahlbare Nachhilfe durch Jugendliche in Rheinbach."
+        ? "Profil von Tim Lohmeier im Workfare Lab: Produktentwicklung von Workfare Edu, einer digitalen Lernplattform für bezahlbare Nachhilfe durch Jugendliche in Rheinbach."
         : undefined,
     alternates: {
         canonical: "/team/tim-lohmeier",
@@ -86,7 +88,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Tim Lohmeier | ${siteConfig.name}`,
         description:
-            "Tim Lohmeier arbeitet im JobBridge Lab an JobBridge Edu, einer Lernplattform für bezahlbare Nachhilfe und Wissensvermittlung unter Jugendlichen.",
+            "Tim Lohmeier arbeitet im Workfare Lab an Workfare Edu, einer Lernplattform für bezahlbare Nachhilfe und Wissensvermittlung unter Jugendlichen.",
         url: "/team/tim-lohmeier",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: member?.displayName ?? siteConfig.name }],
     },
@@ -94,7 +96,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Tim Lohmeier | ${siteConfig.name}`,
         description:
-            "Profil von Tim Lohmeier im JobBridge Lab mit Fokus auf JobBridge Edu.",
+            "Profil von Tim Lohmeier im Workfare Lab mit Fokus auf Workfare Edu.",
         images: ["/og-image.png"],
     },
 };
@@ -111,7 +113,7 @@ export default function TimLohmeierProfilePage() {
     const subjectOfItems = [
         {
             "@type": "SoftwareApplication",
-            name: "JobBridge Edu",
+            name: "Workfare Edu",
             applicationCategory: "EducationalApplication",
             description:
                 "Digitale Lernplattform in der Anfangsphase, die Jugendliche für bezahlbare Nachhilfe vernetzen soll.",
@@ -176,7 +178,7 @@ export default function TimLohmeierProfilePage() {
                 url: siteConfig.url,
                 department: {
                     "@type": "Organization",
-                    name: "JobBridge Lab",
+                    name: "Workfare Lab",
                 },
             },
             homeLocation: {
@@ -203,11 +205,11 @@ export default function TimLohmeierProfilePage() {
                         <div className="grid flex-1 items-center gap-10 pb-8 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(19rem,0.52fr)] lg:pb-10 lg:pt-12">
                             <div>
                                 <Link
-                                    href="/einblicke#team"
-                                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                    href="/einblicke/ueber-uns#team"
+                                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                                 >
                                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                                    Einblicke
+                                    Über uns
                                 </Link>
 
                                 <div className="mt-9 max-w-3xl">

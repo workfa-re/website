@@ -45,6 +45,7 @@ function getOwnInsightMetadata(article: OwnInsight): Metadata {
         ],
         alternates: {
             canonical: path,
+            types: { "application/rss+xml": "/feed.xml" },
         },
         openGraph: {
             title: `${article.title} | ${siteConfig.name}`,
@@ -55,7 +56,7 @@ function getOwnInsightMetadata(article: OwnInsight): Metadata {
             modifiedTime: article.updatedAt,
             authors: author ? [author.displayName] : [siteConfig.name],
             tags: article.tags,
-            images: [{ url: imageUrl, width: 1200, height: 630, alt: article.image?.alt ?? article.title }],
+            images: [{ url: imageUrl, alt: article.image?.alt ?? article.title }],
         },
         twitter: {
             card: "summary_large_image",
@@ -75,16 +76,15 @@ function getExternalInsightMetadata(insight: ExternalInsight): Metadata {
         description: insight.excerpt,
         alternates: {
             canonical: path,
+            types: { "application/rss+xml": "/feed.xml" },
         },
         openGraph: {
             title: `${insight.title} | ${siteConfig.name}`,
             description: insight.excerpt,
             url: path,
-            type: "article",
-            publishedTime: insight.publishedAt,
-            authors: insight.authorName ? [insight.authorName] : [insight.sourceName],
-            tags: insight.tags,
-            images: [{ url: imageUrl, width: 1200, height: 630, alt: insight.image?.alt ?? insight.title }],
+            // This is our source reference page, not the external publisher's article.
+            type: "website",
+            images: [{ url: imageUrl, alt: insight.image?.alt ?? insight.title }],
         },
         twitter: {
             card: "summary_large_image",
@@ -114,9 +114,19 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
         notFound();
     }
 
+    const breadcrumbsJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Startseite", item: siteConfig.url },
+            { "@type": "ListItem", position: 2, name: insightsPage.label, item: `${siteConfig.url}${insightsPage.path}` },
+            { "@type": "ListItem", position: 3, name: insight.title, item: getInsightAbsoluteUrl(insight) },
+        ],
+    };
+
     if (insight.kind === "external") {
         const insightUrl = getInsightAbsoluteUrl(insight);
-        const imageUrl = insight.image?.src ? `${siteConfig.url}${insight.image.src}` : `${siteConfig.url}/og-image.png`;
+        const imageUrl = insight.image?.src ? new URL(insight.image.src, siteConfig.url).href : `${siteConfig.url}/og-image.png`;
         const externalJsonLd = {
             "@context": "https://schema.org",
             "@type": "WebPage",
@@ -161,6 +171,10 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: serializeJsonLd(externalJsonLd) }}
                 />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbsJsonLd) }}
+                />
                 <ExternalInsightPage insight={insight} />
             </>
         );
@@ -168,8 +182,8 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
 
     const article = insight;
     const author = getTeamMember(article.authorSlug);
-    const articleUrl = `${siteConfig.url}${insightsPage.path}/${article.slug}`;
-    const articleImageUrl = article.image?.src ? `${siteConfig.url}${article.image.src}` : `${siteConfig.url}/og-image.png`;
+    const articleUrl = getInsightAbsoluteUrl(article);
+    const articleImageUrl = article.image?.src ? new URL(article.image.src, siteConfig.url).href : undefined;
 
     const articleJsonLd = {
         "@context": "https://schema.org",
@@ -182,9 +196,10 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
         mainEntityOfPage: articleUrl,
         url: articleUrl,
         inLanguage: "de-DE",
-        image: [articleImageUrl],
+        ...(articleImageUrl ? { image: [articleImageUrl] } : {}),
         author: {
-            "@type": "Person",
+            "@type": author ? "Person" : "Organization",
+            "@id": author ? `${siteConfig.url}${author.profilePath}#person` : `${siteConfig.url}/#organization`,
             name: author?.displayName ?? siteConfig.name,
             url: author ? `${siteConfig.url}${author.profilePath}` : siteConfig.url,
         },
@@ -192,6 +207,8 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
             "@id": `${siteConfig.url}/#organization`,
         },
         keywords: article.tags.join(", "),
+        articleSection: article.category,
+        isPartOf: { "@id": `${siteConfig.url}${insightsPage.path}#collection` },
     };
 
     return (
@@ -199,6 +216,10 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbsJsonLd) }}
             />
             <InsightArticlePage article={article} />
         </>

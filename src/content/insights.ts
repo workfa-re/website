@@ -28,6 +28,7 @@ export type OwnInsight = {
     authorSlug: TeamMemberSlug;
     tags: string[];
     heroLine: string;
+    editorialNote?: string;
     image?: {
         src: string;
         alt: string;
@@ -66,9 +67,9 @@ export const insightsPage = {
     title: "Einblicke",
     eyebrow: "Journal",
     description:
-        "Beiträge, Medienberichte und Notizen über JobBridge, sichere Taschengeldjobs und die Arbeit hinter der Plattform.",
+        "Beiträge, Medienberichte und Hintergründe über Workfare, sichere Taschengeldjobs und die Arbeit hinter der Plattform.",
     metaDescription:
-        "Einblicke in JobBridge: eigene Beiträge, Medienberichte und Updates zu sicheren Taschengeldjobs, Rezan Yalcin und der digitalen Taschengeldbörse.",
+        "Einblicke in Workfare: eigene Beiträge, Medienberichte und Hintergründe zur Plattform. Mit Quellen, Autoren und den Menschen hinter Workfare.",
 } as const;
 
 export const ownInsights = [
@@ -87,13 +88,14 @@ export const ownInsights = [
         authorSlug: "rezan",
         tags: ["JobBridge", "Rezan Yalcin", "Taschengeldjobs", "Jugendschutz"],
         heroLine: "Aus einer einfachen Frage wurde eine Plattform: Wie können Jugendliche sicherer lokale Jobs finden?",
+        editorialNote: "Workfare hieß früher JobBridge. Dieser Beitrag beschreibt die ursprüngliche Idee unter dem damaligen Namen.",
         image: {
-            src: "/insights/jobbridge-author-article-cover.png",
-            alt: "JobBridge Logo auf blauem Hintergrund.",
-            position: "center center",
+            src: "/team/rezan-yalcin-portrait.jpeg",
+            alt: "Rezan Yalcin, Autor des Beitrags und Gründer von Workfare.",
+            position: "center 35%",
         },
         featured: true,
-        newsEligible: true,
+        newsEligible: false,
         body: [
             {
                 type: "paragraph",
@@ -312,6 +314,8 @@ export const externalInsights = [
 export const allInsights = [...ownInsights, ...externalInsights].toSorted((a, b) =>
     b.publishedAt.localeCompare(a.publishedAt),
 );
+
+export const latestInsights = allInsights.slice(0, 6);
 
 export function getInsightSlug(insight: Insight): string {
     return insight.kind === "own" ? insight.slug : insight.id;

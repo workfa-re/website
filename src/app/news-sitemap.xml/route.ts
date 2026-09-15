@@ -1,23 +1,12 @@
 import { getInsightPath, ownInsights } from "@/content/insights";
 import { siteConfig } from "@/config/site";
+import { getRecentNewsArticles } from "@/lib/news-sitemap";
+import { escapeXml } from "@/lib/xml";
 
 export const dynamic = "force-dynamic";
 
-function escapeXml(value: string) {
-    return value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&apos;");
-}
-
 export function GET() {
-    const now = Date.now();
-    const twoDays = 1000 * 60 * 60 * 24 * 2;
-    const articles = ownInsights.filter(
-        (article) => article.newsEligible && now - new Date(article.publishedAt).getTime() <= twoDays,
-    );
+    const articles = getRecentNewsArticles(ownInsights, Date.now());
 
     const urls = articles
         .map(
@@ -44,7 +33,8 @@ ${urls}
         {
             headers: {
                 "Content-Type": "application/xml; charset=utf-8",
-                "Cache-Control": "public, max-age=900, stale-while-revalidate=3600",
+                // Recalculate the rolling news window for each request, including quiet publishing periods.
+                "Cache-Control": "no-store",
             },
         },
     );

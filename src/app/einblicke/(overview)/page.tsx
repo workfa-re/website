@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { InsightsIndexPage } from "@/components/insights/InsightsIndexPage";
-import { allInsights, getInsightAbsoluteUrl, insightsPage } from "@/content/insights";
+import { latestInsights, getInsightAbsoluteUrl, insightsPage } from "@/content/insights";
 import { siteConfig } from "@/config/site";
 import { serializeJsonLd } from "@/lib/json-ld";
 
@@ -39,7 +39,7 @@ const collectionJsonLd = {
     isPartOf: {
         "@id": `${siteConfig.url}/#website`,
     },
-    hasPart: allInsights.map((insight) => ({
+    hasPart: latestInsights.map((insight) => ({
         "@type": insight.kind === "own" ? "BlogPosting" : "CreativeWork",
         name: insight.title,
         url: getInsightAbsoluteUrl(insight),

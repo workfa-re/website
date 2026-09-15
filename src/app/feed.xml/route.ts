@@ -1,14 +1,6 @@
-import { allInsights, getInsightAbsoluteUrl, getInsightSourceUrl, insightsPage } from "@/content/insights";
+import { allInsights, getInsightAbsoluteUrl, getInsightAuthorName, getInsightSourceUrl, insightsPage } from "@/content/insights";
 import { siteConfig } from "@/config/site";
-
-function escapeXml(value: string) {
-    return value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&apos;");
-}
+import { escapeXml } from "@/lib/xml";
 
 export function GET() {
     const items = allInsights
@@ -17,23 +9,28 @@ export function GET() {
             const guid = getInsightAbsoluteUrl(insight);
             const sourceLine =
                 insight.kind === "external" ? ` Originalquelle: ${getInsightSourceUrl(insight)}` : "";
+            const attribution = insight.kind === "external" ? `Externer Beitrag von ${insight.sourceName}. ` : "";
 
             return `<item>
   <title>${escapeXml(insight.title)}</title>
   <link>${escapeXml(href)}</link>
-  <guid>${escapeXml(guid)}</guid>
+  <guid isPermaLink="true">${escapeXml(guid)}</guid>
   <pubDate>${new Date(insight.publishedAt).toUTCString()}</pubDate>
-  <description>${escapeXml(`${insight.excerpt}${sourceLine}`)}</description>
+  <dc:creator>${escapeXml(getInsightAuthorName(insight))}</dc:creator>
+  <category>${escapeXml(insight.kind === "external" ? "Externe Quelle" : "Eigener Beitrag")}</category>
+  <category>${escapeXml(insight.category)}</category>
+  <description>${escapeXml(`${attribution}${insight.excerpt}${sourceLine}`)}</description>
 </item>`;
         })
         .join("");
 
     return new Response(
         `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>${escapeXml(`${siteConfig.name} ${insightsPage.label}`)}</title>
     <link>${escapeXml(`${siteConfig.url}${insightsPage.path}`)}</link>
+    <atom:link href="${escapeXml(`${siteConfig.url}/feed.xml`)}" rel="self" type="application/rss+xml" />
     <description>${escapeXml(insightsPage.metaDescription)}</description>
     <language>de-DE</language>
 ${items}

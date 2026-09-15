@@ -80,7 +80,7 @@ function getTobiasRelatedInsights(profileMember: TeamMember) {
 export const metadata: Metadata = {
     title: member ? `${member.displayName} - ${member.role}` : "Tobias Rohm",
     description: member
-        ? "Profil von Tobias Rohm bei JobBridge: Content & Social Media Manager in der Abteilung Marketing und Kommunikation."
+        ? "Profil von Tobias Rohm bei Workfare: Content & Social Media Manager in der Abteilung Marketing und Kommunikation."
         : undefined,
     alternates: {
         canonical: "/team/tobias-rohm",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Tobias Rohm | ${siteConfig.name}`,
         description:
-            "Tobias Rohm arbeitet bei JobBridge in der Abteilung Marketing und Kommunikation als Content & Social Media Manager.",
+            "Tobias Rohm arbeitet bei Workfare in der Abteilung Marketing und Kommunikation als Content & Social Media Manager.",
         url: "/team/tobias-rohm",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: member?.displayName ?? siteConfig.name }],
     },
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: member ? `${member.displayName} | ${siteConfig.name}` : `Tobias Rohm | ${siteConfig.name}`,
         description:
-            "Profil von Tobias Rohm mit Fokus auf Content, Social Media, Marketing und Kommunikation bei JobBridge.",
+            "Profil von Tobias Rohm mit Fokus auf Content, Social Media, Marketing und Kommunikation bei Workfare.",
         images: ["/og-image.png"],
     },
 };
@@ -115,7 +115,7 @@ export default function TobiasRohmProfilePage() {
             "@type": "Organization",
             name: "Marketing und Kommunikation",
             description:
-                "Abteilung bei JobBridge für Content, Social Media, öffentliche Kommunikation und Marketing.",
+                "Abteilung bei Workfare für Content, Social Media, öffentliche Kommunikation und Marketing.",
             parentOrganization: {
                 "@id": `${siteConfig.url}/#organization`,
             },
@@ -204,11 +204,11 @@ export default function TobiasRohmProfilePage() {
                         <div className="grid flex-1 items-center gap-10 pb-8 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(19rem,0.52fr)] lg:pb-10 lg:pt-12">
                             <div>
                                 <Link
-                                    href="/einblicke#team"
-                                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors duration-200 ease-out hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                                    href="/einblicke/ueber-uns#team"
+                                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-400 transition-colors duration-200 ease-out hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                                 >
                                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                                    Einblicke
+                                    Über uns
                                 </Link>
 
                                 <div className="mt-9 max-w-3xl">
@@ -266,7 +266,7 @@ export default function TobiasRohmProfilePage() {
                 <section className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 pt-8 sm:px-8 lg:px-10 lg:pb-[6.5rem] lg:pt-10">
                     <div className="max-w-4xl">
                         <h2 className="max-w-3xl text-[clamp(2.15rem,3.7vw,3.85rem)] font-semibold leading-[0.96] tracking-[-0.058em] text-white">
-                            Gute Kommunikation macht JobBridge verständlich.
+                            Gute Kommunikation macht Workfare verständlich.
                         </h2>
                         <p className="mt-6 max-w-3xl text-[1.02rem] font-medium leading-8 tracking-[-0.02em] text-slate-400 sm:text-[1.12rem] sm:leading-9">
                             {member.profileIntro}
