@@ -1,35 +1,32 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/PlaceholderPage";
-import { placeholderPages } from "@/config/site";
+import { SafetyPage } from "@/components/safety/SafetyPage";
+import { siteConfig } from "@/config/site";
 
-const page = placeholderPages.sicherheit;
+const path = "/sicherheit";
+const title = `Sicherheit | ${siteConfig.name}`;
+const description = "Sicherheit bei Workfare: Orientierung für Jugendliche, Eltern und Auftraggeber, eine Checkliste vor dem Job und direkte Kontakte für Support und Datenschutz.";
 
 export const metadata: Metadata = {
-    title: page.navLabel,
-    description: page.metaDescription,
+    title: "Sicherheit",
+    description,
     alternates: {
-        canonical: page.path,
+        canonical: path,
     },
     openGraph: {
-        title: `${page.navLabel} | JobBridge`,
-        description: page.metaDescription,
-        url: page.path,
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "JobBridge" }],
+        title,
+        description,
+        url: path,
+        type: "website",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
     },
     twitter: {
         card: "summary_large_image",
-        title: `${page.navLabel} | JobBridge`,
-        description: page.metaDescription,
+        title,
+        description,
         images: ["/og-image.png"],
     },
 };
 
 export default function SicherheitPage() {
-    return (
-        <PlaceholderPage
-            eyebrow={page.eyebrow}
-            title={page.title}
-            description={page.description}
-        />
-    );
+    return <SafetyPage />;
 }

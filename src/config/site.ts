@@ -36,16 +36,6 @@ export const placeholderPages = {
         metaDescription:
             "Die Workfare-Plattform für sichere Taschengeldjobs: lokale Aufgaben, Verifizierung, Elternfreigaben und klare Rollen für Jugendliche, Eltern und Auftraggeber.",
     },
-    sicherheit: {
-        path: "/sicherheit",
-        navLabel: "Sicherheit",
-        eyebrow: "Sicherheit",
-        title: "Sicher arbeiten",
-        description:
-            "Wie Workfare Jugendliche, Eltern und Auftraggeber schützt: klare Rollen, geprüfte Kontakte und ein Ablauf, der nicht auf Zufall gebaut ist.",
-        metaDescription:
-            "Sicherheit bei Workfare: klare Rollen, geprüfte Kontakte, Jugendschutz und transparente Freigaben für sichere Taschengeldjobs.",
-    },
     demnaechst: {
         path: "/demnaechst",
         navLabel: "In Planung",
