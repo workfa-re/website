@@ -64,7 +64,7 @@ Die Website-Seite `http://localhost:3000/demo` verwendet im iframe lokal `http:/
 
 Für den öffentlichen Betrieb ist eine dauerhaft getrennte Demo-Instanz unter `demo.workfa.re` vorgesehen. Diese Adresse ist im Code vorbereitet, aber durch diese Arbeit noch nicht eingerichtet oder veröffentlicht. Die normale App wird nicht zum öffentlich nutzbaren Testkonto umgewandelt.
 
-Der öffentliche Einstieg ist deshalb standardmäßig deaktiviert. Erst ein Produktionsbuild mit gesetztem `NEXT_PUBLIC_PLATFORM_DEMO_URL` zeigt den Demo-Link und lädt die Anwendung; ohne Konfiguration bleibt `/demo` eine kurze Vorbereitungsseite ohne iframe. In der lokalen Entwicklung bleibt der Einstieg auf Port 3001 aktiv. Die Freigabevariable erst nach erfolgreicher Bereitstellung und Prüfung der getrennten Instanz setzen.
+Der Link auf die Demoseite bleibt auf ausdrücklichen Nutzerwunsch sichtbar, auch auf Mobilgeräten. Erst ein Produktionsbuild mit gesetztem `NEXT_PUBLIC_PLATFORM_DEMO_URL` lädt dort die Anwendung; ohne Konfiguration bleibt `/demo` eine kurze Vorbereitungsseite ohne iframe. In der lokalen Entwicklung bleibt die Einbettung auf Port 3001 aktiv. Die Freigabevariable erst nach erfolgreicher Bereitstellung und Prüfung der getrennten Instanz setzen.
 
 Plattform und Demo verwenden denselben Quellstand, jedoch eigene Builds, weil die öffentliche Supabase-Konfiguration beim Bauen eingebunden wird. Datenbankänderungen brauchen einen entsprechenden Demo-Rollout mit erneut geprüften Besuchsgrenzen. Neue Tabellen und Funktionen dürfen nicht unbemerkt außerhalb dieser Grenzen erreichbar werden.
 

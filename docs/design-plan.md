@@ -172,3 +172,7 @@ Die Website bleibt aktuell dunkel. Ihr zentraler ThemeProvider steuert nun auch 
 Vorgemerkt: den vollständigen Hellmodus aller Websitebereiche gestalten, Kontraste und Glasflächen in beiden Modi prüfen und anschließend einen öffentlichen Umschalter mit gespeicherter Auswahl anbinden. Die vorbereitete Demo-Kopplung ist kein abgeschlossener Hellmodus der gesamten Website.
 
 Anschließende Freigabe: Nutzerauftrag für Commit und Push erhalten. Die zuvor dokumentierten offenen Gestaltungsaufgaben bleiben erhalten. Die öffentliche Live-Demo wird erst mit ausdrücklich konfigurierter, getrennt bereitgestellter Demo-Instanz freigeschaltet; lokal bleibt sie aktiv. Abschließende Build-, Test- und Git-Prüfung: `changes-demo-theme-2026-09-14.md`.
+
+## Neue lokale Runde am 15. September: inszenierte Vorschau
+
+Auf Nutzerwunsch bleibt der Demo-Link jetzt unabhängig von der öffentlichen Einbettungsfreigabe sichtbar. Hero und Vorschau werden durch eine volle dynamische Bildschirmhöhe getrennt. Die Vorschau erhält eine einmalige Folge aus Glasfläche, geschriebener Wortmarke, Navigation, Texten und Jobkarten mit deutlicher Tiefenbewegung und ruhigem Endzustand. Bestehende Gestaltung und reduzierte Bewegung bleiben berücksichtigt. Die geprüfte Runde ist vom Nutzer für Commit und Push freigegeben; vollständige Änderungstabelle und Prüfgrenzen: `changes-cinematic-preview-2026-09-15.md`.

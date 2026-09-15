@@ -758,7 +758,7 @@ function Hero() {
         <section
             ref={heroRef}
             aria-label={`${siteConfig.name} – Start`}
-            className="relative min-h-[calc(100svh-1rem)] w-full overflow-hidden rounded-[24px] border border-white/10 bg-[#030712] text-white shadow-[0_40px_140px_rgba(2,6,23,0.55)] sm:min-h-[calc(100svh-1.5rem)] sm:rounded-[28px] lg:min-h-[calc(100svh-2rem)] lg:rounded-[32px]"
+            className="relative flex w-full overflow-hidden rounded-[24px] border border-white/10 bg-[#030712] text-white shadow-[0_40px_140px_rgba(2,6,23,0.55)] sm:rounded-[28px] lg:rounded-[32px]"
             style={{
                 backgroundImage: showCanvas ? undefined : MOBILE_NOISE_URL,
                 backgroundColor: "#030712",
@@ -770,12 +770,13 @@ function Hero() {
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:120px_120px] opacity-[0.08]" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#02040b] to-transparent" />
 
-            <div className="relative z-10 mx-auto grid min-h-[calc(100svh-1rem)] w-full max-w-[1760px] grid-cols-12 grid-rows-[auto_minmax(0,1fr)] gap-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] sm:min-h-[calc(100svh-1.5rem)] sm:px-7 sm:pb-8 sm:pt-6 md:px-10 md:pb-10 md:pt-8 lg:min-h-[calc(100svh-2rem)] lg:grid-rows-none lg:gap-0 xl:px-12 2xl:px-16">
+            {/* Fill the current viewport; intrinsic rows can grow on short screens or with larger text. */}
+            <div className="relative z-10 mx-auto grid min-h-[calc(var(--hero-viewport,100vh)-var(--hero-inset,0.5rem)*2-2px)] w-full max-w-[1760px] grid-cols-12 grid-rows-[auto_minmax(auto,1fr)] gap-0 px-[max(1.25rem,env(safe-area-inset-left),env(safe-area-inset-right))] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-[max(1.75rem,env(safe-area-inset-left),env(safe-area-inset-right))] sm:pb-[max(2rem,env(safe-area-inset-bottom))] sm:pt-[max(1.5rem,env(safe-area-inset-top))] md:px-[max(2.5rem,env(safe-area-inset-left),env(safe-area-inset-right))] md:pb-[max(2.5rem,env(safe-area-inset-bottom))] md:pt-[max(2rem,env(safe-area-inset-top))] lg:gap-0 xl:px-[max(3rem,env(safe-area-inset-left),env(safe-area-inset-right))] 2xl:px-[max(4rem,env(safe-area-inset-left),env(safe-area-inset-right))]">
                 <SiteHeader className="col-span-12 h-16" />
 
                 <motion.div
                     style={{ y: contentY, opacity: contentOpacity }}
-                    className="col-span-12 row-start-2 flex min-h-0 flex-col justify-between pb-4 pt-[clamp(2rem,7svh,4.5rem)] sm:pt-12 lg:row-auto lg:col-span-7 lg:justify-center lg:pb-6 lg:pr-10 lg:pt-0 xl:pr-14"
+                    className="col-span-12 row-start-2 flex flex-col justify-between pb-4 pt-[clamp(2rem,7svh,4.5rem)] [@media(max-width:639px)_and_(max-height:700px)]:pt-6 sm:pt-12 lg:row-auto lg:col-span-7 lg:justify-center lg:pb-6 lg:pr-10 lg:pt-0 xl:pr-14"
                 >
                     <motion.div
                         className="max-w-[760px]"
@@ -877,7 +878,7 @@ function Hero() {
                         </motion.h1>
 
                         <motion.p
-                            className="mt-8 max-w-[39rem] text-pretty text-lg leading-relaxed text-slate-300 md:text-xl"
+                            className="mt-8 max-w-[39rem] text-pretty text-lg leading-relaxed text-slate-300 [@media(max-width:639px)_and_(max-height:700px)]:mt-5 md:text-xl"
                             initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.82, delay: 1.44, ease: EASE }}
@@ -888,7 +889,7 @@ function Hero() {
 
                     <motion.div
                         data-hero-ctas
-                        className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center lg:mt-9"
+                        className="mt-8 flex flex-col gap-4 [@media(max-width:639px)_and_(max-height:700px)]:mt-4 [@media(max-width:639px)_and_(max-height:700px)]:gap-2 sm:flex-row sm:items-center lg:mt-9"
                         initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.82, delay: 1.58, ease: EASE }}
