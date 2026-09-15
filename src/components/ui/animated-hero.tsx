@@ -776,10 +776,10 @@ function Hero() {
 
                 <motion.div
                     style={{ y: contentY, opacity: contentOpacity }}
-                    className="col-span-12 row-start-2 flex flex-col justify-between pb-4 pt-[clamp(2rem,7svh,4.5rem)] [@media(max-width:639px)_and_(max-height:700px)]:pt-6 sm:pt-12 lg:row-auto lg:col-span-7 lg:justify-center lg:pb-6 lg:pr-10 lg:pt-0 xl:pr-14"
+                    className="col-span-12 row-start-2 flex flex-col justify-between pt-8 [@media(max-width:639px)_and_(max-height:700px)]:pt-6 lg:row-auto lg:col-span-7 lg:justify-center lg:pb-6 lg:pr-10 lg:pt-0 xl:pr-14"
                 >
                     <motion.div
-                        className="max-w-[760px]"
+                        className="max-w-[760px] max-lg:flex max-lg:flex-1 max-lg:flex-col max-lg:justify-center"
                         initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.12, ease: EASE }}
