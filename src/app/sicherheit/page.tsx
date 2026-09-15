@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import { SafetyPage } from "@/components/safety/SafetyPage";
 import { siteConfig } from "@/config/site";
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
         description,
         url: path,
         type: "website",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+        images: [socialPreview],
     },
     twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
 };
 

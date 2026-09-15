@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { formatInsightDate, getInsightUrl, type Insight } from "@/content/insights";
 import { getTeamMember } from "@/content/team";
 import { siteConfig } from "@/config/site";
+import { brandLogo } from "@/config/brand";
 import styles from "./InsightCard.module.css";
 
 type InsightCardProps = { insight: Insight; headingLevel?: 2 | 3 };
@@ -23,7 +24,17 @@ export function InsightCard({ insight, headingLevel = 2 }: InsightCardProps) {
                             className={styles.image}
                             style={{ objectPosition: insight.image.position ?? "center" }}
                         />
-                    ) : <span className={styles.fallback}>{siteConfig.name}<span>Journal</span></span>}
+                    ) : (
+                        <span className={styles.fallback}>
+                            <Image
+                                src={brandLogo.url}
+                                alt={brandLogo.alt}
+                                width={brandLogo.width}
+                                height={brandLogo.height}
+                                className={styles.fallbackLogo}
+                            />
+                        </span>
+                    )}
                 </div>
                 <div className={styles.content}>
                     <div className={styles.meta}>

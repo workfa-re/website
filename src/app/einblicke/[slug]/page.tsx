@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ExternalInsightPage } from "@/components/insights/ExternalInsightPage";
@@ -32,7 +33,7 @@ export function generateStaticParams() {
 function getOwnInsightMetadata(article: OwnInsight): Metadata {
     const author = getTeamMember(article.authorSlug);
     const path = getInsightCanonicalPath(article);
-    const imageUrl = article.image?.src ?? "/og-image.png";
+    const previewImage = article.image ? { url: article.image.src, alt: article.image.alt } : socialPreview;
 
     return {
         title: article.title,
@@ -56,20 +57,20 @@ function getOwnInsightMetadata(article: OwnInsight): Metadata {
             modifiedTime: article.updatedAt,
             authors: author ? [author.displayName] : [siteConfig.name],
             tags: article.tags,
-            images: [{ url: imageUrl, alt: article.image?.alt ?? article.title }],
+            images: [previewImage],
         },
         twitter: {
             card: "summary_large_image",
             title: `${article.title} | ${siteConfig.name}`,
             description: article.description,
-            images: [imageUrl],
+            images: [previewImage.url],
         },
     };
 }
 
 function getExternalInsightMetadata(insight: ExternalInsight): Metadata {
     const path = getInsightCanonicalPath(insight);
-    const imageUrl = insight.image?.src ?? "/og-image.png";
+    const previewImage = insight.image ? { url: insight.image.src, alt: insight.image.alt } : socialPreview;
 
     return {
         title: insight.title,
@@ -84,13 +85,13 @@ function getExternalInsightMetadata(insight: ExternalInsight): Metadata {
             url: path,
             // This is our source reference page, not the external publisher's article.
             type: "website",
-            images: [{ url: imageUrl, alt: insight.image?.alt ?? insight.title }],
+            images: [previewImage],
         },
         twitter: {
             card: "summary_large_image",
             title: `${insight.title} | ${siteConfig.name}`,
             description: insight.excerpt,
-            images: [imageUrl],
+            images: [previewImage.url],
         },
     };
 }
@@ -126,7 +127,7 @@ export default async function InsightArticleRoute({ params }: InsightArticleRout
 
     if (insight.kind === "external") {
         const insightUrl = getInsightAbsoluteUrl(insight);
-        const imageUrl = insight.image?.src ? new URL(insight.image.src, siteConfig.url).href : `${siteConfig.url}/og-image.png`;
+        const imageUrl = new URL(insight.image?.src ?? socialPreview.url, siteConfig.url).href;
         const externalJsonLd = {
             "@context": "https://schema.org",
             "@type": "WebPage",

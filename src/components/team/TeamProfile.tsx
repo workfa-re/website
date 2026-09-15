@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +15,7 @@ import styles from "./ProfileSurfaces.module.css";
 
 export function createTeamProfileMetadata(member: TeamMember): Metadata {
     const image = member.profileImage;
-    const imageUrl = image?.src ?? "/og-image.png";
+    const previewImage = image ? { url: image.src, alt: image.alt } : socialPreview;
 
     return {
         title: member.profilePending ? member.displayName : `${member.displayName} – ${member.role}`,
@@ -25,13 +26,13 @@ export function createTeamProfileMetadata(member: TeamMember): Metadata {
             description: member.description,
             url: member.profilePath,
             type: "profile",
-            images: [{ url: imageUrl, alt: image?.alt ?? siteConfig.name }],
+            images: [previewImage],
         },
         twitter: {
             card: "summary_large_image",
             title: `${member.displayName} | ${siteConfig.name}`,
             description: member.description,
-            images: [imageUrl],
+            images: [previewImage.url],
         },
     };
 }

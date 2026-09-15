@@ -1,3 +1,4 @@
+import { brandLogo, socialPreview } from "@/config/brand";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { siteConfig } from "@/config/site";
@@ -73,10 +74,7 @@ export const metadata: Metadata = {
         url: SITE_URL,
         images: [
             {
-                url: "/og-image.png",
-                width: 1200,
-                height: 630,
-                alt: `${siteConfig.name} – Die digitale Taschengeldbörse`,
+                ...socialPreview,
                 type: "image/png",
             },
         ],
@@ -85,7 +83,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: `${siteConfig.name} – ${siteConfig.defaultTitle}`,
         description: siteConfig.defaultDescription,
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
     alternates: {
         canonical: "/",
@@ -117,11 +115,11 @@ const organizationJsonLd = {
     url: SITE_URL,
     logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
+        url: new URL(brandLogo.url, SITE_URL).href,
+        width: brandLogo.width,
+        height: brandLogo.height,
     },
-    image: `${SITE_URL}/og-image.png`,
+    image: new URL(socialPreview.url, SITE_URL).href,
     description: siteConfig.defaultDescription,
     email: siteConfig.contactEmail,
     areaServed: {

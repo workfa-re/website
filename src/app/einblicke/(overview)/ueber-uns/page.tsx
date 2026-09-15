@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import { AboutPage } from "@/components/about/AboutPage";
 import { siteConfig } from "@/config/site";
@@ -17,9 +18,9 @@ export const metadata: Metadata = {
         description,
         url: path,
         type: "website",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+        images: [socialPreview],
     },
-    twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
+    twitter: { card: "summary_large_image", title, description, images: [socialPreview.url] },
 };
 
 const aboutJsonLd = {

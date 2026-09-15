@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import styles from "@/components/insights/InsightsIndex.module.css";
 import { InsightCard } from "@/components/insights/InsightCard";
@@ -18,14 +19,14 @@ export const metadata: Metadata = {
             "Alle Workfare-Einblicke an einem Ort: eigene Beiträge, Medienberichte und Hintergründe zur Plattform.",
         url: `${insightsPage.path}/alle`,
         type: "website",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+        images: [socialPreview],
     },
     twitter: {
         card: "summary_large_image",
         title: `Alle Einblicke | ${siteConfig.name}`,
         description:
             "Alle Workfare-Einblicke an einem Ort: eigene Beiträge, Medienberichte und Hintergründe zur Plattform.",
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
 };
 

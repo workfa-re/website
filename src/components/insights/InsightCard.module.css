@@ -4,8 +4,8 @@
 .link:focus-visible { outline: 2px solid #c7dcff; outline-offset: 5px; }
 .visual { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 14px; background: #0e1522; }
 .image { object-fit: cover; outline: 1px solid rgb(255 255 255 / 10%); outline-offset: -1px; }
-.fallback { display: flex; height: 100%; flex-direction: column; justify-content: center; padding: 32px; color: #dae3ef; font-size: 32px; font-weight: 550; letter-spacing: -.03em; }
-.fallback span { margin-top: 8px; color: #a4b3c8; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.fallback { display: flex; height: 100%; align-items: center; justify-content: center; padding: 32px; background: #fff; }
+.fallbackLogo { width: 76%; max-width: 367px; height: auto; }
 .content { display: flex; flex: 1; flex-direction: column; padding: 24px 12px 8px; }
 .meta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; font-size: 12px; font-weight: 500; line-height: 1.6; color: #a3b0c2; }
 .meta > span { color: #d2dbe7; }

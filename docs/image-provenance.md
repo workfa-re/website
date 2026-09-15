@@ -35,6 +35,16 @@ Die folgenden Pfade hatten keine Referenzen in den getrackten Quelltexten, Daten
 | `public/insights/sg-rheinbach-bundeswettbewerb.jpg` | JPEG, 1920×2560, 719,713 Byte | Keine aktuelle Einbindung | Siehe Herkunftshinweis; kein separater Original-Link im aktuellen Artikelmodell.<br>Unreferenzierte Wettbewerbsaufnahme; gd-jpeg-Kommentar. Keine aktuelle Artikelzuordnung im Datenmodell. |
 | `public/insights/wdr-jobbridge-programmieren.jpg` | JPEG, 1600×900, 297,037 Byte | Keine aktuelle Einbindung | Siehe Herkunftshinweis; kein separater Original-Link im aktuellen Artikelmodell.<br>Unreferenzierte frühere WDR-Bildkopie; kein aktueller Datenmodelleintrag. Keine aussagekräftigen Ersteller-Metadaten. |
 
+## Aktueller Stand der Standardvorschau — 15.09.2026
+
+- Die frühere Text-/Verlaufswerbung aus `src/app/og-image.png/route.tsx` ist entfernt. Sie war eine automatisch aus Code gerenderte Linkvorschau, kein belegter generativer Bildexport.
+- `public/brand/workfare-logo.png` ist die unveränderte, vom Nutzer bereitgestellte Datei `Logo_wf.png` (367 × 100 Pixel). Die Kopie wurde bytegenau gegen das Original geprüft.
+- `/workfare-preview.png` zeigt ausschließlich dieses Logo mittig auf Weiß im Format 1200 × 630. Keine zusätzlichen Slogans, Glaseffekte oder künstlichen Lichtflächen. Das Logo wird nur in der Darstellung skaliert.
+- Die alte Adresse `/og-image.png` liefert dieselbe neue Grafik, damit alte Bildverweise ebenfalls das offizielle Logo erhalten. Alle aktuellen Standard-Metadaten verwenden die neue Bildadresse.
+- Das Organisationslogo in strukturierten Daten und der Ersatz für Artikel ohne Bild verwenden ebenfalls das offizielle Logo.
+- Die zwei `public/workfare-platform-mark*.png` sind mit den entsprechenden Originalen des Plattformprojekts bytegleich. Sie bleiben als Bestandteil der echten Plattformvorschau erhalten.
+- Das alte Studioporträt `public/team/rezan-yalcin-profile.jpeg` wird aktuell nicht mehr im Quelltext eingebunden. Der Eintrag weiter oben dokumentiert den historischen Prüfstand; die Datei wurde nicht als KI-Bild klassifiziert.
+
 ## Weitere visuelle Inhalte
 
 ### Ergänzung vom 15.09.2026: Tim Lohmeier
@@ -42,7 +52,7 @@ Die folgenden Pfade hatten keine Referenzen in den getrackten Quelltexten, Daten
 - `public/team/tim-lohmeier-portrait.jpg`: vom Nutzer als Foto für Tim Lohmeier bereitgestellte Originaldatei `8f991cb5-c23e-4a91-82e8-47f704e0c11c.JPG`, 3840 × 5120 Pixel. Unverändert übernommen; keine generative Bearbeitung. Darstellungsausschnitt erfolgt über CSS, passende Auslieferungsgrößen über Next Image.
 - Verwendung: Teamübersicht, Kontaktseite, Tims Profil und dessen Linkvorschau, zentral über `src/content/team.ts`.
 
-- `/og-image.png` wird durch `src/app/og-image.png/route.tsx` deterministisch aus Text und CSS gerendert, Größe 1200×630. Es ist keine generative KI-Datei.
+- `/workfare-preview.png` wird aus dem bereitgestellten offiziellen Logo auf einer weißen Fläche erzeugt; `/og-image.png` dient nur noch als kompatible zweite Adresse.
 - Hero-/Trust-Hintergründe werden mit Canvas/WebGL beziehungsweise CSS dargestellt. Sie sind dekorative Animationen und keine öffentlichen Personenfotos.
 - Fehlende Teamfotos verwenden ausdrücklich beschriftete CSS-Platzhalter. Keine erfundenen Personenbilder einsetzen.
 

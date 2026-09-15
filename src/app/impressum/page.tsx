@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
@@ -23,14 +24,14 @@ export const metadata: Metadata = {
         description:
             `Anbieterkennzeichnung, Kontakt und rechtliche Abgrenzung der ${siteConfig.name}-Landingpage.`,
         url: "/impressum",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+        images: [socialPreview],
     },
     twitter: {
         card: "summary_large_image",
         title: `Impressum | ${siteConfig.name}`,
         description:
             `Anbieterkennzeichnung, Kontakt und rechtliche Abgrenzung der ${siteConfig.name}-Landingpage.`,
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
 };
 

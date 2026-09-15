@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import { Hero } from "@/components/ui/animated-hero";
 import { HeroScrollDemo } from "@/components/ui/hero-scroll-demo";
@@ -16,20 +17,13 @@ export const metadata: Metadata = {
         title: `${siteConfig.name} – ${siteConfig.defaultTitle}`,
         description: siteConfig.defaultDescription,
         url: "/",
-        images: [
-            {
-                url: "/og-image.png",
-                width: 1200,
-                height: 630,
-                alt: `${siteConfig.name} – Die digitale Taschengeldbörse`,
-            },
-        ],
+        images: [socialPreview],
     },
     twitter: {
         card: "summary_large_image",
         title: `${siteConfig.name} – ${siteConfig.defaultTitle}`,
         description: siteConfig.defaultDescription,
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
 };
 

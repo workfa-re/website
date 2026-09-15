@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,7 +58,9 @@ export const metadata: Metadata = {
             ? "Rezan Yalcin entwickelt Workfare als sichere digitale Taschengeldbörse für lokale Hilfe, Jugendliche, Eltern und Auftraggeber."
             : undefined,
         url: "/team/rezan-yalcin",
-        images: [{ url: member?.profileImage?.src ?? "/og-image.png", width: 1459, height: 1054, alt: member?.profileImage?.alt ?? siteConfig.name }],
+        images: [member?.profileImage
+            ? { url: member.profileImage.src, width: 1459, height: 1054, alt: member.profileImage.alt }
+            : socialPreview],
     },
     twitter: {
         card: "summary_large_image",
@@ -65,7 +68,7 @@ export const metadata: Metadata = {
         description: member
             ? "Profil von Rezan Yalcin, Gründer von Workfare, mit ausgewählten Beiträgen und öffentlichen Erwähnungen."
             : undefined,
-        images: [member?.profileImage?.src ?? "/og-image.png"],
+        images: [member?.profileImage?.src ?? socialPreview.url],
     },
 };
 

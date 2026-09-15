@@ -1,3 +1,4 @@
+import { socialPreview } from "@/config/brand";
 import type { Metadata } from "next";
 import { InsightsIndexPage } from "@/components/insights/InsightsIndexPage";
 import { latestInsights, getInsightAbsoluteUrl, insightsPage } from "@/content/insights";
@@ -18,13 +19,13 @@ export const metadata: Metadata = {
         description: insightsPage.metaDescription,
         url: insightsPage.path,
         type: "website",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+        images: [socialPreview],
     },
     twitter: {
         card: "summary_large_image",
         title: `${insightsPage.label} | ${siteConfig.name}`,
         description: insightsPage.metaDescription,
-        images: ["/og-image.png"],
+        images: [socialPreview.url],
     },
 };
 
