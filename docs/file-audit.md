@@ -1,5 +1,17 @@
 # Workfare – lesende Dateiinventur und Cleanup-Nachweise
 
+## Nachtrag zur Icon-Bereinigung – 16.09.2026
+
+Das Favicon wurde vollständig durch die offizielle Workfare-Wortmarke auf Weiß
+ersetzt. Browser-Metadaten, Apple-Touch-Icon, Webmanifest und Plattformvorschau
+verwenden nun die zentral in `src/config/brand.ts` gepflegten quadratischen
+Wortmarken-Icons. Die zwei blauen `public/workfare-platform-mark*.png` sind gelöscht.
+Das Vorschau-Icon zeigt das ganze Quadrat ohne kreisförmigen Zuschnitt oder Zoom.
+Die Bildherkunft und Größen sind in `docs/image-provenance.md` dokumentiert.
+
+Die nachfolgende ursprüngliche Inventur beschreibt den damaligen Stand;
+ihre Favicon-Verwendungen und Dateidaten sind durch diesen Nachtrag überholt.
+
 Stand: 14.09.2026. Repository: `workfa-re/website`. Ausgangs-HEAD der Domainumstellung: `0713f8d09eb3fe94c1cc4ea5450c716834d57643`; HEAD bei Berichtserstellung: `0713f8d09eb3fe94c1cc4ea5450c716834d57643`. Der anschließende Installationsfix wurde separat als `a6f739eb85301d470962e93cd2a2ad7bb3ba0559` committed. Die folgende Matrix dokumentiert den ursprünglichen Bestand vor der Quelltextbereinigung.
 
 ## Umfang und Methode

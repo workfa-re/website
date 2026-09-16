@@ -1,4 +1,4 @@
-import { brandLogo, socialPreview } from "@/config/brand";
+import { brandIcons, brandLogo, socialPreview } from "@/config/brand";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { siteConfig } from "@/config/site";
@@ -89,7 +89,9 @@ export const metadata: Metadata = {
         canonical: "/",
     },
     icons: {
-        icon: "/favicon.ico",
+        icon: { url: brandIcons.favicon, sizes: "96x96", type: "image/png" },
+        shortcut: brandIcons.favicon,
+        apple: { url: brandIcons.apple, sizes: "180x180", type: "image/png" },
     },
 };
 
