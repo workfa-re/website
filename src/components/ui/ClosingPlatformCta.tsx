@@ -1,18 +1,22 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent, type TransitionEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import { ChevronDown } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import styles from "./ClosingPlatformCta.module.css";
 
-// The transition normally completes in 700 ms; this also covers interrupted or missing transition events.
+// A safety net for interrupted animations; normal navigation follows their actual completion.
 const NAVIGATION_FALLBACK_MS = 1100;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
+function getPendingAnimations(link: HTMLAnchorElement) {
+    return link.getAnimations({ subtree: true }).filter((animation) =>
+        animation.playState !== "finished" && animation.playState !== "idle"
+    );
+}
+
 export function ClosingPlatformCta() {
     const linkRef = useRef<HTMLAnchorElement>(null);
-    const fillRef = useRef<HTMLSpanElement>(null);
-    const pointerTypeRef = useRef("");
     const pendingHrefRef = useRef<string | null>(null);
     const fallbackRef = useRef<number | null>(null);
     const mountedRef = useRef(true);
@@ -37,23 +41,12 @@ export function ClosingPlatformCta() {
         window.location.assign(href);
     }, [clearPendingNavigation]);
 
-    function fillIsExpanded() {
-        const link = linkRef.current;
-        const fill = fillRef.current;
-        if (!link || !fill || link.clientWidth === 0) return false;
-
-        const style = window.getComputedStyle(link);
-        const availableWidth = link.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-        return fill.getBoundingClientRect().width >= availableWidth - 1;
-    }
-
     useEffect(() => {
         mountedRef.current = true;
 
         const reset = () => {
             clearPendingNavigation();
             navigatedRef.current = false;
-            pointerTypeRef.current = "";
             setDeparting(false);
             setHovered(false);
         };
@@ -76,14 +69,31 @@ export function ClosingPlatformCta() {
     }, [clearPendingNavigation, finishNavigation]);
 
     useEffect(() => {
-        // Keyboard activation can follow an already completed mouse hover.
-        if (departing && fillIsExpanded()) finishNavigation();
-    }, [departing, finishNavigation]);
+        if (!departing) return;
 
-    function handlePointerDown(event: PointerEvent<HTMLAnchorElement>) {
-        pointerTypeRef.current = event.pointerType;
-        if (event.pointerType !== "mouse") setHovered(false);
-    }
+        let cancelled = false;
+
+        function waitForAnimations() {
+            const link = linkRef.current;
+            if (cancelled || !link || !pendingHrefRef.current) return;
+
+            // Include the fill, arrow and label. Recheck after cancellation (for example on resize).
+            const animations = getPendingAnimations(link);
+            if (animations.length === 0) {
+                finishNavigation();
+                return;
+            }
+
+            void Promise.allSettled(animations.map((animation) => animation.finished)).then(waitForAnimations);
+        }
+
+        // React has committed data-active before we read the resulting CSS transitions.
+        const frame = window.requestAnimationFrame(waitForAnimations);
+        return () => {
+            cancelled = true;
+            window.cancelAnimationFrame(frame);
+        };
+    }, [departing, finishNavigation]);
 
     function handleClick(event: MouseEvent<HTMLAnchorElement>) {
         if (event.defaultPrevented) return;
@@ -103,22 +113,14 @@ export function ClosingPlatformCta() {
             return;
         }
 
-        const nativePointerType = "pointerType" in event.nativeEvent ? event.nativeEvent.pointerType : "";
-        const pointerType = nativePointerType || pointerTypeRef.current;
-        const animateActivation = event.detail === 0 || pointerType === "touch" || pointerType === "pen";
-
-        if (!animateActivation || window.matchMedia(REDUCED_MOTION_QUERY).matches) return;
+        // The animation state decides, not device detection: hybrid devices also work reliably.
+        const animationComplete = link.dataset.active === "true" && getPendingAnimations(link).length === 0;
+        if (animationComplete || window.matchMedia(REDUCED_MOTION_QUERY).matches) return;
 
         event.preventDefault();
         pendingHrefRef.current = link.href;
         setDeparting(true);
         fallbackRef.current = window.setTimeout(finishNavigation, NAVIGATION_FALLBACK_MS);
-    }
-
-    function handleTransitionEnd(event: TransitionEvent<HTMLSpanElement>) {
-        if (event.target === event.currentTarget && event.propertyName === "width" && fillIsExpanded()) {
-            finishNavigation();
-        }
     }
 
     return (
@@ -128,14 +130,14 @@ export function ClosingPlatformCta() {
             aria-label="Zur Workfare Plattform"
             className={styles.link}
             data-active={hovered || departing ? "true" : undefined}
+            aria-busy={departing || undefined}
             onPointerEnter={(event) => setHovered(event.pointerType === "mouse")}
             onPointerLeave={() => setHovered(false)}
-            onPointerDown={handlePointerDown}
-            onPointerCancel={() => { pointerTypeRef.current = ""; setHovered(false); }}
+            onPointerCancel={() => setHovered(false)}
             onClick={handleClick}
             onAuxClick={() => { clearPendingNavigation(); setDeparting(false); }}
         >
-            <span ref={fillRef} aria-hidden="true" className={styles.fill} onTransitionEnd={handleTransitionEnd} />
+            <span aria-hidden="true" className={styles.fill} />
             <span aria-hidden="true" className={styles.arrowPosition}>
                 <ChevronDown className={styles.arrow} />
             </span>
