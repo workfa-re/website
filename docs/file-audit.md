@@ -2,15 +2,16 @@
 
 ## Nachtrag zur Icon-Bereinigung – 16.09.2026
 
-Das Favicon wurde vollständig durch die offizielle Workfare-Wortmarke auf Weiß
-ersetzt. Browser-Metadaten, Apple-Touch-Icon, Webmanifest und Plattformvorschau
-verwenden nun die zentral in `src/config/brand.ts` gepflegten quadratischen
-Wortmarken-Icons. Die zwei blauen `public/workfare-platform-mark*.png` sind gelöscht.
-Das Vorschau-Icon zeigt das ganze Quadrat ohne kreisförmigen Zuschnitt oder Zoom.
+Nach der Nutzerkorrektur verwenden Favicon, Webmanifest und Plattformvorschau
+wieder die blaue Brücke ohne dunkelblauen Hintergrund. Die transparente Datei
+`public/workfare-platform-mark.png` bleibt erhalten; ausschließlich
+`public/workfare-platform-mark-dark.png` bleibt gelöscht. Beide Farbmodi der
+Vorschau nutzen die transparente Grafik ohne zusätzliche Icon-Hintergrundfläche.
+Die vorübergehend eingeführten vier Wortmarken-Icons wurden wieder entfernt.
 Die Bildherkunft und Größen sind in `docs/image-provenance.md` dokumentiert.
 
 Die nachfolgende ursprüngliche Inventur beschreibt den damaligen Stand;
-ihre Favicon-Verwendungen und Dateidaten sind durch diesen Nachtrag überholt.
+für die aktuelle Icon-Auswahl gilt die Korrektur in diesem Nachtrag.
 
 Stand: 14.09.2026. Repository: `workfa-re/website`. Ausgangs-HEAD der Domainumstellung: `0713f8d09eb3fe94c1cc4ea5450c716834d57643`; HEAD bei Berichtserstellung: `0713f8d09eb3fe94c1cc4ea5450c716834d57643`. Der anschließende Installationsfix wurde separat als `a6f739eb85301d470962e93cd2a2ad7bb3ba0559` committed. Die folgende Matrix dokumentiert den ursprünglichen Bestand vor der Quelltextbereinigung.
 

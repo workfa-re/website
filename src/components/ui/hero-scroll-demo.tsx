@@ -8,7 +8,6 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ArrowUpRight, Bell, BriefcaseBusiness, CheckCircle2, ChevronDown, Clock3, Euro, ListFilter, MapPin, PawPrint, Repeat2, Settings, Shovel, Smartphone, Sprout } from "lucide-react";
 import styles from "./PlatformPreview.module.css";
 import { useWebsiteTheme } from "@/components/providers/WebsiteThemeProvider";
-import { brandIcons } from "@/config/brand";
 
 const platformFont = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap" });
 
@@ -90,7 +89,7 @@ export function HeroScrollDemo() {
                     <span aria-hidden="true" className={styles.edgeLight} />
                     <div className={styles.chrome} aria-hidden="true">
                         <div className={`${styles.pill} ${styles.brand} ${styles.chromeReveal}`} style={enterDelay(0.08)}>
-                            <span className={styles.brandIcon}><Image src={brandIcons.small} alt="" width={40} height={40} /></span>
+                            <span className={styles.bridge}><Image src="/workfare-platform-mark.png" alt="" width={40} height={40} /></span>
                             <span className={styles.brandName}><span className={styles.wordmark}>Workfare</span><small className={styles.reveal} style={enterDelay(0.64)}>Musterstadt</small></span>
                         </div>
                         <div className={`${styles.pill} ${styles.navigation} ${styles.chromeReveal}`} style={enterDelay(0.3)}>

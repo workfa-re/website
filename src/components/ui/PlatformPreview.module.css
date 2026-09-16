@@ -35,17 +35,16 @@
     box-shadow: 0 1px 3px rgb(15 23 42 / 6%), 0 0 0 1px rgb(15 23 42 / 6%), inset 0 1px 0 #fff;
 }
 .brand { gap: 8px; padding-right: 16px; }
-.brandIcon {
+.bridge {
     display: grid;
     place-items: center;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     flex-shrink: 0;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #fff;
 }
-.brandIcon img { width: 100%; height: 100%; object-fit: contain; }
+.bridge { overflow: hidden; }
+.bridge img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.22); }
 .brandName { font-size: 19px; font-weight: 650; line-height: 1.08; letter-spacing: -.7px; }
 .brandName small { display: block; margin-top: 3px; color: #64748b; font-size: 11px; font-weight: 500; letter-spacing: 0; }
 .navigation { position: absolute; left: 50%; transform: translateX(-50%); gap: 6px; }
@@ -158,7 +157,7 @@
     .screen { height: 1040px; border-radius: 20px; }
     .chrome { padding: 16px; height: 88px; gap: 8px; }
     .pill { height: 48px; padding: 4px; }
-    .brandIcon { width: 36px; height: 36px; }
+    .bridge { width: 36px; height: 36px; }
     .brand { flex-shrink: 0; }
     .account { gap: 6px; }
     .notification { width: 42px; }

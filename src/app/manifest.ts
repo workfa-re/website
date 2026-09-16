@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
-import { brandIcons } from "@/config/brand";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
@@ -13,14 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
         theme_color: "#02040b",
         icons: [
             {
-                src: brandIcons.small,
-                sizes: "192x192",
-                type: "image/png",
-            },
-            {
-                src: brandIcons.large,
-                sizes: "512x512",
-                type: "image/png",
+                src: "/favicon.ico",
+                sizes: "32x32",
+                type: "image/x-icon",
             },
         ],
     };

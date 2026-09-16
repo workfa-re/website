@@ -2,28 +2,23 @@
 
 ## Aktueller Icon-Stand – 16.09.2026
 
-- Die blaue Brücke ist aus dem aktuellen Favicon entfernt. `public/favicon.ico`
-  enthält ausschließlich den offiziellen Workfare-Schriftzug auf opakem Weiß,
-  in 16, 32, 48 und 256 Pixeln. Der Pfad bleibt für direkte Browser- und
-  Cloudflare-Abfragen erhalten; die alte Grafik wird dort nicht weiter ausgeliefert.
-- `public/brand/workfare-icon-{96,180,192,512}.png` zeigen dieselbe Wortmarke auf
-  weißem Quadrat. Die 96-Pixel-Datei ist das explizite Browser-/Suchmaschinen-Icon,
-  180 Pixel dienen Apple-Touch-Icons, 192 und 512 Pixel dem Webmanifest. Die
-  Plattformvorschau verwendet ebenfalls die 192-Pixel-Datei, ohne Farbwechsel.
-- Quelle: die bereits vorbereiteten Wortmarken-Icons des lokalen Plattformprojekts
-  (`public/workfare-icon-192.png`, `public/workfare-icon-512.png`,
-  `public/workfare-apple-touch-icon.png`, `src/app/favicon.ico`), visuell gegen
-  die vorhandene offizielle Wortmarke `public/brand/workfare-logo.png` geprüft.
-  Diese vier Dateien wurden bytegleich übernommen; die 96-Pixel-Version ist eine
-  proportionale Verkleinerung der 512-Pixel-Datei. Keine neue Illustration.
-- `public/workfare-platform-mark.png` und `public/workfare-platform-mark-dark.png`
-  wurden auf ausdrücklichen Nutzerwunsch gelöscht. Die weiter unten dokumentierte
-  frühere Entscheidung, sie aufzubewahren, ist damit überholt.
-- Die vorhandene weiße Brücke innerhalb der genehmigten Website-Oberfläche und
-  historische Pressebilder sind von der Entfernung der blauen Icons nicht betroffen.
+- Nach der Nutzerkorrektur bleibt die blaue Brücke ohne dunkelblauen Hintergrund
+  erhalten. `public/favicon.ico` wurde aus dem Stand `2e82ab8` wiederhergestellt
+  (16, 32 und 48 Pixel, transparenter Hintergrund).
+- `public/workfare-platform-mark.png` wurde aus demselben Stand wiederhergestellt.
+  Die Plattformvorschau verwendet diese transparente Brücke in beiden Farbmodi;
+  der Icon-Rahmen fügt keine eigene Hintergrundfläche hinzu.
+- Ausschließlich `public/workfare-platform-mark-dark.png`, die Variante mit
+  dunkelblauem Hintergrund, bleibt entfernt und wird nicht mehr referenziert.
+- Die zwischenzeitlich angelegten `public/brand/workfare-icon-{96,180,192,512}.png`
+  mit Wortmarke auf weißem Quadrat wurden wieder entfernt. Favicon-Metadaten und
+  Webmanifest verwenden wieder das Brücken-Favicon.
+- Die offizielle Wortmarke `public/brand/workfare-logo.png`, das freigegebene
+  Social-Vorschaubild, die weiße UI-Brücke und historische Pressebilder bleiben
+  erhalten. Es wurden keine neuen Grafiken generiert.
 
 Die folgenden Inventuren und Fingerabdrücke beschreiben ihren jeweils angegebenen
-historischen Prüfstand, nicht die inzwischen ersetzten Icon-Dateien.
+historischen Prüfstand. Für die aktuelle Auswahl gilt die Korrektur oben.
 
 Stand: 14.09.2026. Lokale Bestandsprüfung vor der Bereinigung: 17 getrackte Dateien unter `public/`. 13 werden weiter benötigt; vier nicht mehr eingebundene Kopien wurden aus dem öffentlichen Arbeitsbestand entfernt. Historische Presseartikel und die dort verwendeten Bilder bleiben erhalten.
 
