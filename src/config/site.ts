@@ -1,7 +1,7 @@
 export const siteConfig = {
     name: "Workfare",
     url: "https://workfa.re",
-    appUrl: "https://app.jobbridge.app",
+    appUrl: "https://app.workfa.re",
     contactEmail: "kontakt@workfare.team",
     supportEmail: "support@workfare.team",
     privacyEmail: "datenschutz@workfare.team",

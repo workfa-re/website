@@ -6,7 +6,7 @@ import { LegalDefinitionRows, LegalPageLayout, LegalSection } from "@/components
 import { siteConfig } from "@/config/site";
 
 const updatedAt = "14. September 2026";
-const platformImprintUrl = "https://app.jobbridge.app/legal/impressum";
+const platformImprintUrl = `${siteConfig.appUrl}/legal/impressum`;
 
 export const metadata: Metadata = {
     title: "Impressum",
@@ -122,8 +122,8 @@ export default function ImpressumPage() {
                 <p>
                     Dieses Impressum gilt für die Landingpage <strong className="text-white">workfa.re</strong>.
                     Die Plattform unter{" "}
-                    <a href="https://app.jobbridge.app" className="text-blue-200 transition-colors hover:text-white">
-                        app.jobbridge.app
+                    <a href={siteConfig.appUrl} className="text-blue-200 transition-colors hover:text-white">
+                        {new URL(siteConfig.appUrl).host}
                     </a>{" "}
                     ist ein eigener Bereich mit separaten rechtlichen Angaben.
                 </p>
@@ -135,7 +135,7 @@ export default function ImpressumPage() {
                         rel="noopener noreferrer"
                         className="text-blue-200 transition-colors hover:text-white"
                     >
-                        app.jobbridge.app/legal/impressum <ArrowUpRight className="inline-block h-3.5 w-3.5 align-[-0.125em]" aria-hidden="true" />
+                        {new URL(siteConfig.appUrl).host}/legal/impressum <ArrowUpRight className="inline-block h-3.5 w-3.5 align-[-0.125em]" aria-hidden="true" />
                     </a>
                     .
                 </p>

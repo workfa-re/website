@@ -6,7 +6,7 @@ import { LegalDefinitionRows, LegalPageLayout, LegalSection } from "@/components
 import { siteConfig } from "@/config/site";
 
 const updatedAt = "14. September 2026";
-const platformPrivacyUrl = "https://app.jobbridge.app/legal/datenschutz";
+const platformPrivacyUrl = `${siteConfig.appUrl}/legal/datenschutz`;
 
 export const metadata: Metadata = {
     title: "Datenschutz",
@@ -61,8 +61,8 @@ export default function DatenschutzPage() {
                 <p>
                     Diese Datenschutzhinweise gelten für die Website <strong className="text-white">workfa.re</strong>.
                     Die Plattform unter{" "}
-                    <a href="https://app.jobbridge.app" className="text-blue-200 transition-colors hover:text-white">
-                        app.jobbridge.app
+                    <a href={siteConfig.appUrl} className="text-blue-200 transition-colors hover:text-white">
+                        {new URL(siteConfig.appUrl).host}
                     </a>{" "}
                     ist ein eigener Bereich und verarbeitet andere Daten, etwa wenn dort Konten, Jobs,
                     Kommunikation, Verifizierungen oder Zahlungen genutzt werden.

@@ -19,7 +19,7 @@ export function Footer({ showChat = true }: { showChat?: boolean }) {
                         </div>
                         <nav aria-label="Footer-Navigation" className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
                             <a
-                                href="https://app.jobbridge.app"
+                                href={siteConfig.appUrl}
                                 className="cursor-pointer transition-colors hover:text-white"
                             >
                                 Zur Plattform
