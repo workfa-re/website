@@ -1,0 +1,102 @@
+.section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-inline: 20px;
+    background: #02040b;
+    color: white;
+    scroll-margin-top: 24px;
+}
+.shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, #02040b, transparent 18%, transparent 74%, #0a0a0a);
+}
+.layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-block: clamp(80px, 12svh, 144px);
+}
+.headlineGroup, .details { min-width: 0; }
+.mark { position: relative; width: 96px; height: 46px; margin-bottom: 36px; }
+.markImage { object-fit: contain; object-position: left; }
+.title {
+    max-width: 14ch;
+    margin: 0;
+    font-size: clamp(3rem, 5.4vw, 5.3rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -.038em;
+    text-wrap: pretty;
+}
+.title > span { display: block; }
+.mutedTitle { color: #959eab; }
+.description {
+    max-width: 28ch;
+    margin: 0;
+    color: #adb5c1;
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    line-height: 1.6;
+    letter-spacing: -.015em;
+    text-wrap: pretty;
+}
+.description > span { color: #fff; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.fillButton {
+    min-height: 56px;
+    gap: 10px;
+    padding: 0 22px 0 20px;
+    font-size: .9375rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    transition: box-shadow 220ms ease, background-color 220ms ease, scale 160ms ease;
+}
+.fillButton::before, .fillButton::after { z-index: 2; }
+.fillButton:active { scale: .96; }
+.fillWave {
+    position: absolute;
+    z-index: 1;
+    top: var(--fill-y);
+    left: var(--fill-x);
+    width: 220%;
+    aspect-ratio: 1;
+    pointer-events: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgb(255 255 255 / .96), rgb(255 255 255 / .72) 60%, rgb(255 255 255 / .84));
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 700ms cubic-bezier(.22,1,.36,1);
+}
+.fillButton[data-variant="primary"] .fillWave {
+    background: linear-gradient(135deg, rgb(30 64 175 / .96), rgb(37 99 235 / .88) 55%, rgb(59 130 246 / .8));
+}
+.fillButton[data-active="true"] .fillWave { transform: translate(-50%, -50%) scale(1); }
+.buttonIcon, .buttonLabel { position: relative; z-index: 3; transition: color 350ms ease; }
+.buttonIcon { display: inline-flex; flex-shrink: 0; }
+.fillButton[data-active="true"] { color: #07101f; }
+.fillButton[data-variant="primary"][data-active="true"] { color: #fff; }
+@media (min-width: 640px) {
+    .section { padding-inline: 32px; }
+    .layout { gap: 48px; }
+}
+@media (min-width: 1024px) {
+    .section { padding-inline: 40px; }
+    .layout { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 96px); }
+    .details { padding-top: 82px; }
+}
+@media (max-width: 639px) {
+    .actions { flex-direction: column; }
+    .mark { width: 80px; height: 40px; margin-bottom: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .fillButton, .fillWave, .buttonIcon, .buttonLabel { transition: none; }
+    .fillWave { transform: none; inset: 0; width: auto; aspect-ratio: auto; border-radius: inherit; opacity: 0; }
+    .fillButton[data-active="true"] .fillWave { transform: none; opacity: 1; }
+}

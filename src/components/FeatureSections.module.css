@@ -1,0 +1,129 @@
+.features {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: #0a0a0a;
+    color: #f6f6f6;
+}
+.audienceSection, .safetySection {
+    padding-inline: 20px;
+    scroll-margin-top: 32px;
+}
+.audienceSection { padding-block: 80px 88px; }
+.audienceComposition, .safetyComposition { width: 100%; max-width: 78rem; margin-inline: auto; }
+.audienceComposition { --audience-size: clamp(3rem, 9.5vw, 4.4rem); display: grid; grid-template-columns: minmax(0, 1fr); }
+.audienceSide { min-width: 0; text-align: center; }
+.helpSide { grid-row: 3; }
+.audienceTitle {
+    font-size: var(--audience-size);
+    font-weight: 500;
+    line-height: 1.07;
+    letter-spacing: -.045em;
+}
+.lineMask { display: block; overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
+.lineMask > span { display: block; }
+.quiet { color: #9b9b9e; }
+.audienceDescription {
+    max-width: 28ch;
+    margin: 24px auto 0;
+    color: #a5a5ab;
+    font-size: 1rem;
+    line-height: 1.7;
+    text-wrap: pretty;
+}
+.connection {
+    position: relative;
+    display: grid;
+    place-items: center;
+    grid-row: 2;
+    width: 100%;
+    height: 80px;
+    margin-block: 20px;
+}
+.connectionLine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% - .5px);
+    width: 1px;
+    background: #ffffff26;
+}
+.bridge { position: relative; display: grid; place-items: center; width: 84px; height: 54px; background: #0a0a0a; }
+.bridge img { width: 54px; height: auto; opacity: .74; }
+.safetySection { padding-block: 0 100px; }
+.safetyComposition {
+    display: grid;
+    grid-template-areas: "title" "principles" "action";
+    gap: 40px;
+    padding-top: 64px;
+    border-top: 1px solid rgb(255 255 255 / 10%);
+}
+.safetyTitle {
+    grid-area: title;
+    max-width: 15ch;
+    font-size: clamp(2.55rem, 6vw, 4.25rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -.04em;
+    text-wrap: balance;
+}
+.safetyTitle > span { color: #929297; }
+.safetyAction { grid-area: action; }
+.safetyLink { min-height: 48px; gap: 12px; padding-inline: 20px; font-size: .875rem; font-weight: 500; transition: scale 160ms ease; }
+.safetyLink:active { scale: .96; }
+.principles {
+    --rail-inset: 24px;
+    --rail-color: rgb(255 255 255 / 24%);
+    grid-area: principles;
+    display: grid;
+    gap: 28px;
+    align-content: center;
+    margin: 0;
+    padding: 0 0 0 var(--rail-inset);
+    border-left: 1px solid var(--rail-color);
+    list-style: none;
+}
+.principles li {
+    position: relative;
+    font-size: clamp(1.35rem, 3.5vw, 2.35rem);
+    font-weight: 450;
+    line-height: 1.3;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+}
+.principles li::before { content: ""; position: absolute; left: calc(-1 * var(--rail-inset)); top: .63em; width: 9px; height: 1px; background: var(--rail-color); }
+.principles li > span { color: #909098; }
+
+@media (min-width: 640px) {
+    .audienceSection, .safetySection { padding-inline: 32px; }
+    .audienceComposition { --audience-size: clamp(3.8rem, 7vw, 6.4rem); }
+    .audienceDescription { font-size: 1.0625rem; }
+}
+@media (min-width: 768px) {
+    .audienceSection { padding-block: 128px 144px; }
+    .audienceComposition { grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr); align-items: center; }
+    .audienceComposition { --audience-size: clamp(2.5rem, 5.6vw, 5.4rem); }
+    .helpSide { grid-row: 1; grid-column: 3; }
+    .audienceDescription { max-width: 25ch; }
+    .connection { grid-row: 1; grid-column: 2; align-self: start; height: calc(var(--audience-size) * 2.22); margin: 0; }
+    .connectionLine { top: 50%; bottom: auto; left: 0; width: 100%; height: 1px; }
+    .bridge { width: 70px; }
+    .bridge img { width: 46px; }
+    .safetyComposition { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "title principles" "action principles"; gap: 32px 64px; padding-top: 88px; }
+    .safetySection { padding-bottom: 112px; }
+    .principles { --rail-inset: 32px; gap: 32px; }
+}
+@media (min-width: 1024px) {
+    .audienceSection, .safetySection { padding-inline: 40px; }
+    .audienceComposition { grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr); gap: 32px; }
+    .audienceComposition { --audience-size: clamp(3.3rem, 5.4vw, 5.4rem); }
+    .audienceDescription { font-size: 1.125rem; }
+    .bridge { width: 94px; }
+    .bridge img { width: 60px; }
+    .safetyComposition { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); column-gap: 112px; }
+    .principles { --rail-inset: 40px; gap: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .safetyLink { transition: none; }
+}
